@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.hexj.group.rbwm</groupId>
+  <artifactId>tablet-web</artifactId>
+  <name>rbwm-tablet-web</name>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+  <output.folder>${basedir}/target</output.folder><!-- output folder like as ../code-zip -->
+  <build.properties>../config/build.properties</build.properties>
+  <temp.dir>${output.folder}/temp/</temp.dir>
+  <compress.dir></compress.dir> <!-- if compress javascript active, it will have value -->
+  </properties>
+
+  <profiles>
+  <profile>
+    <id>generate_zip</id>
+    <activation>
+    <activeByDefault>true</activeByDefault>
+    </activation>
+    <properties>
+    <checksum.ext>.sha-512</checksum.ext><!--checksum filename extension -->
+    <algorithm>SHA-512</algorithm><!--checksum algorithm like as SHA-512, SHA-1, MD5 -->
+    <config.path>../config</config.path><!--UAT/SIT template configure files path -->
+    </properties>
+    <build>
+    <plugins>
+      <plugin>
+      <artifactId>maven-antrun-plugin</artifactId>
+      <version>1.7</version>
+      <executions>
+        <execution>
+        <id>create_zipfiles</id>
+        <phase>package</phase>
+        <goals>
+          <goal>run</goal>
+        </goals>
+        <configuration>
+          <target>
+          <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="build_lib/ant-contrib-1.0b3.jar" />
+
+          <!-- load serverurl from build properties file -->
+          <property file="${build.properties}" />
+
+          <zip destfile="${output.folder}/tablet_authentication.zip" basedir="${basedir}" includes="${compress.dir}web/authentication/**, ${compress.dir}web/global/**" />
+          <zip destfile="${output.folder}/tablet_banking.zip" basedir="${basedir}" includes="${compress.dir}web/banking/**" />
+          <zip destfile="${output.folder}/tablet_lib.zip" basedir="${basedir}" includes="lib/**, application.html" excludes="lib/images/**" />
+          <zip destfile="${output.folder}/tablet_images.zip" basedir="${basedir}" includes="lib/images/**" />
+
+          <!-- images zip files start -->
+          <if>
+            <equals arg1="${tablet.emptyImagesZIP}" arg2="true" />
+            <then>
+            <mkdir dir="${output.folder}/empty" />
+            <zip destfile="${output.folder}/tablet_images.zip" basedir="${output.folder}/empty" whenempty="create" />
+            <delete dir="${output.folder}/empty" />
+            </then>
+            <else>
+            <zip destfile="${output.folder}/tablet_images.zip" basedir="${basedir}" includes="lib/images/**" />
+            </else>
+          </if>
+          <!-- images zip files end -->
+
+          <for list="${servernames}" param="servername" delimiter=",">
+            <sequential>
+            <local name="getDomainUrl" />
+            <local name="nativeHookDomain" />
+
+            <property name="getDomainUrl" value="${getDomainUrl.@{servername}}" />
+            <property name="nativeHookDomain" value="${nativeHookDomain.@{servername}}" />
+
+            <local name="globaljs" />
+            <loadfile property="globaljs" srcFile="${compress.dir}web/config/settings/global.js">
+              <filterchain>
+              <expandproperties />
+              </filterchain>
+            </loadfile>
+            <echo message="${globaljs}" file="${temp.dir}/@{servername}/web/config/settings/global.js" />
+            <zip destfile="${output.folder}/@{servername}/tablet_config.zip">
+              <zipfileset dir="${temp.dir}@{servername}">
+              <include name="web/config/settings/*" />
+              </zipfileset>
+              <zipfileset dir="${basedir}">
+              <include name="${compress.dir}web/config/**" />
+              <exclude name="${compress.dir}web/config/settings/global*" />
+              </zipfileset>
+            </zip>
+            </sequential>
+          </for>
+
+          <checksum algorithm="${algorithm}" fileext="${checksum.ext}">
+            <fileset dir="${output.folder}" includes="**/*.zip" />
+          </checksum>
+
+          <!-- move checksum files to folder checksum -->
+          <move todir="${output.folder}/checksum">
+            <fileset dir="${output.folder}" includes="**/*${checksum.ext}" />
+          </move>
+          <!-- fill checksum to config.json -->
+          <local name="checksum_tablet_authentication" />
+          <local name="checksum_tablet_banking" />
+          <local name="checksum_tablet_images" />
+          <local name="checksum_tablet_lib" />
+
+          <for param="file" keepgoing="true">
+            <path>
+            <fileset dir="${output.folder}/checksum/" includes="*${checksum.ext}" />
+            </path>
+            <sequential>
+            <local name="filename" />
+            <basename property="filename" file="@{file}" suffix=".zip${checksum.ext}" />
+
+            <loadresource property="checksum_${filename}">
+              <file file="@{file}" />
+              <filterchain>
+              <trim />
+              <deletecharacters chars="\n\r" />
+              </filterchain>
+            </loadresource>
+            </sequential>
+          </for>
+          <for list="${servernames}" param="servername" delimiter="," keepgoing="true">
+            <sequential>
+            <local name="servername" />
+            <property name="servername" value="@{servername}" />
+            <local name="serverpath" />
+            <local name="jsonExternalBaseUrl" />
+            <property name="serverpath" value="${serverpath.@{servername}}" />
+            <property name="jsonExternalBaseUrl" value="${jsonExternalBaseUrl.@{servername}}" />
+
+            <local name="checksum_tablet_config" />
+            <for param="file" keepgoing="true">
+              <path>
+              <fileset dir="${output.folder}/checksum/@{servername}" includes="**/*${checksum.ext}" />
+              </path>
+              <sequential>
+              <local name="@{servername}.filename" />
+              <basename property="@{servername}.filename" file="@{file}" suffix=".zip${checksum.ext}" />
+
+              <loadresource property="checksum_${@{servername}.filename}">
+                <file file="@{file}" />
+                <filterchain>
+                <trim />
+                <deletecharacters chars="\n\r" />
+                </filterchain>
+              </loadresource>
+              </sequential>
+            </for>
+
+            <local name="config.json" />
+            <loadfile property="config.json" srcFile="${config.path}/config.json">
+              <filterchain>
+              <expandproperties />
+              </filterchain>
+            </loadfile>
+
+            <echo message="${config.json}" file="${output.folder}/@{servername}/${configfilename.@{servername}}" />
+            <echo message="created file ${output.folder}/@{servername}/${configfilename.@{servername}}." />
+            </sequential>
+          </for>
+
+          <delete dir="${temp.dir}" />
+          <delete dir="target/antrun" />
+          <delete dir="${output.folder}/checksum" />
+          </target>
+        </configuration>
+        </execution>
+        <execution>
+        <id>clean_output</id>
+        <phase>clean</phase>
+        <goals>
+          <goal>run</goal>
+        </goals>
+        <configuration>
+          <target>
+          <delete dir="${output.folder}" />
+          </target>
+        </configuration>
+        </execution>
+      </executions>
+      </plugin>
+    </plugins>
+    </build>
+  </profile>
+
+  <profile>
+    <id>developer_local</id>
+    <activation>
+    <activeByDefault>false</activeByDefault>
+    </activation>
+    <properties>
+    </properties>
+    <build>
+    <plugins>
+      <plugin>
+      <artifactId>maven-antrun-plugin</artifactId>
+      <version>1.7</version>
+      <executions>
+        <execution>
+        <id>replace_global_js</id>
+        <phase>validate</phase>
+        <goals>
+          <goal>run</goal>
+        </goals>
+        <configuration>
+          <target>
+          <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="build_lib/ant-contrib-1.0b3.jar" />
+          <!-- load serverurl from build properties file -->
+          <property file="${build.properties}" />
+          <local name="getDomainUrl" />
+          <local name="nativeHookDomain" />
+          <property name="getDomainUrl" value="${getDomainUrl.sit}" />
+          <property name="nativeHookDomain" value="${nativeHookDomain.sit}" />
+
+          <local name="globaljs" />
+          <loadfile property="globaljs" srcFile="web/config/settings/global.js">
+            <filterchain>
+            <expandproperties />
+            </filterchain>
+          </loadfile>
+          <attrib file="web/config/settings/global.js" readonly="false" />
+          <echo message="${globaljs}" file="web/config/settings/global.js" />
+          </target>
+        </configuration>
+        </execution>
+      </executions>
+      </plugin>
+    </plugins>
+    </build>
+  </profile>
+
+  <profile>
+    <id>compress_js</id>
+    <activation>
+    <activeByDefault>false</activeByDefault>
+    </activation>
+    <properties>
+    <compilation.level>SIMPLE_OPTIMIZATIONS</compilation.level>
+    <closure-compiler>${basedir}/build_lib/compiler.jar</closure-compiler>
+    <source.directory>${basedir}</source.directory>
+    <compress.dir>${output.folder}/compressed/</compress.dir>
+    </properties>
+    <build>
+    <plugins>
+      <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-antrun-plugin</artifactId>
+      <version>1.7</version>
+      <executions>
+        <execution>
+        <phase>compile</phase>
+        <goals>
+          <goal>run</goal>
+        </goals>
+        <configuration>
+          <target>
+          <tstamp>
+            <format property="start_time" pattern="yyyy-MM-dd HH:mm:ss:sss zzz" />
+          </tstamp>
+          <echo message="start copy, ${start_time}" />
+          <copy todir="${compress.dir}">
+            <fileset dir="${source.directory}">
+            <exclude name="**/*.js" />
+            <include name="lib/**" />
+            <include name="web/**" />
+            <include name="application.html" />
+            </fileset>
+          </copy>
+          <echo message="Start compress Javascript files, compress all js files need long time,  ...\n" />
+
+          <apply executable="java" parallel="false" failonerror="false" dest="${source.directory}">
+            <fileset dir="${source.directory}" includes="**/*.js" />
+            <arg line="-jar" />
+            <arg path="${closure-compiler}" />
+            <arg line="--warning_level QUIET" /> <!-- DEFAULT -->
+            <arg line="--compilation_level WHITESPACE_ONLY" /><!-- SIMPLE_OPTIMIZATIONS -->
+            <arg line=" --language_in ECMASCRIPT5" />
+            <arg line="--js" />
+            <srcfile />
+            <arg line="--js_output_file" />
+            <targetfile />
+            <chainedmapper>
+            <globmapper from="*" to="${compress.dir}*" handledirsep="true" />
+            <mapper>
+              <globmapper from="${source.directory}/*" to="*" handledirsep="true" />
+            </mapper>
+            </chainedmapper>
+          </apply>
+          <tstamp>
+            <format property="end_time" pattern="yyyy-MM-dd HH:mm:ss:sss zzz" />
+          </tstamp>
+          <echo message="Compress JS file success. ${end_time}" />
+          </target>
+        </configuration>
+        </execution>
+      </executions>
+      </plugin>
+    </plugins>
+    </build>
+  </profile>
+  </profiles>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>Third Party Repository</id>
+      <name>maven-parent and third party repo</name>
+      <url>http://mirrors.ibiblio.org/maven2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
