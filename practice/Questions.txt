@@ -1,0 +1,30 @@
+1.       如何实现线程?
+  1.1 ThreadClass extends java.lang.Thread    ThreadClass tc = new ThreadClass(); tc.start();
+  1.2 ThreadClass implements java.lang.Runnable  Thread td = new Thread(new ThreadClass()); td.start();
+
+2.       JSP应用中,重定向有些什么方法?
+        //2.1 RequestDispatcher#forward(request, response);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
+        //有三种方法可以得到Request Dispatcher对象
+        2.1.1 javax.servlet. ServletRequest#getRequestDispatcher(String path)//path 可以是相对
+        2.1.2 javax.servlet. ServletContext#getRequestDispatcher(String path)//其中path必须以"/"开头
+        
+        //2.2 response.sendRedirect();
+
+3.       JSP的对象Request中的getparameter方法与session对象中的getAttribute方法的区别?(两对象应用之间的区别?)
+        javax.servlet.ServletRequest
+        request.getAttribute web容器内 setAttribute getAttribute,  返回的是Object
+        request.getParameter http request to Web 容器, 返回的是String
+        
+4.       如何加入Session对象?
+        request.getSession(true);
+        
+5.       Java开发包有些什么开发工具?
+6.       如何实现Jsp页面与数据库的连接(jdbc-odbc桥)?实现连接时要用到哪些类?
+7.       如何构造List对象,用什么方法插入和取得List项目中数据项?
+8.       Session的生命期多长?(参阅Session对象的一些属性设置)
+9.       简述你所熟悉的一些web server.
+10.   如果要使一个程序在网络上传接,要实现什么接口?
+11.   JDBC中如何控制一个事务？
+12.   如何实现JSP程序参数之间的传递？
