@@ -1,0 +1,6 @@
+# Exercise chrome qrcode, 
+create a chrome extention for address url qrcode generate 
+tips: 
+could use qrcodejs: http://davidshimjs.github.io/qrcodejs/
+javascript: alert(window.location.href);
+(document.URL);
