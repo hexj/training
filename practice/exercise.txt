@@ -4,3 +4,11 @@ tips:
 could use qrcodejs: http://davidshimjs.github.io/qrcodejs/
 javascript: alert(window.location.href);
 (document.URL);
+
+
+#Q2
+/* get below css from url: http://fonts.googleapis.com/css?family=Alfa+Slab+One|Fjalla+One */
+http://code.google.com/p/googlefontdirectory/source/browse/ofl/fjallaone/FjallaOne-Regular.ttf
+.font-fjalla {
+	font-family:'Fjalla One',arial,helvetica,sans-serif; font-weight: 400;
+}
