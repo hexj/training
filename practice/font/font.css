@@ -1,0 +1,29 @@
+@font-face {
+  font-family: 'Fjalla One';
+  font-style: normal;
+  src: url(FjallaOne.eot);
+  src: url(FjallaOne.eot?#iefix) format('embedded-opentype'),  
+  /*url("FjallaOne-Regular.ttf") format("truetype"),*/
+  url(FjallaOne.woff) format('woff'); 
+}
+
+.font-fjalla {
+	font-family:'Fjalla One'; font-weight: 500;
+}
+@font-face {
+  font-family: 'AlfaSlabOne';
+  font-style: normal;
+  src: url(AlfaSlabOne.eot);
+  src: url(AlfaSlabOne.eot?#iefix) format('embedded-opentype'),  
+  /*url("FjallaOne-Regular.ttf") format("truetype"),*/
+  url(AlfaSlabOne.woff) format('woff'); 
+}
+
+h2 {
+font-size: 24px;
+}
+
+h2, h3, h4, h5, h6, h7 {
+font-family: 'Fjalla One',sans-serif;
+font-weight: 400;
+}
