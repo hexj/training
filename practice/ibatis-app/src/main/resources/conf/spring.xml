@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+                        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+                        http://www.springframework.org/schema/context  
+                        http://www.springframework.org/schema/context/spring-context-2.5.xsd  
+                        http://www.springframework.org/schema/mvc  
+                        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!-- 引入jdbc配置文件 -->
+	<context:property-placeholder location="classpath:conf/datasource.properties" />
+
+	<!-- 扫描com这个包里的所有类，把里面配上相应注解的类全都放在容器中进行管理 -->
+	<context:component-scan base-package="forwe.hexj.learn.mybatis" />
+
+	<!-- 添加注解驱动 -->
+	<mvc:annotation-driven />
+	<context:annotation-config />
+</beans>
