@@ -68,7 +68,7 @@
 	<!-- 创建SqlSessionFactory，同时指定数据源 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="dataSource"
-		p:mapperLocations="classpath:forwe/hexj/learn/mybatis/mapping/UserMapper.xml" />
+		p:mapperLocations="classpath:forwe/hexj/learn/mybatis/mapping/*.xml" />
 	<!-- configLocation为mybatis属性mapperLocations为所有mapper -->
 
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
