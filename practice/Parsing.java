@@ -205,6 +205,12 @@ class NexusDown implements Runnable {
 
 	public Document getDocByURL(String url) {
 		Document doc = null;
+		System.setProperty("http.proxyHost", "intpxy1.abc.def");
+		System.setProperty("http.proxyPort", "8080");
+		System.setProperty("https.proxyHost", "intpxy1.abc.def");
+		System.setProperty("https.proxyPort", "8080");
+		System.setProperty("http.proxyUser", "user");
+		System.setProperty("http.proxyPassword", "pwd");
 		try {
 			doc = Jsoup
 					.connect(url)
