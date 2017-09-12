@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="//g.alicdn.com/tbc/??search-suggest/1.4.5/new_suggest-min.css,search-suggest/1.4.5/new_searchbox.css?t=3720334782.css">
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/mods/header/header.css">
+
+<div class="mc-header">
+    <div class="grid-1190 clearfix mc-header-top">
+        <div class="mc-logo">
+            <a href="//cun.taobao.com" class="mc-cunlogo"></a>
+        </div>
+        <div class="mc-nav">
+			<span class="mc-nav-item index">
+				<a href="index.htm">首页</a>
+				<i class="iconfontheader">&#xe602;</i>
+			</span>
+            <span class="mc-nav-item" style="margin-left:70px;">
+				<a href="//cun.bbs.taobao.com/" target="_blank">村淘之家</a>
+			</span>
+        </div>
+		<div class="mc-search">
+	        <div class="search" id="J_Search" role="search">
+	            <div class="search-panel ks-switchable-content ">
+	                <form target="_blank" action="//cunlist.taobao.com/itemlist/search.htm" name="search" id="J_TSearchForm" class="">
+	                    <input id='_tb_token_' name='_tb_token_' type='hidden' value='$csrfToken.UniqueToken'>
+	                    
+	                    <div class="search-button">
+	                        <button class="btn-search" type="submit">搜 索</button>
+	                    </div>
+	                    <div class="search-panel-fields search-hp-fields search-common-panel">
+    	                	<input type="hidden" name="q" id="J_keyword">
+    	                    <input type="hidden" name="_input_charset" id="J_keyword" value="utf-8">
+	                        <label for="q" data-searchtype-item="请输入您要购买的商品名称" data-searchtype-shop="" style="color: rgb(153, 153, 153);">请输入您要购买的商品名称</label>
+	                        <div class="search-combobox" id="ks-component223"><div class="search-combobox-input-wrap"><input id="q" aria-label="请输入搜索文字" accesskey="s" autofocus="true" maxlength="100" autocomplete="off" aria-haspopup="true" aria-combobox="list" role="combobox" class="search-combobox-input" x-webkit-grammar="builtin:translate"></div></div>
+	                        <i id="J_SearchIcon" class="tb-fp-iconfont"></i>
+	                    </div>
+	                    <!--[if lt IE 9]><s class="search-fix search-fix-panellt"></s><s class="search-fix search-fix-panellb"></s>
+	                    <![endif]-->
+	                </form>
+	            </div>
+	        </div> 
+	    </div>
+    </div>
+</div>
+	
+<input type="hidden" id ="_csrf_token" value="$!csrfToken.UniqueToken">
+<script type="text/javascript">
+	KISSY.use('common/js/common');
+	
+	KISSY.use('admin/mods/header/header');
+</script>

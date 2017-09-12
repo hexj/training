@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/app-download.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","app")
+        </div>
+        <div class="mc-main-wrap">
+            <div class="cunPage">
+                <div class="detail">
+                    <div class="top">
+                        <span class="title">手机应用下载</span>
+                    </div>
+                    <div class="app-download-item">
+                        <ul class="app-item">
+                            <li>
+                                <img style="" src="//img.alicdn.com/bao/uploaded/i3/1687671017/TB2AnTYbpXXXXapXXXXXXXXXXXX_!!1687671017.jpg" />
+                                <dd>
+                                    <h4>代购员版APP V1.0</h4>
+                                    <div>主要功能：</div>
+                                </dd>
+                                <dt>
+                                    <a href="＃">下载Android到电脑</a>
+                                    <a href="#">下载IOS到电脑</a>
+                                    <a href="#">手机扫描二维码下载</a>
+                                </dt>
+                            </li>
+                            <li>
+                                <img style="" src="//img.alicdn.com/bao/uploaded/i3/1687671017/TB2AnTYbpXXXXapXXXXXXXXXXXX_!!1687671017.jpg" />
+                                <dd>
+                                    <h4>村民版APP V1.0</h4>
+                                    <div>主要功能：</div>
+                                </dd>
+                                <dt>
+                                    <a href="＃">下载Android到电脑</a>
+                                    <a href="#">下载IOS到电脑</a>
+                                    <a href="#">手机扫描二维码下载</a>
+                                </dt>
+                            </li>
+                        </ul>
+                        <p class="marks-item"><span>提醒：</span>注册使用时需关联村代购点，请扫描代购人<span class="card-hover二维码名片信息</span></p>
+                        <div class="agent-card-wrap J-agent-card"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+   (function(){
+        KISSY.use('admin/js/app-down', function (S, AppDown) {
+            new AppDown("app");
+        });
+   })();
+</script>

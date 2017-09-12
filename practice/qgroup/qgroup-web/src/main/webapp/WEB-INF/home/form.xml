@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:fm-conditions="http://www.alibaba.com/schema/services/form/conditions"
+             xmlns:fm-validators="http://www.alibaba.com/schema/services/form/validators"
+             xmlns="http://www.alibaba.com/schema/services/form/validators"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/form/conditions http://localhost:8080/schema/services-form-conditions.xsd
+        http://www.alibaba.com/schema/services/form/validators http://localhost:8080/schema/services-form-validators.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <services:form postOnlyByDefault="true">
+        <services:property-editor-registrar
+                class="com.alibaba.citrus.service.configuration.support.CustomDateRegistrar"
+                p:format="yyyy-MM-dd HH:mm" />
+        <!--
+          - ===============================================
+          - 用来检查csrf token。
+          - ===============================================
+         -->
+        <services:group name="csrfCheck">
+            <services:field name="_tb_token_">
+                <csrf-validator>
+                    <message>提交的数据已过期</message>
+                </csrf-validator>
+            </services:field>
+        </services:group>
+        <!--
+          - ===============================================
+          - Simple form
+          - ===============================================
+         -->
+        <services:group name="simple" extends="csrfCheck">
+            <services:field name="name" displayName="你的名字">
+                <required-validator>
+                    <message>必须填写 ${displayName}</message>
+                </required-validator>
+            </services:field>
+        </services:group>
+
+        <services:group name="periodDetail">
+            <services:field name="id" displayName="" defaultValue="0">
+            </services:field>
+
+            <services:field name="period" displayName="期数">
+                <!--<required-validator>-->
+                    <!--<message>必须填写 ${displayName}</message>-->
+                <!--</required-validator>-->
+            </services:field>
+
+            <services:field name="periodTitle" displayName="主题">
+
+            </services:field>
+
+            <services:field name="desc" displayName="挑食期描述">
+
+            </services:field>
+
+            <services:field name="mainPic" displayName="本期的主题图片">
+                <required-validator>
+                    <message>必须填写 ${displayName}</message>
+                </required-validator>
+                <!--<regexp-validator pattern="^http*(.jpg|.png)$">-->
+                    <!--<message>${displayName}必须以jpg/png结尾</message>-->
+                <!--</regexp-validator>-->
+            </services:field>
+
+            <services:field name="bgColor" displayName="期的背景底色">
+                <required-validator>
+                    <message>必须填写${displayName},不知道问我</message>
+                </required-validator>
+            </services:field>
+
+            <services:field name="startTime" displayName="活动开始时间">
+                <required-validator>
+                    <message>必须填写${displayName}</message>
+                </required-validator>
+                <date-validator format="yyyy-MM-dd HH:mm">
+                    <message>${displayName} 必须是日期，格式为 ${format}</message>
+                </date-validator>
+                <custom-error id="errorDate">
+                    <message>开始时间不能晚于结束时间</message>
+                </custom-error>
+            </services:field>
+
+            <services:field name="endTime" displayName="活动结束时间">
+                <required-validator>
+                    <message>必须填写 ${displayName}</message>
+                </required-validator>
+                <date-validator format="yyyy-MM-dd HH:mm">
+                    <message>${displayName} 必须是日期，格式为 ${format}</message>
+                </date-validator>
+            </services:field>
+
+            <services:field name="status" displayName="状态">
+                <number-validator>
+                    <message>必须为数字</message>
+                </number-validator>
+            </services:field>
+
+        </services:group>
+    </services:form>
+
+</beans:beans>

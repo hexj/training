@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 使用annotation定义Aspect -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.taobao.cun.*"/>
+
+
+
+    <import resource="classpath*:spring/beans-hsf-cuntao-center-consumer.xml"/>
+    <import resource="classpath*:spring/beans-hsf-crius-consumer.xml"/>    
+    <import resource="classpath*:spring/beans-service.xml"/>
+    <import resource="classpath*:spring/beans-tfs.xml"/>
+    <import resource="classpath*:spring/beans-hsf-uic-consumer.xml"/>
+    <import resource="classpath*:spring/beans-jmonitor.xml"/>
+    <import resource="classpath*:spring/beans-key-center.xml"/>
+    <import resource="classpath*:spring/beans-alipay.xml"/>
+    <import resource="classpath*:spring/beans-switch.xml"/>
+    <import resource="classpath*:spring/beans-provider.xml"/>
+    <import resource="classpath*:com/taobao/cun/admin/common/switcher/spring/beans-switcher.xml"/>
+
+</beans>

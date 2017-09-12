@@ -1,0 +1,91 @@
+<!--通用分液器-->
+#set($pageNo = ${currentPageNum})
+#set($prePage = ${pageNo} - 1 )
+#set($nextPage = ${pageNo} + 1)
+#set($tPage = ${totalPages})
+#if($!tPage > 0)
+    <div class="page-content">
+    #if(${pageNo} > 1)
+        <a class="page-wrap prev-page" title="上一页" href="#" onclick="return changePage('$prePage')"><</a>
+    #end
+    #set($leftStart = 1)
+    #set($leftEnd = 1)
+    #set($mStart = $pageNo - 2)
+    #set($mEnd = $pageNo + 2)
+    #set($rStart = $tPage)
+    #set($rEnd = $tPage)
+    #if ($mStart <= $leftEnd)
+        #set($leftStart = 0)
+        #set($leftEnd = 0)
+        #set($mStart = 1)
+    #end
+    #if ($mEnd >= $rStart)
+        #set($rStart = 0)
+        #set($rEnd = 0)
+        #set($mEnd = $tPage)
+    #end
+    <ul>
+        #if ($leftEnd >= $leftStart)
+            #foreach($p in [${leftStart}..${leftEnd}])
+                #if($p != 0)
+                    <li><a class="page-wrap" onclick="return changePage('$p')">$p</a></li>
+                #end
+            #end
+            #if($mStart > ($leftEnd +1))
+                <li><a class="page-wrap page-separate">...</a></li>
+            #end
+        #end
+        #foreach($p in [${mStart}..${mEnd}])
+            #if($p == $pageNo)
+                <li><a class="page-wrap active" onclick="return changePage('$p')">$p</a></li>
+            #else
+                #if($p != 0)
+                    <li><a class="page-wrap"  onclick="return changePage('$p')">$p</a></li>
+                #end
+            #end
+        #end
+        #if ($rEnd >= $rStart && $rEnd > 0)
+            #if($rStart > ($mEnd+1))
+                <li><a class="page-wrap page-separate">...</a></li>
+            #end
+            #foreach($p in [${rStart}..${rEnd}])
+                <li><a class="page-wrap" onclick="return changePage('$p')">$p</a></li>
+            #end
+        #end
+
+    </ul>
+    #if ($pageNo < $tPage)
+        <a href="#" class="page-wrap next-page" onclick="return changePage('$nextPage')" title="下一页">></a>
+    #end
+    <div class="page-jump">
+        <span>共<span>$!{totalPages}</span>页，</span>
+        <span>到第</span><input id="J_PageNum" type="text" name="page" value="$!pageNo" data-totalpages="${totalPages}"/><span>页</span><a class="btn-jump"
+                                                                                                 onclick="return changePage('')">确定</a>
+    </div>
+</div>
+#end
+<script type="text/javascript">
+    function changePage(pageNum) {
+        if (pageNum == '') {
+        	var pageNumDOM = document.getElementById("J_PageNum"), totalPages = pageNumDOM.getAttribute("data-totalpages");
+            pageNum = pageNumDOM.value;
+            if(parseInt(pageNum) > parseInt(totalPages)){
+            	pageNum = totalPages;
+            }
+        }
+        var currentUrl = window.location.href;
+        if (currentUrl.indexOf('?') == -1) {
+            //没有请求参数
+            currentUrl = currentUrl + "?page=" + pageNum;
+        }
+        else {
+            if (currentUrl.indexOf('page=') == -1) {
+                currentUrl = currentUrl + "&page=" + pageNum;
+            }
+            else {
+                currentUrl = currentUrl.replace(/page=\d*/, "page=" + pageNum);
+            }
+        }
+        window.location.href = currentUrl;
+    }
+</script>

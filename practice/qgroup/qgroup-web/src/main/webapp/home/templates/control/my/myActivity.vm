@@ -1,0 +1,89 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/index/my-activity.css">
+<div id="JSlide">
+
+    #if( !$!{partnerActivityVoList} || $!{partnerActivityVoList.size()} == 0)
+        <div id="title" style="margin-bottom:15px;">
+            <span class="fix_font_size16">我的活动</span>
+            <div class="no_activity">
+            ##        <img src="http://gtms04.alicdn.com/tps/i4/TB1uSUMIXXXXXXjXpXXrTrfIpXX-219-50.png" class="a" style="border: 0;width:219px;height:50px">
+            </div>
+        </div>
+    #else
+        <div id="title">
+            <span class="fix_font_size16">我的活动</span>
+            <span class="fix_font_size12">只计算活动期间已经支付的有效淘宝订单</span>
+        </div>
+        <div class="trigger-bar">
+            <a href="javascript:void(0);" title="下翻" id="next1" class="next" style="float:right"></a>
+            <a href="javascript:void(0);" title="上翻" id="prev1" class="prev" style="float:left"></a>
+
+            <div class="scrollable-trigger" style="display:none;">
+                <li class="current">
+                    <a href="javascript:void(0);" class="current">1</a></li>
+                <li class=""><a href="javascript:void(0);" class="">2</a></li>
+                <li class=""><a href="javascript:void(0);" class="">3</a></li>
+            </div>
+        </div>
+    <div id="myAcitvitys" class="scrollable-panel" style="width: 620px; overflow: hidden; height: 130px;">
+        #foreach($partnerActivityVo in $!{partnerActivityVoList})
+
+        <div class="scrollable-content" style="float: left; overflow: hidden; width: 620px; display: block;">
+            #if($!{partnerActivityVo.state} == 0 )
+                <img src="$!{partnerActivityVo.picUrl}"/>
+            #elseif($!{partnerActivityVo.state} == 1)
+                <a href="$!{partnerActivityVo.PageUrl}" target="blank"><img src="$!{partnerActivityVo.picUrl}"/></a>
+            #end
+            <div class="discrpition">
+                #if($!{partnerActivityVo.state} == 0 )
+                <div class="waiting">即将开始
+                #elseif($!{partnerActivityVo.state} == 1)
+                <div class="in_process">进行中
+                #end
+            </div>
+                <p style="line-height: normal;">活动名称：
+                    #if($!{partnerActivityVo.state} == 0 )
+                        <span class="ready">$!{partnerActivityVo.name}</span>
+                    #elseif($!{partnerActivityVo.state} == 1)
+                        <a href="$!{partnerActivityVo.PageUrl}" target="blank">$!{partnerActivityVo.name}</a>
+                    #end
+                </p>
+                <p>活动时间：$!{partnerActivityVo.beginTime}-$!{partnerActivityVo.endTime}</p>
+
+                <p>活动排名：
+                    #if($!{partnerActivityVo.state} == 0 )
+                        暂无排名
+                    #elseif(${partnerActivityVo.state} == 1)
+                        累积交易额&nbsp;<span class="num">$!{partnerActivityVo.gmv}</span>&nbsp;元
+                        #if(${partnerActivityVo.sortOrder})
+                            ，排名第&nbsp;<span class="num">$!{partnerActivityVo.sortOrder}</span>&nbsp;位
+                        #else
+                            ，暂无排名
+                        #end
+                    #end
+
+                </p>
+                <div class="tip">
+                    #if($!{partnerActivityVo.descLevel} == 1 )
+                        亲！加油！还差$!{partnerActivityVo.gmvDiffer}元就有机会获得奖励！
+                    #elseif($!{partnerActivityVo.descLevel} == 2)
+                        亲!加油!还差$!{partnerActivityVo.gmvDiffer}元,再赶超$!{partnerActivityVo.sortOrderDiffer}位小伙伴就有机会获得奖励!
+                    #elseif($!{partnerActivityVo.descLevel} == 3)
+                        亲！恭喜您已入围奖励名单，请继续提高名次获得更多奖励！
+                    #elseif($!{partnerActivityVo.descLevel} == 4)
+                        亲！加油！再赶超$!{partnerActivityVo.sortOrderDiffer}位小伙伴就有机会获得奖励！
+                    #elseif($!{partnerActivityVo.descLevel} == 5)
+                        亲！您是冠军哦！请继续保持不要被小伙伴追上哦！
+                    #elseif($!{partnerActivityVo.descLevel} == 6)
+                        亲，您下个月就可以参加活动啦！
+                    #elseif($!{partnerActivityVo.descLevel} == 7)
+                        亲，请做好活动相关准备，入围名单可获得奖励噢~
+                    #end
+                </div>
+            </div>
+            </div>
+        #end
+    </div>
+    #end
+    <a href="https://cun.bbs.taobao.com/detail.html?spm=a210m.7699111.41501.1.h6ZcT4&postId=4186499&page=0&topicId=26801" target="_blank"><img src="/static/images/fan-banner.jpg" style="width: 660px;"></a>
+    <input type="hidden" value="$!{partnerActivityVoList.size()}" id="myActivitySize"/>
+</div>

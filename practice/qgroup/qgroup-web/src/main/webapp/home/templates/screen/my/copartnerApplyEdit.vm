@@ -1,0 +1,368 @@
+<link rel="stylesheet" href="//g.alicdn.com/kissy/k/1.4.7/??css/dpl/base-min.css,css/dpl/forms-min.css,button/assets/dpl-min.css">
+<link href="$!frontServer/address/css/address.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/copartner-apply-station.css">
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/map.css">
+<link rel="stylesheet" href="//g.alicdn.com/kg/agiledialog/1.0.0/index-min.css"/>
+#if($!repeatApply =='notApply')
+	<div style="width: 800px;height: 100px;margin: 0 auto;border: 1px solid #E5E5E5;margin-top: 20px;margin-bottom: 20px;font-family: Microsoft YaHei;">
+	    <div style=" margin: 50px auto;width:500px;height:70px"> <font style="font-size:15px">您好，对不起您未申请报名，无法查看进度，请先
+	            <a href="/my/copartnerApplyStation.htm">申请报名</a>。</font> 
+	    </div>
+	</div>
+#elseif($!repeatApply =='alreadyBePartner')
+	<div style="width: 800px;height: 100px;margin: 0 auto;border: 1px solid #E5E5E5;margin-top: 20px;margin-bottom: 20px;font-family: Microsoft YaHei;">
+	    <div style=" margin: 50px auto;width:500px;height:70px"> <font style="font-size:15px">您好，您已经是合伙人,无法编辑申请信息。</font> 
+	    </div>
+	</div>
+#else
+<div class="addPage" id="copartnerApply">
+    <div class="detail">
+    <font style="color:red;font-size:15px;" id="error"></font>
+        <div class="fix-line">
+            <span class="title"> <font style="color:red;">*</font> <font style="color:#999999">号为必填项</font>
+            </span>
+        </div>
+        <div>
+            <div class="cunInfo">
+                <table class="listInfo">
+                    <tr>
+                        <td class="tdleft">
+                            姓名
+                            <font color="red">*</font>
+                            
+                        </td>
+                        <td class="tdright" width="580">
+                            <input type="text"  value="$!applyName" id="applyName" name="applyName"   maxlength="20"  readonly/>
+                        </td>
+                    </tr>
+                    <td class="tdleft" >
+                        性别
+                        <font color="red">*</font>
+                        
+                    </td>
+                    <td class="tdright">
+                        <input type="radio"  name ="gender" value="M" #if($!gender!='F')checked#end  class="netPlatform"/>
+                    男
+                    	<input type="radio"   name ="gender" value="F" #if($!gender=='F')checked#end class="netPlatform"/>
+                    女
+                    </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            身份证号
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+                           <input type="text"  value="$!idCardNum" id="idCardNum" name="idCardNum" readonly/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            支付宝账号
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+                            <input type="text" value="$!alipayAccount"  id="alipayAccount" name ="alipayAccount" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft"  style="float: right;padding-top: 12px;">
+    							民族
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+                            <input id = "nation"  name ="nation" type ="text" value="$!nation" maxlength="150" />
+                        </td>
+                    </tr>
+    				<tr>
+                        <td class="tdleft"  style="float: right;padding-top: 12px;">
+    							学历
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+    						<select name="education" id="education">
+    						   		<option value="">请选择</option>
+                                #foreach($!edu in $!educationList)
+                                    <option value="$edu.code" #if($!education==$edu.code)selected#end>$!edu.name</option>
+                                #end
+                            </select>
+                        </td>
+                    </tr>
+    				<tr>
+                        <td class="tdleft"  style="float: right;padding-top: 12px;">
+    							政治面貌
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+    						<select name="politics" id="politics">
+    							<option value="">请选择</option>
+                                #foreach($!pol in $!politicsList)
+                                    <option value="$pol.code" #if($!politics==$pol.code)selected#end>$!pol.name</option>
+                                #end
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft"  style="float: right;padding-top: 12px;">
+    							现居住地
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+                            <input id = "manageAddress"  name ="manageAddress" type ="text" value="$!manageAddress" maxlength="150" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            营业场所
+                            <font color="red">*</font>
+                        
+                        </td>
+                        <td class="tdright" >
+                        <input type="radio"  id="isExitPlace" name ="isExitPlace" value="y" #if($!isExitPlace!='n')checked#end class="netPlatform" />
+                        有
+                        <input type="radio"  id="isExitPlaceO" name ="isExitPlace" value="n" #if($!isExitPlace=='n')checked#end class="netPlatform"/>
+                        无
+                        </td>
+                    </tr>
+                    <tr id="addressDetail">
+                        <td class="tdleft">
+                            计划经营地址
+                            <font color="red">*</font>
+                    
+                        </td>
+                        <td  #if("STATE_APPLY_INTERVIEW"==$!partnerApplyState) class="tdright" #end >
+                        	#if("STATE_APPLY_WAIT"==$!partnerApplyState)
+                            <input type="hidden"  id="J_iCountry" value="0"/>
+                            
+                            <input type="hidden" name="province" id="J_iProv" value="$!province"/>
+                            <input type="hidden" id ="provinceDetail" name="provinceDetail" value="$!provinceDetail"/>
+                            <input type="hidden"  id="J_iProvExt" value=""/>
+                            <input type="hidden" name="city" id="J_iCity" value="$!city"/>
+                            <input type="hidden" id ="cityDetail" name="cityDetail" value="$!cityDetail"/>
+                            <input type="hidden" name="county" id="J_iArea" value="$!county"/>
+                            <input type="hidden" id ="countyDetail" name="countyDetail" value="$!countyDetail"/>
+                            <input type="hidden" name="town" id="J_iTown" value="$!town"/>
+                            <input type="hidden" name="townDetail" id="townDetail" value="$!townDetail"/>
+
+                            <div class="item item-devision" id="J_ItemDivision"  style="display: block;padding-left: 25px;margin-top:10px">
+                                <div id="J_CitySelect" class="ks-clear clearfix">
+                                   <select id="J_Country" style="display:none">
+                                        <option value="0"  selected>中国大陆</option>
+                                    </select>
+                                    <div class="bf-select bf-cn-select lSelect select-node J_Modify" id="J_CnCity" style="height:16px;width:240px;border-radius:3px">
+                                        <div id="city-title" class="city-title">
+                                        	$!{provinceDetail}/$!{cityDetail}/$!{countyDetail}/$!{townDetail}
+                                        </div>
+                                        <div class="bf-menu-button-dropdown"></div>
+                                    </div>
+                                </div>
+                                <div class="msg-box">
+                                    <div class="msg msg-error  hide " id="J_MsgDivision"> <i></i>
+                                        <div class="msg-cnt"></div>
+                                    </div>
+                                </div>
+                                <div class="msg-box">
+                                    <div class="msg msg-attension hide" id="J_MsgSuggestion"> <i></i>
+                                        <div class="msg-cnt"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            #end
+                            #if("STATE_APPLY_INTERVIEW"==$!partnerApplyState)
+                              <input type="text"  value="$!stationAddressDetail" id="stationAddressDetail" name="stationAddressDetail"  readonly/>
+                            #end
+                        </td>
+                    </tr>
+                    <tr id="streetDetail">
+                        <td></td>
+                        <td >
+                            <div  class="item item-street"  id="J_ItemStreet" style="padding-left: 25px;display:block;">
+                                <div class="ks-combobox" id="J_ComboboxStreet" aria-pressed="false">
+                                    <div class="ks-combobox-input-wrap">
+                                        <input type="text" class="ks-combobox-input i-ta" aria-combobox="list" role="combobox" autocomplete="off"  id="J_Street" name="address"
+                                                                  placeholder="请输入街道信息及门牌号信息" value="$!stationAddressDetailExt" style="width: 250px;margin-top: 10px; #if($!isExitPlace=='n')display:none;#end" />
+                                    </div>
+                                </div>
+                                <div class="msg-box">
+                                    <div class="msg msg-error hide" id="J_MsgStreet">
+                                        <i></i>
+                                        <div class="msg-cnt"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr #if($!isExitPlace=='n')style="display:none;"#end class="hasAreaCol">
+                        <td class="tdleft">营业面积</td>
+                        <td class="tdright">
+                            <input id="manageArea" name="manageArea" type ="text" value="$!manageArea" maxlength="10" placeholder="如：1000平方米"/>
+                        </td>
+                    </tr>
+                    <tr #if($!isExitPlace=='n')style="display:none;"#end class="hasAreaCol">
+						<td class="tdleft">经营地照片</td>
+						<td class="tdright grid" >
+                            <input class="g-u" id="J_UploaderBtn" name="Filedata" accept="image/*" type="file" value="上传图片" >
+                            <input type="hidden" id="J_Urls" name="imageUrls" value="http://tp4.sinaimg.cn/1653905027/180/5601547226/1,http://img02.taobaocdn.com/imgextra/i2/748902859/T2OTOdXm0bXXXXXXXX_!!748902859.jpg_310x310.jpg">
+                            <ul id="J_UploaderQueue" class="grid">
+	                            <script type="text/uploader-files">
+									#noescape()$!locationImgs#end 
+								</script>
+                            </ul>
+                   		 </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            联系电话
+                            <font color="red">*</font>
+                    
+                        </td>
+                        <td class="tdright" >
+                            <input id="mobile" name="mobile" type ="text" value="$!mobile" maxlength="11"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">常用邮箱</td>
+                        <td class="tdright" >
+                            <input id = "email" name="email" type ="text" value="$!email" maxlength="40"/>
+                        </td>
+                    </tr>
+            		 <tr>
+                        <td class="tdleft">创业(经营)计划书</td>
+						 <td class="tdright grid" >
+                            <input class="g-u" id="upload-file" name="Filedata" type="file" value="上传文件" >
+                            <input type="hidden" id="file-urls" name="image-urls" value="http://tp4.sinaimg.cn/1653905027/180/5601547226/1,http://img02.taobaocdn.com/imgextra/i2/748902859/T2OTOdXm0bXXXXXXXX_!!748902859.jpg_310x310.jpg">
+                            <ul id="files-queue" class="grid">
+                            	<script type="text/uploader-files">
+									#noescape()$!busProposal#end 
+								</script>
+                            </ul>
+                            <p class="sub-description">最多上传5份资料，附件格式支持jepg、png、jpg、doc、docx、ppt、pptx、pdf、zip，大小在 20M 以内。</p>
+                        </td>
+                    </tr>
+            		<tr>
+                        <td class="tdleft">您是从哪几个渠道知道我们的</td>
+                        <td class="tdright" >
+            				#foreach($!fromChannel in $!fromChannelList)
+            				<label class="partner-checkbox">
+                				<input style="width:25px" name="fromChannels" #if($!fromChannel.checked)checked#end type="checkbox" value="$fromChannel.code"/>$fromChannel.name
+                			</label>
+                			#end
+            				<label class="partner-checkbox">
+                				<input style="width:25px" name="fromChannels" id="other-way" type="checkbox" value="$!otherChannel" #if($!otherChannel)checked#end/>其他
+                			</label>
+                            <input type="text" class="other-way" value="$!otherChannel" #if($!otherChannel)style="display: block;"#end>
+                        </td>
+                    </tr>
+                    <tr>
+                    	<td class="tdright" colspan="2">
+                			<h4 class="optional-title">（以下为选填信息，填写内容越详尽，对审核通过越有帮助）</h4>
+                			<a class="toggle-options" href="javascript:;">收起^</a>
+                	    </td>
+                    </tr>
+                    <tbody class="options">
+                    	<tr>
+                            <td class="tdleft">工作经历</td>
+                            <td class="tdright" >
+                                <textarea id="workExp" name="workExp" placeholder="起止日期、工作单位、工作地、工作内容等" style="width:250px">$!workExp</textarea>
+                            </td>
+                        </tr>
+                    	<tr>
+                            <td class="tdleft"  style="float: right;padding-top: 12px;">
+                        			村面积
+                            </td>
+                            <td class="tdright" >
+                    			<select name="areaRange">
+                                        <option>请选择</option>
+                                    #foreach($!ar in $!areaRangeList)
+                                        <option value="$ar.code" #if($!ar.code == $!areaRange)selected#end>$!ar.name</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                    	<tr>
+                            <td class="tdleft"  style="float: right;padding-top: 12px;">
+                        			村人口
+                            </td>
+                            <td class="tdright" >
+                    			<select name="population">
+                                     <option>请选择</option>
+                                    #foreach($!pop in $!populationList)
+                                        <option value="$pop.code" #if($!pop.code == $!population)selected#end>$!pop.name</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                    	<tr>
+                            <td class="tdleft"  style="float: right;padding-top: 12px;">
+                        			村人均收入
+                            </td>
+                            <td class="tdright" >
+                    			<select name="perIncomeRange">
+                                     <option>请选择</option>
+                                    #foreach($!per in $!perIncomeRangeList)
+                                        <option value="$per.code" #if($!per.code == $!perIncomeRange)selected#end>$!per.name</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                    	<tr>
+                            <td class="tdleft"  style="float: right;padding-top: 12px;">
+                        			村民主要年龄
+                            </td>
+                            <td class="tdright" >
+                    			<select name="ageRange">
+                                     <option>请选择</option>
+                                    #foreach($!ar in $!ageRangeList)
+                                        <option value="$ar.code" #if($!ar.code == $!ageRange)selected#end>$!ar.name</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                    	<tr>
+                            <td class="tdleft">是否有其他电子商务平台经验</td>
+                            <td class="tdright" >
+                    			#foreach($!netPlat in $!netPlatList)
+                    			<label class="partner-checkbox">
+                    				<input style="width:25px" name="netPlatformExp" #if($!netPlat.checked)checked#end type="checkbox" value="$!netPlat.code">$netPlat.name
+                    			</label>
+                    			#end
+                    			<label class="partner-checkbox">
+                    				<input style="width:25px" name="netPlatformExp" id="other-experience" type="checkbox" value="$!otherPlat" #if($!otherPlat)checked#end>其他
+                    			</label>
+                                <input type="text" class="other-experience" value="$!otherPlat" #if($!otherPlat)style="display: block;"#end>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+</div>
+</div>
+</div>
+<div class="lastfix">
+<div class="warning">
+<i class="cunicon icon-warn" style="color:#009FFF;padding-left: 10px;">&nbsp;</i>
+请准确填写表单信息，提交后将不能修改，如填写有误请联系技术人员解决。
+</div>
+#if($!canEdit)
+	<div class="sub-action">
+		<button type="submit" class="submitBtn" id ="submitBtn">确认无误，提交</button>
+	</div>
+	#end
+</div>
+</div>
+<script src="https://webapi.amap.com/maps?v=1.3&key=8464d50a3f581a0be0ee9bcbf987e06a"></script>
+<script charset="utf-8" src="$!frontServer/address/js/map.js"></script>
+<script charset="utf-8" src="$!frontServer/address/js/address.js"></script>
+<script charset="utf-8" src="$!frontServer/address/js/index.js"></script>
+<script type="text/javascript">
+	var Cuntao = Cuntao || {};
+	Cuntao.page = "EDIT";
+	Cuntao.interview = "$!partnerApplyState";
+	KISSY.use('admin/js/copartner-apply-station');
+</script>
+#end

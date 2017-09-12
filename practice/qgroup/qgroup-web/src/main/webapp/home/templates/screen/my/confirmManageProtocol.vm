@@ -1,0 +1,173 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/detail-station.css">
+<style>
+    .read-agree {
+        margin: 0 auto;
+        width: 200px;
+        padding-bottom: 20px;
+    }    
+    .submit_enable{
+          width: 70px;
+          height: 30px;
+          background-color: #1e8c00;
+          color: white;
+          cursor: pointer;
+          border-style: none;
+    }
+    .submit_disable{
+          width: 70px;
+          height: 30px;
+          background-color: #1e8c00;
+          color: white;
+          cursor: not-allowed;
+          border-style: none;
+    }
+    .contentwrap{
+        background-color: white;
+    }
+
+
+    .protocol{
+        margin: 20px 100px;
+        position: relative;
+        padding-bottom: 20px;
+    }
+
+    .protocol h3 {
+        position: relative;
+        font-size:  250%;
+        text-align: center;
+        padding-top: 25px;
+
+    }
+
+    .protocol h4 {
+        font-size: 180% ;
+        margin-top: 20px;
+    }
+
+    .protocol p {
+        margin-top: 7px;
+        position: relative;
+        display: inline-block;
+    }
+
+    p strong {
+        clear: left;
+        display: block;
+        float: left;
+        font-size: 150%;
+        margin-right: 15px;
+        position: relative;
+        padding-top: 0px;
+    }
+
+    #eleven {
+        margin-top: 30px;
+        float: none;
+        position: relative;
+    }
+
+    ol {
+        clear: left;
+        margin-left: 20px;
+        list-style: decimal;
+    }
+
+    .contentfoot{
+        clear: left;
+    }
+
+
+
+
+</style>
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <input type="hidden" id="stationApplyId" value="$!applyStationId">
+        <input type="hidden" id="manageProtocolVersion" value="$!manageProtocolVersion"/>
+
+        
+        <div class="contentwrap">
+            <div id="confirm-content"  class="protocol">
+				#if($!manageProtocolVersion == "")
+                $control.setTemplate("my/manageProtocol1")
+				#else
+				$control.setTemplate("my/manageProtocol${manageProtocolVersion}")	
+				#end
+            </div>
+            <div class="read-agree">
+                <input type="checkbox"  id="mg"  checked="true"><span>已阅读，同意条款</span>
+                <button id="submit" class="submit_enable">确定</button>            
+            </div>   
+        </div> 
+    </div>
+</div>
+<script>
+
+KISSY.use('node,io',function(S,node,IO){
+
+    var $ = node.all;
+
+    var cout = {
+        init:function (classname) {
+            this.time=20
+            this.pri()
+        },
+        pri:function (obj, time) {
+            var $this = this
+            function temp(){
+                $this.time=$this.time*1-1
+                $("#submit").html("确定("+$this.time+")")
+                window.setTimeout(function () {
+                    if($this.time>0){
+                        temp()
+                    }
+                    else{
+                        cout.reg=true
+                        $("#submit").html("确定")
+                    }
+                }, 1000)
+            }
+            temp();
+        }
+    }
+
+    cout.init()
+
+
+    $("#submit").on("click",function(){
+        var parm={
+            stationApplyId:$("#stationApplyId").val(),
+            manageProtocolVersion:$("#manageProtocolVersion").val()
+        }
+
+        if($("#mg")[0].checked&&cout.reg){
+            IO.post("/my/doConfirmManageProtocol.json",parm,function(data){
+                if(!data.hasError && data.content.succ){
+                    window.location.href=data.content.url;
+                }else{
+                    window.location.href="/my/confirmManageProtocol.htm";
+                }
+            })
+        }
+    })
+
+    $("#mg").on('change',  function() {
+        if($("#mg")[0].checked==false){
+            $("#submit").attr("disabled",true);
+            $("#submit").replaceClass("submit_enable","submit_disable");
+        }else{
+            $("#submit").attr("disabled",false);
+            $("#submit").replaceClass("submit_disable","submit_enable");
+        }
+    });
+});
+
+
+
+
+
+
+
+
+</script>

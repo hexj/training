@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="$!frontServer/admin/pages/training/training.css">
+<div class="mc-main">
+    <div class="grid-1190">
+    	<div class="training">
+    		$!securityUtil.ignoretext($tmsTool.importRgn("/rgn/cun/cunadmin/training.php",1,false))
+	    	<div class="action">
+	    		<a href="/my/copartnerApplyStation.htm" class="btn mr20" target="_blank">¡¢º¥…Í«Î</a>
+	    		<a href="/my/exam.htm" class="btn" target="_blank">Œ““™øº ‘</a>
+	    	</div>
+    	</div>
+    </div>
+    <div id="videoContent" style="display:none;">
+    	<div id="container"></div>
+    </div>
+</div>
+<script>
+	KISSY.use('admin/pages/training/training', function(S, App){
+		new App();
+	});
+</script>

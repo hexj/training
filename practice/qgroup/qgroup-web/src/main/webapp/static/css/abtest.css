@@ -1,0 +1,83 @@
+body { 
+    font: normal 12px auto Courier New, Arial, Helvetica, sans-serif; 
+    color: #4f6b72; 
+    background: #E6EAE9; 
+}
+
+a { 
+    color: #4f6b72/*#c75f3e*/;
+	text-decoration:none;
+}
+
+#mytable { 
+    width: 100%; 
+    padding: 0; 
+    margin: 0; 
+}
+
+caption { 
+    padding: 0 0 5px 0; 
+   	width: 100%;
+	font: 12px "华文楷体",Courier New;
+	text-align: left;
+}
+
+th { 
+    font:12px Courier New, Arial, Helvetica, sans-serif; 
+    color: #4f6b72; 
+    border-right: 1px solid #C1DAD7; 
+    border-bottom: 1px solid #C1DAD7; 
+    border-top: 1px solid #C1DAD7; 
+    letter-spacing: 2px; 
+    text-align: left; 
+    padding: 6px 6px 6px 12px; 
+    background: #CAE8EA ; 
+}
+
+th.nobg { 
+    border-left: 0; 
+    border-right:0; 
+    background: none; 
+}
+
+th.nobg_head { 
+	border-top:0; 
+    border-left: 0; 
+    border-right:0; 
+    background: none; 
+	text-align:center;
+	font-size:12px; 
+}
+
+td { 
+    border-right: 1px solid #C1DAD7; 
+    border-bottom: 1px solid #C1DAD7; 
+    background: #fff; 
+    font-size:12px; 
+    padding: 6px 6px 6px 12px; 
+    font:  12px Courier New, Arial, Helvetica, sans-serif, "新宋体";
+    color: #4f6b72; 
+}
+
+
+td.alt { 
+    background: #F5FAFA; 
+    color: #797268; 
+}
+td.red {
+	 color: red; 
+}
+th.spec { 
+    border-left: 1px solid #C1DAD7; 
+    border-top: 0; 
+    background: #fff; 
+    font: bolder 12px Courier New, Arial, Helvetica, sans-serif, "新宋体";
+}
+
+th.specalt { 
+    border-left: 1px solid #C1DAD7; 
+    border-top: 0; 
+    background: #f5fafa; 
+    font: bold 12px Courier New, Arial, Helvetica, sans-serif; 
+    color: #797268; 
+} 

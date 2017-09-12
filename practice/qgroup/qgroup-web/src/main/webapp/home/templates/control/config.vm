@@ -1,0 +1,33 @@
+<script type="text/javascript">
+KISSY.config({
+    combine: true,
+    debug: true,
+    packages: {
+        admin: {
+            base: '$!frontServer/admin', 
+            charset: "utf-8",
+            ignorePackageNameInUri: true
+        },
+		common: {
+            base: '$!frontServer/common', 
+            charset: "utf-8",
+            ignorePackageNameInUri: true
+        },
+        bops: {
+            base: '$!frontServer/bops', 
+            charset: "utf-8",
+            ignorePackageNameInUri: true
+        },
+		tbc :{
+            base: "//g.alicdn.com/tbc/",
+            charset: "utf-8",
+            ignorePackageNameInUri: true
+        },
+		kg :{
+            base: "//g.alicdn.com/kg/",
+            charset: "utf-8",
+            ignorePackageNameInUri: true
+        }
+    }
+});
+</script>

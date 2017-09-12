@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/index/admin-home.css">
+<div class="order_amount_ranking">
+    <div>
+        <div class="title">
+            <span class="fix_font_size16">我的月代购金额排名</span>
+            <span class="fix_font_size12">只计算已经支付的有效淘宝订单</span>
+        </div>
+        <div class="refresh_btn" id="refresh">
+            <a href="javascript:void(0)"> <i class="refresh">&#xe600;</i>
+                <span class="font_l">刷新</span>
+            </a>
+        </div>
+    </div>
+    <div class="p_content">
+        <div class="content">
+            <div class="fix_font_size16 align_c padding-t" id="county_name"></div>
+            <div class="town_ranking align_c padding-t" id="town">
+                第 <font class="num_color" id="county_ranking"></font>
+                位
+            </div>
+            <div class="fix_font_size14 align_c padding-t" id="top_30">本县服务点30强</div>
+            <div id="example">
+                <div id="slides">
+                    <!--Slide控件开始-->
+                    <div class="slides_container tab-content" id="county_detail">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="content fix-bacground">
+            <div class="fix_font_size16 align_c padding-t" id="country_name"></div>
+            <div class="town_ranking align_c padding-t" id="all">
+                第 <font class="num_color" id="country_rank"></font>
+                位
+            </div>
+            <div class="fix_font_size14 align_c padding-t">全国服务点50强</div>
+            <div id="example2">
+                <div id="slides2">
+                    <!--Slide控件开始-->
+                    <div class="slides_container tab-content" id="country_detail">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

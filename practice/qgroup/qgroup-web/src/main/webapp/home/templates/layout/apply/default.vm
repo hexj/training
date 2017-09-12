@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<title>农村淘宝-服务点合作协议</title>
+	<link href="//www.taobao.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="//g.alicdn.com/kissy/k/5.0.0/css/base.css">
+	<link rel="stylesheet" type="text/css" href="//g.alicdn.com/kissy/k/5.0.0/button/assets/dpl.css">
+	<link rel="stylesheet" type="text/css" href="//g.alicdn.com/kissy/k/5.0.1/overlay/assets/dpl.css">
+	<link rel="stylesheet" type="text/css" href="//g.alicdn.com/tb/cuntao/1.0.11/admin/css/common.css">
+	$control.setTemplate("vmcommon/s/3.2/css.vm")
+	$control.setTemplate("vmcommon/s/3.2/js.vm").setParameter("version", "1.4.7")
+	$control.setTemplate("config")
+</head>
+<body>
+	$control.setTemplate("vmcommon/s/3.2/header.vm")
+	<input type="hidden" id ="_csrf_token" value="$!csrfToken.UniqueToken">
+    <script type="text/javascript">
+    	KISSY.use('common/js/common');
+    </script>	
+    <script>
+	TB.Global.blacklist = ['fn-cart'];
+        TB.Global.init();
+    </script>
+    <div class="l-page">
+    	$screen_placeholder
+    </div>
+	$!securityUtil.ignoretext($tmsTool.importRgn("/rgn/sites/footer.php",1,true))
+</body>
+</html>

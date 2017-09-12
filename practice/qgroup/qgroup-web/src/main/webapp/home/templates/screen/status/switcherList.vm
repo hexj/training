@@ -1,0 +1,11 @@
+<ul>
+Switcher List:
+#foreach($switcher in $cuntaoAdminBasicSwitcherMap.entrySet())
+<li>$switcher.key : ${switcher.value.isSwitchedOn()}</li>
+#end
+</ul>
+
+<ul>
+Conditional Switcher List:
+<li>CahierFunctionConditionalSwitcher : ${cashierFunctionConditionalSwitcher.isSwitchingOn($!loginId)}</li>
+</ul>

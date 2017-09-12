@@ -1,0 +1,293 @@
+<!-- 导航-- -->
+$!securityUtil.ignoretext($tmsTool.importRgn("/rgn/cun/cun-header.php",1,true))
+<link rel="stylesheet" href="//g.alicdn.com/kissy/k/1.4.7/??css/dpl/base-min.css,css/dpl/forms-min.css,button/assets/dpl-min.css">
+<link href="$!frontServer/address/css/address.css" rel="stylesheet"/>
+<link rel="stylesheet" href="//g.alicdn.com/kg/agiledialog/1.0.0/index-min.css"/>
+<link rel="stylesheet" href="$!frontServer/admin/pages/tp-apply/tp-apply.css">
+
+<div class="tp-wrap">
+	<div class="grid-1190 clearfix">
+		<div class="tp-main">
+			<div class="tp-header">
+				<div class="title">第三方合作申请</div>
+				<div class="step">
+					<div class="tp-step tp-step-1"></div>
+				</div>
+			</div>
+			<div class="tp-content">
+			#if (!$errorCode)
+				<div class="tp-content-header">
+                    <span style="color:red">*</span> <span style="color:#999">为必填项</span>
+                </div>
+           #end
+                <div class="tp-content-body">
+				#if ($errorCode)
+    				#if($!errorCode == "5")
+    				<div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-error">
+                            <h3 class="tp-feedback-header">您好，您已经是合伙人，不能报名</h3>
+                        </div>
+                    </div>
+   					#elseif($!errorCode == "1")
+   					<div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-error">
+                            <h3 class="tp-feedback-header">该淘宝账号不存在</h3>
+                        </div>
+                    </div>
+   					#elseif($!errorCode == "4")
+   					<div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-error">
+                            <h3 class="tp-feedback-header">你已经提交报名，请勿重新报名，可以<a href="/invite/tpApplyDetail.htm">查看进度</a></h3>
+                        </div>
+                    </div>
+   					#elseif($!errorCode == "2")
+   					<div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-error">
+                            <h3 class="tp-feedback-header">您的账号未绑定支付宝，请<a href="http://member1.taobao.com/member/fresh/account_management.htm">绑定</a>并<a href="https://certify.alipay.com">实名认证</a>后才能报名</h3>
+                        </div>
+                    </div>
+   					#elseif($!errorCode == "3")
+   					<div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-error">
+                            <h3 class="tp-feedback-header">您账号所绑定的支付宝未通过实名认证，请先进行<a href="https://certify.alipay.com">实名认证</a>后才能报名</h3>
+                        </div>
+                    </div>
+   				#end
+#else
+<div class="addPage" id="tpApply">
+	<form id="tpApplyForm" action="" method="POST">
+	 <input id='_tb_token_' name='_tb_token_' type='hidden' value='$csrfToken.UniqueToken'>
+    <div class="detail">
+    <font style="color:red;font-size:15px;" id="error"></font>
+        <div>
+            <div class="cunInfo">
+                <table class="listInfo">
+                    <tr>
+                        <td class="tdleft">
+                            公司名称 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="orgName" name="orgName" />
+                        </td>
+                    </tr>
+                    <tr id="addressDetail">
+		                <td class="tdleft">
+		                    计划经营地址
+		                    <font color="red">*</font>
+		                </td>
+		                <td>
+		                    <input type="hidden"  id="J_iCountry" value="0"/>
+		                    <input type="hidden" name="province" id="J_iProv" value="" style="width:280px;" />
+		                    <input type="hidden" id ="provinceDetail" name="provinceDetail" value=""/>
+		                    <input type="hidden"  id="J_iProvExt" value=""/>
+		                    <input type="hidden" name="city" id="J_iCity" value=""/>
+		                    <input type="hidden" id ="cityDetail" name="cityDetail" value=""/>
+		                    <input type="hidden" name="county" id="J_iArea" value=""/>
+		                    <input type="hidden" id ="countyDetail" name="countyDetail" value=""/>
+		                    <input type="hidden" name="town" id="J_iTown" value="" style="width:280px;" />
+		                    <input type="hidden" name="townDetail" id="townDetail" value=""/>
+		                    <div class="item item-devision" id="J_ItemDivision"  style="display: block;padding-left: 25px;margin-top:10px">
+		                        <div id="J_CitySelect" class="ks-clear clearfix">
+		                            <select id="J_Country" style="display:none">
+		                                <option value="0"  selected>中国大陆</option>
+		                            </select>
+		                            <div class="bf-select bf-cn-select lSelect select-node J_Modify" id="J_CnCity" style="height:16px;width:240px;border-radius:3px">
+		                                <div id="city-title" class="city-title">请选择省市区</div>
+		                                <div class="bf-menu-button-dropdown"></div>
+		                            </div>
+		                        </div>
+		                        <div class="msg-box">
+		                            <div class="msg msg-error  hide " id="J_MsgDivision"> <i></i>
+		                                <div class="msg-cnt"></div>
+		                            </div>
+		                        </div>
+		                        <div class="msg-box">
+		                            <div class="msg msg-attension hide" id="J_MsgSuggestion"> <i></i>
+		                                <div class="msg-cnt"></div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </td>
+		            </tr>
+		            <tr id="streetDetail">
+		                <td></td>
+		                <td  colspan="2">
+		                    <div  class="item item-street"  id="J_ItemStreet" style="padding-left: 25px;display:block;">
+		                        <div class="ks-combobox" id="J_ComboboxStreet" aria-pressed="false">
+		                            <div class="ks-combobox-input-wrap">
+		                                <input type="text" class="ks-combobox-input i-ta" aria-combobox="list" role="combobox" autocomplete="off"  id="J_Street" name="address"
+		                                                          placeholder="请输入街道信息及门牌号信息" style="width: 250px;margin-top: 10px;display:block" />
+		                            </div>
+		                        </div>
+		                        <div class="msg-box">
+		                            <div class="msg msg-error hide" id="J_MsgStreet">
+		                                <i></i>
+		                                <div class="msg-cnt"></div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </td>
+		            </tr>
+		            <tr>
+                        <td class="tdleft">
+                            法定代表人姓名 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="legalPersonName" name="legalPersonName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            支付宝帐号 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="$!alipayAccount" id="alipayAccount" name="alipayAccount" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            培训团人数 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="teamNum" name="teamNum" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            自有师资人数 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="teacherNum" name="teacherNum" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            服务区域 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="serveArea" name="serveArea" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            业务范围 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <select id="businessType" name="businessType">
+  								<option value ="BUSINESS_ELEC_TRAIN">电商培训</option>
+ 								<option value ="BUSINESS_SELF_TRAIN">有自有培训课程</option>
+  								<option value="BUSINESS_SERVICE_INDUSTRAIL">产业园服务</option>
+  								<option value="BUSINESS_TP_AGENT">TP代运营</option>
+ 								<option value="BUSINESS_OTHER">其他</option>
+							</select>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="tdleft">
+                            申请人 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="applyerName" name="applyerName" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            申请人职位 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="applyerJob" name="applyerJob" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            申请人电话 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="tel" name="tel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            申请人邮箱 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <input type="text"  value="" id="email" name="email" />
+                        </td>
+                    </tr>
+                    <tr>
+				        <td class="tdleft" style="float: right;padding-top: 15px;vertical-align:top;">
+				            营业执照
+				            <font color="red">*</font>
+				            
+				        </td>
+				        <td class="tdright"  colspan="2">
+			                <input type="hidden" id="imgData" name="imgData" value="" style="width:80px;" />
+				            <div class="grid" >
+				                <input class="g-u" id="J_UploaderBtn" name="Filedata" type="file" accept="image/*" value="上传图片">
+				            </div>
+				            <ul id="J_UploaderQueue" class="grid">
+				                <script type="text/uploader-files"></script>
+				            </ul>
+				        </td>
+				    </tr>
+				     <tr>
+				        <td class="tdleft" style="color:#666;letter-spacing:0;font-size:12px"></td>
+				        <td  class="tdright" style="color:#666;letter-spacing:0;font-size:12px">必须提交营业执照, 组织机构代码证, 税务登记证</td>
+				    </tr>
+				    
+				    <tr>
+				        <td class="tdleft" style="color:#666;letter-spacing:0;font-size:12px"></td>
+				        <td  class="tdright" style="color:#666;letter-spacing:0;font-size:12px">最多上传5张图片, 格式支持jpeg,jpg,png, 大小在5M以内</td>
+				    </tr>
+				    <tr>
+                        <td class="tdleft">公司介绍 <font color="red">*</font></td>
+                        <td class="tdright">
+                        	<input type="hidden" id="fileData" name="fileData" value="" style="width:80px;" />
+                            <div class="grid">
+                                <input type="file" class="g-u" id="J_UploaderBtn_file" value="上传文件" name="Filedata" >
+                            </div>
+                            <ul id="J_UploaderQueue_file">
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+				        <td class="tdleft" style="color:#666;letter-spacing:0;font-size:12px"></td>
+				        <td  class="tdright" style="color:#666;letter-spacing:0;font-size:12px">最多上传5份资料, 附件格式支持jpeg,png,jpg,doc,docx,ppt,pptx,pdf,zip, 大小在20M以内</td>
+				    </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="lastfix">
+	<div class="warning">
+	<i class="cunicon icon-warn" style="color:#009FFF;padding-left: 10px;">&nbsp;</i>
+	请准确填写表单信息，提交后将不能修改，如填写有误请联系技术人员解决。
+	</div>
+	<div style="padding: 25px 0 0 240px;">
+	<div>
+	<button type="submit" class="submitBtn" id ="submitBtn">确认无误，提交</button>
+	</div>
+	</div>
+	</div>
+	</form>
+</div>
+#end
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://webapi.amap.com/maps?v=1.3&key=8464d50a3f581a0be0ee9bcbf987e06a"></script>
+<script charset="utf-8" src="$!frontServer/address/js/map.js"></script>
+<script charset="utf-8" src="$!frontServer/address/js/address.js"></script>
+<script charset="utf-8" src="$!frontServer/address/js/index.js"></script>
+#if (!$errorCode)
+<script>
+	KISSY.use('admin/pages/tp-apply/tp-apply', function(S, App){
+		new App();
+	});
+</script>
+#end

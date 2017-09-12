@@ -1,0 +1,332 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/??admin/css/copartner-apply-detail.css,admin/mods/feed-back-tips/feed-back-tips.css">
+<link rel="stylesheet" href="$!frontServer/admin/css/mod/??ct-box.css,ct-button.css,ct-form.css,ct-message.css"/>
+<link rel="stylesheet" href="$!frontServer/admin/pages/recruit-partner-detail/index.css"/>
+#if($!repeatApply =='alreadyBePartner')
+<div class="mc-main">
+	<div class="grid-1190" style="background: #fff;">
+		<div class="ct-ui-message">
+			<div class="ct-ui-message-content ct-ui-message-success">
+				<i class="ct-ui-message-ico"></i>
+				<h3 class="ct-ui-message-header">您好，您已经是合伙人,无需再次报名。</h3>
+				<div class="ct-ui-message-body">
+					<p>请登录 <a href="/my/index.htm">我的村淘</a> 开始农村淘宝之旅！</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+#else
+<div class="mc-main">
+	<div class="grid-1190 clearfix">
+		<div class="mc-main-aside">
+			$control.setTemplate("my/asideMenu").setParameter("currentIndex","partner")
+		</div>
+		<div class="mc-main-wrap">
+			<div class="recruit-detail">
+				<div class="recruit-detail-header">
+					<div class="title clearfix">
+						#if($!auditStateCode == 'STATE_APPLY_WAIT')
+						<div class="left ico-success">
+							<h3>报名成功，信息审核中</h3>
+							<p class="extra">您可以完善信息或者参加考试，以提高录取率</p>
+						</div>
+						#elseif($!auditStateCode == 'STATE_APPLY_INTERVIEW' || $!auditStateCode == 'STATE_APPLY_NOTIFY' || $!auditStateCode == 'STATE_APPLY_SIGNED' || $!auditStateCode == 'STATE_APPLY_NOT_SIGNED')
+						<div class="left ico-success">
+							<h3>待面试</h3>
+							<p class="extra">村淘小二会根据您的资料和考试成绩考虑是否安排面试，请耐心等待通知</p>
+						</div>
+						#elseif($!auditStateCode == 'STATE_APPLY_REFUSE' || $!auditStateCode == 'STATE_APPLY_REFUSE_INTERVIEW')
+						<div class="left ico-error">
+							<h3>审核情况</h3>
+							<p class="extra">$!refuseReason</p>
+						</div>
+						#elseif($!auditStateCode == 'STATE_APPLY_SUCC')
+						<div class="left ico-success">
+							<h3>面试通过</h3>
+							<p class="extra">您的报名申请已经审核通过，村淘小二会联系您跟进后续事宜</p>
+						</div>
+						#elseif($!auditStateCode == 'STATE_APPLY_COOPERATION')
+						<div class="left ico-success">
+							<h3>已合作</h3>
+							<p class="extra">您已经是村淘合伙人，无需再次报名</p>
+						</div>
+						#end
+						<div class="right">
+							#if($!infoLevel == '1')
+								<a href="/my/copartnerApplyStation.htm?isEdit=y&currentStep=step2" class="btn-action ui-button ui-button-primary ui-button-large">补全资料</a>
+							#elseif($!infoLevel == '2')
+								<a href="/my/exam.htm" class="btn-action ui-button ui-button-primary ui-button-large">开始考试</a>
+							#end
+						</div>
+					</div>
+				</div>
+				<div class="recruit-detail-body">
+					<div class="ui-box ui-box-normal">
+						<h3 class="ui-box-header">
+							基础信息
+							<a class="action" href="/my/copartnerApplyStation.htm?isEdit=y&currentStep=step1" >修改</a>
+						</h3>
+						<div class="ui-box-body">
+							<div class="ui-form ui-form-horizontal">
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										姓名 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!applyName</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										性别 :
+									</label>
+									<div class="ui-form-control">
+										<div>#if($!gender!='M')女 #else 男 #end</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										身份证号 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!idCardNum</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										支付宝帐号 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!alipayAccount</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										联系电话 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!mobile</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										学历 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!education</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										计划经营地址 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!stationAddress</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										身份证照片 :
+									</label>
+									<div class="ui-form-control">
+										#if($!idCardImgs)
+										  #foreach($!atta in $!idCardImgs)
+											  <a href="$!atta.url" target="_blank"><img data-original-url="$securityUtil.richtext($!atta.url)"  src="$securityUtil.richtext($!atta.url)" data-desc="$!imgType"width="100" height="100" /></a>
+										  #end
+										#end
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-box ui-box-normal mt20">
+						<h3 class="ui-box-header">
+							详细信息
+							<a class="action" href="/my/copartnerApplyStation.htm?isEdit=y&currentStep=step2" >修改</a>
+						</h3>
+						<div class="ui-box-body">
+							<div class="ui-form ui-form-horizontal">
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										政治面貌 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!politics</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										现居住地 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!manageAddress</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										村人口 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!population</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										计划村淘营业场所 :
+									</label>
+									<div class="ui-form-control">
+										<div>#if($!isExitPlace == 'y') 有 #elseif($!isExitPlace == 'n') 无  #end</div>
+									</div>
+								</div>
+								#if($!isExitPlace == 'y')
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										<span class="ui-form-required">*</span>
+										营业面积 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!manageArea</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										营业地照片 :
+									</label>
+									<div class="ui-form-control">
+										<div>
+										#if($!locationImgs)
+										  #foreach($!atta in $!locationImgs)
+											  <a href="$!atta.url" target="_blank"><img src="$!atta.url" width="100" height="100" /></a>
+										  #end
+										#end
+										</div>
+									</div>
+								</div>
+								#end
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										常用邮箱 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!email</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										民族 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!nation</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										村面积 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!areaRange</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										村人均收入 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!perIncomeRange</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										村民主要年龄 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!ageRange</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										网络是否覆盖 :
+									</label>
+									<div class="ui-form-control">
+										<div> #if($!isExistNetwork=='y') 是 #elseif($!isExistNetwork=='n') 否 #end</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										工作经历 :
+									</label>
+									<div class="ui-form-control">
+										<div>$!workExp</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										经营计划书 :
+									</label>
+									<div class="ui-form-control">
+										<div>
+											#if($!busProposal)
+												#foreach($!atta in $!busProposal)
+												<a class="guide-book" href="$!atta.downloadUrl">$!atta.title</a><br>
+												#end
+											#end
+										</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										您是从哪几个渠道知道我们的 :
+									</label>
+									<div class="ui-form-control">
+										<div>
+											#set($count1=0)
+												#foreach($!channel in $!fromChannels)
+												#if ($count1 == 0)
+												$!channel
+												#else
+												,&nbsp;$!channel
+												#end
+												#set($count1 = $count1 + 1)
+											#end
+										</div>
+									</div>
+								</div>
+								<div class="ui-form-item">
+									<label class="ui-form-label" for="">
+										是否有其他电子商务平台经验 :
+									</label>
+									<div class="ui-form-control">
+										<div>
+											#set($count2=0)
+												#foreach($!codeName in $!netPlatformExp)
+												#if ($count2 == 0)
+												$!codeName
+												#else
+												,&nbsp;$!codeName
+												#end
+												#set($count2 = $count2 + 1)
+											#end
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+#end	

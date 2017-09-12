@@ -1,0 +1,7 @@
+$control.setTemplate("header").setParameter('headerdesc','村服务点入驻')
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/tb/cuntao/1.0.10/admin/css/confirm-success.css">
+<div id="success-info">
+    <p class="success-info-title"><i></i>保证金冻结成功，欢迎正式入驻农村淘宝。</p>
+    
+    <p class="success-back"><a href="/my/index.htm">我的农村淘宝</a><i></i><a href="$!cuntaoHomeUrl">返回首页</a></p>
+</div>

@@ -1,0 +1,177 @@
+
+body{
+	background-color: #8598A6;
+	font-family: "MS Shell Dlg", "Tahoma", "ËÎÌו";
+	font-size: 12px;
+	color: #47565D;
+	margin:0;
+	padding:0;
+	}
+	
+p, th, td, input, select, textarea{
+	font-size: 12px;
+}
+
+A:Link,A:Visited {
+	color:#293D6B;
+	text-decoration:none;
+}
+
+A:Hover,A:Active {
+	color:#FF5500;
+	text-decoration:underline;
+}
+
+.query_table_td{
+	background-color:#E2E2E2;
+}
+
+.query_table_th{
+	background-color:#E2E2E2;
+}
+
+.query_table_tr{
+	background-color:#E2E2E2;
+}
+
+.edit_table_th{
+	background-color:#E2E2E2;
+}
+
+.edit_table_td{
+	background-color:#E2E2E2;
+}
+
+#datatable tr{background-color:expression((this.rowIndex%2==0)?((this.rowIndex%2==0)?"#F3F3F3":"#ffcc66"):"#ffffff")}
+.cc{
+	background-color:#EAF2FF;
+	border-top:1px solid #62A3FF;
+	border-bottom:1px solid #62A3FF;
+}
+.dj{
+	background-color:#FFF2E9;
+	border-top:1px solid #FFA262;
+	border-bottom:1px solid #FFA262;
+}
+
+.power{
+	background-color:#FFFFDD;
+	border-top:1px solid #FFCC33;
+	border-bottom:1px solid #FFCC33;
+}
+
+.pagination{
+	margin:10px 0 10px 0;
+	background-color: #899089;
+	text-align:right;
+	padding-right:15px;
+	height:25px;
+}
+.del{
+	background-color:#FFFFDD;
+	border-top:1px solid #FFCC33;
+	border-bottom:1px solid #FFCC33;
+}
+.editted{
+	background-color:#CDEDD8;
+	border-top:1px solid #49BE73;
+	border-bottom:1px solid #49BE73;
+}
+.auctiondeltop{
+	border-top:1px solid #FFCC33;
+	background-color:#FFFFDD;
+}
+.auctiondel{
+	background-color:#FFFFDD;
+}
+.auctiondelbottom{
+	background-color:#FFFFDD;
+	border-bottom:1px solid #FFCC33;
+}
+.auctioncctop{
+	border-top:1px solid #FFA262;
+	background-color:#FFF2E9;
+
+}
+.auctionccbottom{
+	background-color:#FFF2E9;
+	border-bottom:1px solid #FFA262;
+
+}
+.auctionmessagetop{
+	border-top:1px solid #6AE0BD;
+	background-color:#E1F9F2;
+}
+.auctionmessagebottom{
+	background-color:#E1F9F2;
+	border-bottom:1px solid #6AE0BD;
+}
+.auctionbidtop{
+	border-top:1px solid #7BC233;
+	background-color:#E5F3D6;
+}
+.auctionbidbottom{
+	background-color:#E5F3D6;
+	border-bottom:1px solid #7BC233;
+}
+.auctionbidtop1{
+	border-top:1px solid #7BC233;
+	background-color:#E1F9F2;
+}
+.auctionbidbottom1{
+	background-color:#E1F9F2;
+	border-bottom:1px solid #7BC233;
+}
+.auctionoptbytbtop{	
+	border-top:1px solid #FF6616;
+	background-color:#FFCB94;
+}
+.auctionoptbytbbottom{	
+	background-color:#FFCB94;
+	border-bottom:1px solid #FF6616;
+}
+.auctionoptbyusertop{
+	border-top:1px solid #FFAB09;
+	background-color:#FFF2BF;
+}
+.auctionoptbyuserbottom{
+	background-color:#FFF2BF;
+	border-bottom:1px solid #FFAB09;
+}
+
+.gtpassauction{
+
+	background-color:#FFFFFF;
+
+	border-bottom:1px solid #FFAB09;
+
+}
+
+.gtuserdelauction{
+
+	background-color:#FFF2BF;
+
+	border-bottom:1px solid #FFAB09;
+
+}
+
+.gttbdelauction{
+
+	background-color:#FFCB94;
+
+	border-bottom:1px solid #FFAB09;
+
+}
+
+.gtoffauction{
+
+	background-color:#D0D0D0;
+
+	border-bottom:1px solid #FFAB09;
+
+}
+
+.listtable td{
+	padding:5px;
+	Font-size:14px;
+}

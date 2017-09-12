@@ -1,0 +1,130 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/order-list.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","order")
+        </div>
+        <div class="mc-main-wrap">
+        	<input id='_tb_token_' name='_tb_token_' type='hidden' value='$csrfToken.UniqueToken'>
+            <div id="main-content" class="main-content">
+                <!--代购单状态-->
+                <div class="trade-remind" id="J_navbar">
+                    <ul class="list">
+                        <li class="first selected">
+                            <a class="link" data-state="" href="javascript:;">
+                                <span>所有</span> <i class="interval">|</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link" data-state="NEW" href="javascript:;">
+                                <span>待下单</span><em class="tm-h">0</em>
+                                <i class="interval">|</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link" data-state="ORDERED" href="javascript:;">
+                                <span>待付款</span><em class="tm-h">0</em>
+                                <i class="interval">|</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link" data-state="BOUGHT" href="javascript:;">
+                                <span>已付款</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="link" data-state="CANCEL" href="javascript:;">
+                                <span>已取消</span>
+                            </a>
+                        </li>
+                        <!-- <li class="last ">
+                        <a id="J_orderRecyleBin" class="recycle J_MakePoint" href="//trade.taobao.com/trade/itemlist/list_recyled_items.htm" data-spm="d8" data-point-url="//gm.mmstat.com/listbought.1.4">订单回收站</a>
+                    </li>
+                    -->
+                </ul>
+
+                <div class="wrap-line">
+                    <span class="line"></span>
+                </div>
+            </div>
+
+            <div class="bought-list">
+                <div>
+                    <input id="state" type="hidden" value="$!{agentOrderPagedVo.state}">
+                    <input id="totalPage" type="hidden" value="$!{agentOrderPagedVo.totalPage}">
+                    <input id="currentPage" type="hidden" value="$!{agentOrderPagedVo.page}">
+
+                    <table class="bought-table" id="J_BoughtTable" data-spm="9">
+                        <colgroup>
+                        <col class="baobei">
+                        <col class="price">
+                        <col class="quantity">
+                        <col class="amount">
+                        <col class="trade-status">
+                        <col class="trade-operate"></colgroup>
+                    <thead>
+                        <tr class="col-name">
+                            <th class="baobei">商品信息</th>
+                            <th class="price">单价(元)</th>
+                            <th class="quantity">数量</th>
+                            <th class="amount">金额(元)</th>
+                            <th class="trade-status">状态</th>
+                            <th class="trade-operate">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="loading-box">
+                        <tr class="sep-row">
+                            <td colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="loading-tip">
+                                    <img src="//img.alicdn.com/tps/i1/T1Pk2NXe8hXXXH_oTs-96-96.gif"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody class="no-result-wrapper msg-box">
+                        <tr class="sep-row">
+                            <td colspan="6"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="no-result-box layout-center">暂时没有相关数据</div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tfoot>
+                        <tr class="sep-row">
+                            <td colspan="6"></td>
+                        </tr>
+                        <tr class="toolbar toolbar-bottom">
+                            <td colspan="6">
+                                <div class="paging-box paging-full" id="J_trade_pagenation">
+                                    <div id="pagination-wrap" class="skin-cuntao-dgd"></div>
+
+                                    <div class="total">
+                                        共
+                                        <span>0</span>
+                                        页，
+                                    </div>
+                                    <div class="form">
+                                        <span class="text">到第</span>
+                                        <input class="input" type="number" value="1" min="1">
+                                        <span class="text">页</span>
+                                        <span class="button submit">确定</span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!--end bought-list--> </div>
+</div>
+</div>
+</div>
+<script>window.g_config={appId:101};</script>
+<script type="text/javascript" src="//g.alicdn.com/tbc/webww/1.1.5/webww-min.js"></script>
+<script type="text/javascript">KISSY.use('admin/js/order-list');</script>

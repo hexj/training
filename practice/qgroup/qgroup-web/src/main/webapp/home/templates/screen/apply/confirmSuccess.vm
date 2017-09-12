@@ -1,0 +1,33 @@
+$control.setTemplate("header").setParameter('headerdesc','村服务点入驻')
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/tb/cuntao/1.0.10/admin/css/confirm-success.css">
+<input type="hidden" id="needOpenNewWindow" #if($!needOpenNewWindow)value="y"#else value="n" #end/>
+<div id="success-info">
+    <p class="success-info-title"><i></i>合作协议已确认，请完成保证金冻结。</p>
+    <p>请注意在<span class="text-orange">$!{limitDay}前，</span>提交支付宝中<span class="text-orange">$!{frozenMoney}元</span>作为设备押金进行冻结。</p>
+    <p>在完成保证金冻结后，阿里巴巴将依照入驻协议为您提供相应服务。</p>
+    <div class="info-frozen">
+        <div class="info-content">
+            <span class="info-label">冻结项目：</span><span class="info-control">$!{name}服务点入驻农村淘宝冻结保证金</span>
+        </div>
+        <div class="info-content">
+            <span class="info-label">申请人姓名：</span><span class="info-control">$!applierName</span>
+        </div>
+        <div class="info-content">
+            <span class="info-label">申请淘宝帐号：</span><span class="info-control">$!loginId</span>
+        </div>
+        <div class="info-content">
+            <span class="info-label">绑定支付宝帐号：</span><span class="info-control">$!alipayAccount</span>
+        </div>
+        <div class="info-content">
+            <span class="info-label">冻结保证金：</span><span class="text-orange">$!{frozenMoney}元</span>
+        </div>
+        <div class="info-op">
+            <a id="btn-frozen" class="btn btn-large " href="$!jumpUrl" #if($!needOpenNewWindow)target="_blank"#end>去冻结保证金</a>
+        </div>
+    </div>
+    
+</div>
+<script type="text/javascript">
+
+KISSY.use('admin/js/confirm-success');
+</script>

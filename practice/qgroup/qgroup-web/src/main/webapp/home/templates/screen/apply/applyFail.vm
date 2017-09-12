@@ -1,0 +1,11 @@
+$control.setTemplate("header").setParameter('headerdesc','村服务点入驻')
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/tb/cuntao/1.0.10/admin/css/apply-fail.css">
+<div id="fail-info">
+    <p class="fail-info-title"><i></i>#if($!errorMessage)$!{errorMessage}，保证金冻结失败。#else 系统繁忙，保证金冻结失败。 #end</p>
+    #if($!showAlipyLink)
+	<div class="info-op">
+        <a class="btn btn-large " href="https://www.alipay.com/" target="_blank">去支付宝充值</a>
+		<p class="fail-back">完成支付宝充值后，请进入<a href="/apply/confirmSuccess.htm">继续完成保证金冻结</a></p>
+    </div>
+	#end
+</div>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/partner-quit-apply/partner-quit-apply.css">
+<input type="hidden" id="stationApplyId" value="$!stationApplyId"/>
+<input type="hidden" id="cunQuitProtocol" value="$!cunQuitProtocol"/>
+<input type="hidden" id="cunQuitType" value="$!cunQuitType"/>
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","my")
+        </div>
+        <div class="mc-main-wrap">
+            <div id="confirm-info" class="clearfix">
+                <div class="l-fl">
+                    <div class="info-title info-title-r">服务条款和声明</div>
+                    <div id="confirm-content"  class="protocol">
+                        $control.setTemplate("my/partner-quit-agreements-v1")
+                    </div>
+                </div>
+
+            </div>
+            <div class="protocol-op">
+                <input id="cb-confirm" type="checkbox" class="op-confirm"/><label for="cb-confirm" class="op-confirm op-confirm-label">同意<span class="protocol-text">《村服务点合作协议》</span></label>
+            </div>
+            <div class="protocol-op" id="op-container">
+                <input type="button" value="同意" id="btn-confirm-yes" class="btn btn-large " data-confirm="yes"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    KISSY.use('admin/pages/partner-quit-apply/partner-quit-apply');
+</script>

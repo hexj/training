@@ -1,0 +1,231 @@
+<link rel="stylesheet" href="$!frontServer/??common/css/common.css,common/css/button.css,admin/mods/feed-back-tips/feed-back-tips.css,admin/pages/bill-pay/bill-pay.css,admin/pages/bill-pay/wait-payment.css" />
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","receipt")
+        </div>
+        <!-- mc-main-wrap begin -->
+        <div class="mc-main-wrap">
+            
+            <div class="cuntao-bill-pay-root">
+            	##流程提示 begin
+                <div class="page-step-tips clearfix">
+                    <div class="step-title"> 收款流程：</div>
+                    <div class="step-text">1、查找收款商品 </div>
+                    <div class="step-line-wrap">
+                    	<i class="s-line"></i>
+                        <i class="s-dir-1"></i>
+                        <i class="s-dir-2"></i>
+                    </div> 
+                    <div class="step-text">2、扫支付宝付款码 </div>
+                    <div class="step-line-wrap">
+                    	<i class="s-line"></i>
+                        <i class="s-dir-1"></i>
+                        <i class="s-dir-2"></i>
+                    </div> 
+                    <div class="step-text">3、收款完成 </div>
+                </div>
+                ##流程提示 end
+
+                <div  id="J-page-content-box"  class="page-content">
+                
+                 	##搜索部分 begin
+                	<div class="p-search-box">
+                    	<span class="p-s-title">快递运单号/交易订单号:</span>
+                        <div class="p-s-content">
+                        	<div id="J-input-search-wrap" class="input-search-wrap">
+                            	<input id="J-input-scan-text" class="search-text" placeholder="扫描或填写单号" type="text" name="orderNo" data-source="$!source"  data-mailNo="$!orderNoOrMailNo"  value="$!orderNoOrMailNo" />
+                                <i class="J-icon text-icon"></i>
+                                <a id="J-btn-search" href="javascript:void(0)" class="J-button btn-search">查 找</a>
+                            </div>
+                        </div>
+                    </div>
+                    ##搜索部分 end
+                    
+                    
+                    <div id="J-search-text-error-msg" class="not-find-tips-wrap" style="display:none;">
+                        <div class="not-find-logo"></div>
+                        <div class="tips-content">
+                            <div class="main-tips">未找到相关联的订单信息。</div>
+                            <ul class="other-tips clearfix">
+                            	<li>请检查填写是否有误</li>
+                                <li>或重新填写订单号查找</li>
+                            </ul>
+                        </div>
+                     </div>
+                    
+                    
+                    <div class="p-bill-info-box">
+                    
+                    	 <div id="J-goods-item-tmp" style="display:none;">
+                         	<div class="J-c-d-item c-d-item">
+                                <a href="javascript:void(0)" class="c-d-img-link">
+                                    <img class="J-img goods-img" src=""  />
+                                </a>
+                                <span class="J-text c-d-text"> </span>
+                            </div>
+                         </div>
+                         
+                    	 <table id="J-item-row-temp" style="display:none;">
+                              <tr class="J-item-row row-item">
+                                	<td class="J-orderNo r-col col-orderNo"></td>
+                                    <td class="J-orderItems r-col col-detail">
+                                    
+                                    </td>
+                                    <td class="J-actualTotalFee r-col col-payment"> </td>
+                                    <td class="r-col col-receiver">
+                                    	<div class="J-receiverName"></div>
+									  	<div class="J-receiverContact"></div>
+                                    </td>
+                                    <td class="J-action r-col col-action">
+                                    	 <a href="javascript:void(0)" class="J-btn-pay btn-search ui-button ui-button-orange ui-button-medium">扫支付宝收款</a>
+                                         <span class="J-label-finish text-green" style="display:none;">已收款</span>
+                                    </td>
+                                </tr>
+                         </table>
+                         
+   
+                         <table id="J-bill-info-list" class="bill-info-list" cellpadding="0" cellspacing="0" style="display:none;">
+                         	<thead>
+                            	<tr class="list-header row-item">
+                                	<th class="r-col col-orderNo">订单号</th>
+                                    <th class="r-col col-detail">宝贝 </th>
+                                    <th class="r-col col-payment">实付款(元)</th>
+                                    <th class="r-col col-receiver">收货人</th>
+                                    <th class="r-col col-action">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="J-body list-content" >
+
+                                 
+                            </tbody>
+                         </table>
+                         
+                         
+                         
+                    
+                    </div>
+                    
+                    ##支付宝支付码扫码提示部分 begin
+                     <div id="J-ipay-scan-check-dialog-overlay" class="ks-overlay" >
+                    	<div class="J-btn-close dialog-close"></div>
+    					<div class="ks-overlay-content">
+                                <div id="J-ipay-scan-check-dialog" class="ipay-scan-check-root-box">
+                                    <div class="ipay-tips-pic"></div>
+                                    <div class="list-top-mask"></div>
+                                    <div class="J-box-content box-content overflow-scroll">
+                                        <table id="J-pay-order-info" class="bill-info-list pay-order-info" cellpadding="0" cellspacing="0">
+                                            <thead>
+                                                <tr class="list-header row-item">
+                                                    <th class="r-col col-orderNo">订单号</th>
+                                                    <th class="r-col col-detail">宝贝 </th>
+                                                    <th class="r-col col-payment">实付款(元)</th>
+                                                    <th class="r-col col-receiver">收货人</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="J-body list-content" >
+                                            </tbody>
+                                         </table>
+                                    
+                                    
+                                    </div>
+                                
+                                </div>
+                    
+                    
+                    
+                        </div>
+					 </div>
+                     ##支付宝支付码扫码提示部分 end
+                    
+                    
+                </div>
+                 
+                <div id="J-payment-success-tips" class="payment-tips ui-feedback ui-feedback-success" style="display:none;">
+                    <i class="f-icon"></i>
+                    <div class="ui-content">
+                    	<div class="ui-main-tips">
+                        	成功收到<span class="J-name text-orange"></span>支付宝付款<span class="J-total-fee text-orange"></span>元！
+                        </div>
+                        <ul class="ui-other-tips clearfix">
+                        	<li>
+                            	<a class="J-btn-history"  href="./receiptHistory.htm">查看收款记录</a>
+                            </li>
+                            <li>|</li>
+                            <li>
+                            	<a class="J-btn-payment" href="javascript:void(0);">继续收款</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div id="J-payment-fail-tips" class="payment-tips ui-feedback ui-feedback-error" style="display:none;">
+                    <i class="f-icon"></i>
+                    <div class="ui-content">
+                    	<div class="ui-main-tips">
+                        	支付失败，请重新扫付款码收款！
+                        </div>
+                        <ul class="ui-small-tips ui-tips-desc">
+                            <li>1. 请付款人确认支付</li>
+                            <li>2. 请重新扫付款码收款</li>
+                        </ul>
+                        <ul class="ui-other-tips clearfix">
+                        	<li>
+                            	<a class="J-btn-payment" href="javascript:void(0);">重新收款</a>
+                            </li>
+                            <li>|</li>
+                            <li>
+                            	<a class="J-btn-history" href="./receiptHistory.htm">查看收款记录</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                ##收款失败 --- 支付未完成引导
+                <div id="J-wait-payment-guide" class="wait-payment-guide">
+                    <img src="//aliwork.alicdn.com/tps/i3/TB1s7GWHXXXXXbBXFXXx5rUPVXX-1048-494.png" width="1048" height="494" />
+                </div>
+                
+                 ##等待支付部分
+                 <div id="J-wait-payment-dialog-overlay" class="ks-overlay wait-payment-overlay" >
+                    	<div class="J-btn-close dialog-close"></div>
+    					<div class="ks-overlay-content">
+                            <div id="J-wait-payment-dialog-root" class="wait-payment-dialog-root">
+                                <div class="w-p-title">支付宝付款码扫描完成</div>
+                                <div class="J-w-p-content w-p-content">
+                                    <i class="w-p-loading"></i>
+                                    <div class="w-p-tips">收款处理中...请等待</div>
+                                </div>
+                                <div class="w-p-button">
+                                	<span class="J-btn-finish ui-button ui-button-white ui-button-medium">已完成</span>
+                                    <span class="J-btn-problem  ml20 ui-button ui-button-white ui-button-medium">收款遇到问题</span>
+                                </div>
+                             </div>
+                        </div>
+				 </div>
+                
+          </div>
+            
+            
+            <script>
+			   (function(){
+			
+					KISSY.use('admin/pages/bill-pay/bill-pay', function (S, App) {
+						
+						new App();
+						
+					});
+				
+			   })();
+			</script>
+            
+            
+            
+            
+            
+            
+        </div>
+         <!-- mc-main-wrap end -->
+        
+    </div>
+</div>

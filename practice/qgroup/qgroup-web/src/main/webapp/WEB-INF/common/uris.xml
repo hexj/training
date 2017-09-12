@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:services="http://www.alibaba.com/schema/services" xmlns="http://www.alibaba.com/schema/services/uris"
+	xmlns:uris="http://www.alibaba.com/schema/services/uris" xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:uri-interceptors="http://www.alibaba.com/schema/services/uris/interceptors"
+	xsi:schemaLocation="
+                 http://www.alibaba.com/schema/services      http://localhost:8080/schema/services.xsd
+                 http://www.alibaba.com/schema/services/uris http://localhost:8080/schema/services-uris.xsd
+                 http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
+                 http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+             ">
+
+	<services:uris>
+
+		<content-uri id="server">
+			<serverURI>//cun.${cuntao.taobao.domain}:${cuntao.domain.port}/</serverURI>
+		</content-uri>
+		<turbine-uri id="homeModule" exposed="true" extends="server">
+			<componentPath>/</componentPath>
+		</turbine-uri>
+
+		<!--静态js,css,image路径-->
+		<turbine-content-uri id="staticContent" exposed="true" extends="server">
+            <componentPath>static</componentPath>
+        </turbine-content-uri>
+        
+		<content-uri id="loginServer" exposed="true">
+			<serverURI>https://login.${cuntao.taobao.domain}</serverURI>
+		</content-uri>
+
+		<!-- 淘宝相关 -->
+		<uri id="taobaoLoginURL" exposed="true">
+			<serverURI>https://login.${cuntao.taobao.domain}/member/login.jhtml</serverURI>
+		</uri>
+
+		<!-- assets服务器 -->
+		<uri id="assetsServer" exposed="true">
+			<serverURI>//${cuntao.assetsServer.host}:${cuntao.assetsServer.port}</serverURI>
+		</uri>
+
+		<!-- 新版本assets服务器 -->
+		<uri id="newAssetsServer" exposed="true">
+			<serverURI>//${cuntao.newAssetsServer.host}:${cuntao.assetsServer.port}</serverURI>
+		</uri>
+
+		<!--================img（图片）==================-->
+		<content-uri id="topImageServer" exposed="true">
+			<serverURI>//${taobaocdn.img.common.domainName}</serverURI>
+		</content-uri>
+
+        <uris:content-uri id="uploadImageServer" exposed="true" extends="topImageServer">
+            <uri-interceptors:interceptor class="com.taobao.common.uri.interceptor.ImageDomainDivider" />
+            <uris:prefixPath>/bao/uploaded</uris:prefixPath>
+        </uris:content-uri>
+		
+        <!-- 农村淘宝首页 -->
+		<uri id="cuntaoHomeUrl" exposed="true">
+			<serverURI>//cun.${cuntao.taobao.domain}</serverURI>
+		</uri>
+
+		<uri id="frontServer" exposed="true">
+			<serverURI>${cuntao.frontServer.url.prefix}${cuntao.frontServer.url.version}</serverURI>
+		</uri>
+		
+		<uri id="examServer" exposed="true">
+			<serverURI>${cuntao.exam.url}</serverURI>
+		</uri>
+		
+		<uri id="cainiaoyzDomain" exposed="true">
+			<serverURI>//${cainiao.yz.service.domainName}</serverURI>
+		</uri>
+
+		<uri id="icuntaoDomain" exposed="true">
+			<serverURI>//${icuntao.domain.name}</serverURI>
+		</uri>
+
+	</services:uris>
+
+</beans:beans>

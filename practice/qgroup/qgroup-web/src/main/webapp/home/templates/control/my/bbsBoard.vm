@@ -1,0 +1,50 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/index/bbs-board.css">
+
+
+    <div class="card-container">
+        <div id="Jtab2">
+            <ul class="tab-nav">
+                <li class="hot-title"><a href="#">热帖</a></li>
+                <li class="communication-title"><a href="#">合伙人交流</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pannel">
+                    <ul id="hot-list">
+                    </ul>
+                </div>
+                <div class="tab-pannel">
+                    <ul id="communication-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-container">
+        <div id="Jtab">
+            <ul class="tab-nav">
+                <li class="trends-title" ><a href="#" style="color: red">年货节活动</a></li>
+                <li class="training-title"><a href="#">培训之家</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pannel">
+                    <ul id="trends-list">
+                    </ul>
+                </div>
+                <div class="tab-pannel">
+                    <ul id="training-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ $!securityUtil.ignoretext($tmsTool.importRgn("/rgn/cun/partnervideo.php",1,false))
+    <div class="card-container entrance">
+        <div>
+            <span> <i class="order">&#xe601;</i>
+                <a href="#" target="_blank" id="my_order">我的淘宝</a>
+            </span>
+            <span class="fix-l"> <i class="home">&#xe600;</i>
+                <a href="//cun.taobao.com" target="_blank">农村淘宝首页</a>
+            </span>
+        </div>
+    </div>

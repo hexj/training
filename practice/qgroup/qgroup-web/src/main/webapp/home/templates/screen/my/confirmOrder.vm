@@ -1,0 +1,48 @@
+<style type="text/css">
+    .grid-1190{
+        width: 1190px;margin: 0 auto;
+    }
+    .clearfix:before, .clearfix:after {
+      content: "";
+      display: table;
+    }
+    .clearfix:after {clear: both;}
+</style>
+<!-- //g.alicdn.com/kissy/k/1.4.7/seed -->
+<script src="//g.alicdn.com/kissy/k/1.4.7/seed.js" data-config="{combine:true}"></script>
+    <input type="hidden" id="loginBuyUrl" value="$!{loginBuyUrl}">
+<form id="blankForm" action="$!{action}" name="item_detail" method="post" style="display: none;">
+    <input id='_tb_token_' name='_tb_token_' type='hidden' value='$csrfToken.UniqueToken'>
+    <input type="hidden" name="buy_param" value="$!{buy_param}">
+    <input type="hidden" name="cunTaoChannel" value="$!{cunTaoChannel}">
+    <input type="hidden" name="from" value="$!{from}">
+</form>
+<div class="grid-1190 clearfix ">
+<div class="loading-tip" style="margin: 50px;text-align: center;">
+    <img src="//img.alicdn.com/tps/i1/T1Pk2NXe8hXXXH_oTs-96-96.gif">
+  </div>
+</div>
+<script>
+   (function(){
+        KISSY.ready(function(S) {
+        		var buyUrl = document.getElementById("loginBuyUrl").value;
+					  var frm = document.forms["item_detail"];
+        		if(buyUrl){
+        				//当没有登录时，cookie为空会出现第一次请求时form表单post提交的参数不能提交至buy的后台服务，特有此蹩脚逻辑。参考购物车逻辑。
+				        S.getScript(buyUrl, {
+				            success: function(e){
+					              frm.submit();
+				            },
+				            error: function(){
+				                // form.action = groupGoAPI.normal;  TODO 
+				                frm.submit();
+				            },
+				            timeout: 10
+				        });
+        		
+        		}else{
+        			frm.submit();
+        		}
+        })
+   })();
+</script>

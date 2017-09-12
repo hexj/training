@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="$!frontServer/??common/css/common.css,common/css/button.css,admin/pages/receipt-history/receipt-history.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","receiptHistory")
+        </div>
+        <div class="mc-main-wrap">
+            
+            
+            
+            
+            <div class="cuntao-receipt-history-root">
+            
+                         <table id="history-order-list" class="history-order-list" cellpadding="0" cellspacing="0">
+                         	<thead>
+                            	<tr class="list-header row-item">
+                                    <th class="r-col col-detail">商品信息 </th>
+                                    <th class="r-col col-payment">实付款(元)</th>
+                                    <th class="r-col col-receiver">收货人</th>
+                                    <th class="r-col col-action">状态</th>
+                                </tr>
+                            </thead>
+                            
+                           #if($totalResultSize == 0)
+                            <tbody class="J-no-find-tips no-find-tips" >
+                            	<tr class="sep-row">
+                            	  <td colspan="5">&nbsp;</td></tr>
+                            	<tr>
+                                	<td colspan="5">
+                                    	<div class="no-find-tips-content">
+                                        	<i class="n-f-t-icon"></i>
+                                            <div class="tips-text">暂无收款记录</div>
+                                        </div>
+                                    </td>
+                                 </tr>
+                            </tbody>
+                            
+                            #else
+                            <tbody class="J-body list-content" >
+
+                            	#foreach( $receiptDTO in $receiptDTOs) 
+                                <tr class="sep-row"><td colspan="5">&nbsp;</td></tr>
+                            	<tr class="row-item">
+                                    <td class="r-col col-detail">
+                                    	<div class="c-d-item">
+                                            <a href="javascript:void(0)" class="c-d-img-link">
+                                            	<img class="goods-img" src="$!receiptDTO.orderProductPicUrl"  />
+                                            </a>
+                                            <div class="c-d-title">
+                                              	$!receiptDTO.orderDescription
+                                            </div>
+                                            <div class="c-d-order">
+                                           		   订单号：<span class="J-orderNo">$!receiptDTO.orderNo</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="r-col col-payment">$!receiptDTO.totalFee</td>
+                                    <td class="r-col col-receiver">
+                                    	<div class="cell-text">$!receiptDTO.receiverName</div>
+									  	<div>$!receiptDTO.receiverContact</div>
+                                    </td>
+                                    <td class="r-col col-action">
+                                    	 #if($receiptDTO.receiptStatus == 'SUCCESS')
+                                    	 	<div class="cell-text text-green">收款成功</div>
+                                    	 	<div class="cell-text text-gray">$!receiptDTO.gmtReceivablesStr</div>
+                                    	 #elseif($receiptDTO.receiptStatus == 'WAIT_PAY')
+                                    		<div class="cell-text text-orange-light">收款确认中</div> 
+                                    	 #else 
+                                    	 	<div class="cell-text text-orange">收款失败</div>
+                                    		<a href="/my/receiptDetail.htm?orderNoOrMailNo=$!receiptDTO.orderNo" class="J-btn-pay btn-search ui-button ui-button-white ui-button-medium">重新收款</a>
+                                    	 #end
+                                    </td>
+                                 </tr>
+                                 #end
+                            </tbody>
+                            
+                            #end
+                         </table>
+            
+            </div>
+            
+            ##页面初始化参数 当前页和总共多少页
+            <div class="pagination-wrap">
+                <div id="J_Pagination" class="pagination-inner"  data-currentPage="$pageNum" data-totalPage="$totalPage" ></div>
+            </div>
+            
+            
+            <script>
+			   (function(){
+			
+					KISSY.use('admin/pages/receipt-history/receipt-history', function (S, App) {
+						
+						new App();
+						
+					});
+
+				
+			   })();
+			</script>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","income")
+        </div>
+        <div class="mc-main-wrap">
+            #noescape()
+    			$tmsTool.importRgn("/market/cun/billprotocal.php",1,false)
+			#end
+        </div>
+    </div>
+</div>

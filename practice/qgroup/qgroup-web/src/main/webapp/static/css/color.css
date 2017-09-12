@@ -1,0 +1,84 @@
+* {margin:0;padding:0}
+ul,li{list-style:none;}
+input {font-size:12px;}
+
+input.checkbox {margin:0 0 0 4px;}
+input[type="checkbox"] {margin:0 2px 4px 4px;}
+
+span.c-000000, li.c-000000 a,.ul-color-2 li.c-000000 label{background-color:#000000;}/*黑色*/
+span.c-666666, li.c-666666 a,.ul-color-2 li.c-666666 label{background-color:#666666;}/*深灰色*/
+span.c-e4e4e4, li.c-e4e4e4 a,.ul-color-2 li.c-e4e4e4 label{background-color:#e4e4e4;}/*浅灰色*/
+span.c-4b0082, li.c-4b0082 a,.ul-color-2 li.c-4b0082 label{background-color:#4b0082;}/*深紫色*/
+span.c-800080, li.c-800080 a,.ul-color-2 li.c-800080 label{background-color:#800080;}/*紫色*/
+span.c-dda0dd, li.c-dda0dd a,.ul-color-2 li.c-dda0dd label{background-color:#dda0dd;}/*紫罗兰*/
+span.c-990000, li.c-990000 a,.ul-color-2 li.c-990000 label{background-color:#990000;}/*酒红色*/
+span.c-ff0000, li.c-ff0000 a,.ul-color-2 li.c-ff0000 label{background-color:#ff0000;}/*红色*/
+span.c-ffb6c1, li.c-ffb6c1 a,.ul-color-2 li.c-ffb6c1 label{background-color:#ffb6c1;}/*粉红色*/
+span.c-ffa500, li.c-ffa500 a,.ul-color-2 li.c-ffa500 label{background-color:#ffa500;}/*桔色*/
+span.c-ffff00, li.c-ffff00 a,.ul-color-2 li.c-ffff00 label{background-color:#ffff00;}/*黄色*/
+span.c-ffffb1, li.c-ffffb1 a,.ul-color-2 li.c-ffffb1 label{background-color:#ffffb1;}/*浅黄色*/
+span.c-855b00, li.c-855b00 a,.ul-color-2 li.c-855b00 label{background-color:#855b00;}/*褐色*/
+span.c-d2691e, li.c-d2691e a,.ul-color-2 li.c-d2691e label{background-color:#d2691e;}/*巧克力色*/
+span.c-bdb76b, li.c-bdb76b a,.ul-color-2 li.c-bdb76b label{background-color:#bdb76b;}/*深卡其布色*/
+span.c-5d762a, li.c-5d762a a,.ul-color-2 li.c-5d762a label{background-color:#5d762a;}/*军绿色*/
+span.c-008000, li.c-008000 a,.ul-color-2 li.c-008000 label{background-color:#008000;}/*绿色*/
+span.c-98fb98, li.c-98fb98 a,.ul-color-2 li.c-98fb98 label{background-color:#98fb98;}/*浅绿色*/
+span.c-041690, li.c-041690 a,.ul-color-2 li.c-041690 label{background-color:#041690;}/*深蓝色*/
+span.c-0000ff, li.c-0000ff a,.ul-color-2 li.c-0000ff label{background-color:#0000ff;}/*蓝色*/
+span.c-1eddff, li.c-1eddff a,.ul-color-2 li.c-1eddff label{background-color:#1eddff;}/*天蓝色*/
+span.c-ffffff, li.c-ffffff a,.ul-color-2 li.c-ffffff label{background-color:#ffffff;}/*白色*/
+span.c-transparent, li.c-transparent a,.ul-color-2 li.c-transparent label{background:url(color-bg.gif) 0 0 no-repeat;}
+span.c-assortment, li.c-assortment a,.ul-color-2 li.c-assortment label{background:url(color-bg.gif) 0 -14px no-repeat;}
+ul.ul-color-2 {
+    overflow:hidden;
+    zoom:1;
+    padding:0 0 10px 10px;
+    
+}
+
+ul.ul-color-2 li {
+    float:left;
+    margin:0 5px 5px 0;
+    white-space:nowrap;
+}
+
+ul.ul-color-2 li label,span.c-detail {
+    overflow:hidden;
+    width:14px;
+    height:14px;
+    display:-moz-inline-block;
+    display:inline-block;
+    text-indent:-9999em;
+    border:1px solid #e4e4e4;
+}
+ul.ul-color-2 li.c-all label {
+    height:auto;
+    width:auto;
+    text-indent:0;
+    border:0;
+}
+
+span.c-detail {
+    margin-right:6px;
+    margin-top:5px;
+    *margin-top:3px;
+    float:left;
+    text-indent:0;
+    font-size:0;
+    line-height:0;
+}
+
+ul.ul-attr {
+    overflow:hidden;
+    padding:0pt 0pt 10px;
+}
+ol, ul {
+    list-style-image:none;
+    list-style-position:outside;
+    list-style-type:none;
+}
+ul.ul-attr li {
+    float:left;
+    margin:0pt 5px 5px 0pt;
+    white-space:nowrap;
+}

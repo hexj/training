@@ -1,0 +1,39 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/exam-list.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            ## left menu position
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","exam")
+        </div>
+        <div class="mc-main-wrap">
+            <div class="list-detail" style="display:none">
+                <table class="my-list" border="1px" cellspacing="1" id="exam-list">
+                    <thead>
+                         <tr>
+                             <th>试卷名称</th>
+                             <th width="100">通过分数/总分</th>
+                             <th width="65">我的得分</th>
+                             <th width="75">考试时长</th>
+                             <th width="160">考试截止时间</th>
+                             <th width="100">已考/可考次数</th>
+                             <th width="70">状态</th>
+                             <th width="120">操作</th>
+                          </tr>
+                     </thead>
+                     <tbody class="js-tbody"></tbody>
+                  </table>
+                    ##页面初始化参数 当前页和总共多少页
+				  <div class="pagination-wrap">
+					  <div id="J_Pagination" class="pagination-inner"></div>
+			      </div>
+                  <div id="pagination-wrap"></div>
+             </div>          
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	var Cuntao = Cuntao || {};
+	Cuntao.examServer = "$examServer";
+	KISSY.use('admin/js/exam-list');
+</script>

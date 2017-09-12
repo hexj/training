@@ -1,0 +1,119 @@
+<link rel="stylesheet" type="text/css" href="https://g.alicdn.com/kissy/k/1.4.7/??button/assets/dpl.css,overlay/assets/dpl.css">
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/assets-manage/assets-manage.css">
+<div class="mc-main">
+    <input type="hidden" id="stationApplyId" value="$!stationApplyId">
+    <input type="hidden" id="stationStatus" value="$!stationStatus"/>
+    <input type="hidden" id="applierName" value="$!applierName"/>
+    <input type="hidden" id="countyName" value="$!countyName"/>
+    <input type="hidden" id="stationName" value="$!stationName"/>
+    <input type="hidden" id="countyId" value="$!countyId"/>
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            ## left menu position
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","assets")
+        </div>
+        <div class="mc-main-wrap">
+            <div class="assets-detail">
+                <div class="assets-header">
+                    <div class="title">全部资产
+                    <a href="//download.taobaocdn.com/freedom/35022/pdf/p1a12jti39avs1dc1102hjb1a2a4.pdf" style="padding-left:680px;height: 20px;line-height: 20px;color: #3c3c3c;" target="_blank">村淘合伙人资产管理手册 </a>
+                    </div>
+                </div>
+                <div class="assets-body">
+                    <div class="assets-search clearfix">
+                        <div class="assets-search-l">
+                            <div class="assets-search-wrap">
+                                <input id="assetNum" class="assets-search-input" type="text" placeholder="输入资产编号" />
+                                <a class="js-btn-search assets-btn-search" href="javascript:void(0);">增加资产</a>
+                            </div>
+                            <p class="notice mt10">
+                                资产编号见设备上的条形码
+                            </p>
+                        </div>
+                        <div class="assets-search-r">
+                            <ul class="clearfix">
+                                <li>
+                                    <p><img src="//img.alicdn.com/tps/TB1UQTVJXXXXXXYXXXXXXXXXXXX-200-200.png" alt=""></p>
+                                    <p class="mt5">电视机</p>
+                                </li>
+                                <li>
+                                    <p><img src="//img.alicdn.com/tps/TB1lz6vJXXXXXaZaXXXXXXXXXXX-200-200.png" alt=""></p>
+                                    <p class="mt5">主机</p>
+                                </li>
+                                <li>
+                                    <p><img src="//img.alicdn.com/tps/TB14njzJXXXXXbeXVXXXXXXXXXX-200-200.png" alt=""></p>
+                                    <p class="mt5">显示器</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="assets-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 资产列表模板 -->
+<script type="text/tmpl" class="J_TmplAssetList">
+<table class="assets-table">
+    <colgroup>                            
+        <col class="img">                            
+        <col class="desc1">                            
+        <col class="desc2">                            
+        <col class="desc3">                            
+        <col class="action">                            
+    </colgroup>
+    {{#each data}}
+    <tr>
+        <td class="img">
+            {{@if category==='显示器'}}
+            <img src="//img.alicdn.com/tps/TB1YG6NJXXXXXcjXpXXXXXXXXXX-128-128.png_100x100" alt="">
+            {{/if}}
+            {{@if category==='主机'}}
+            <img src="//img.alicdn.com/tps/TB1VTzyJXXXXXcMXVXXXXXXXXXX-128-128.png_100x100" alt="">
+            {{/if}}
+            {{@if category==='电视机'}}
+            <img src="//img.alicdn.com/tps/TB1f_vNJXXXXXbLXpXXXXXXXXXX-128-128.png_100x100" alt="">
+            {{/if}}
+        </td>
+        <td class="desc">
+            <p>名称：{{category}}</p>
+            <p>品牌：{{brand}}</p>
+            <p>型号：{{model}}</p>
+        </td>
+        <td class="desc">
+            <p>大阿里编号：{{aliNo}}</p>
+            <p>序列号：{{serialNo}}</p>
+            <p>po号：{{boNo}}</p>
+        </td>
+        <td class="desc">
+            <p>村点：{{stationName}}</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </td>
+        <td class="action mt10">
+            <p>
+                {{@if status==='WAIT_STATION_SIGN'}}
+                <a href="javascript:void(0);" class="js-btn-signasset btn-normal mr10" data-id="{{id}}">确认签收</a>
+                {{/if}}
+                {{@if status==='STATION_SIGN'}}
+                <a href="javascript:void(0);" class="btn-normal btn-disabled mr10" data-id="{{id}}">已签收</a>
+                {{/if}}
+                {{@if checkStatus==='CHECKING'}}
+                <a href="javascript:void(0);" class="js-btn-checkasset btn-normal mr10" data-id="{{id}}">盘点资产</a>
+                {{/if}}
+                {{@if checkStatus==='CHECKED'}}
+                <a href="javascript:void(0);" class="btn-normal btn-disabled mr10" data-id="{{id}}">已盘点</a>
+                {{/if}}
+            <p class="notice mt10">提示：请检查资产编号后确认</p>
+        </td>
+    </tr>
+    {{/each}}
+</table>
+</script>
+<script>
+    KISSY.use('admin/pages/assets-manage/assets-manage', function(S, App){
+        new App();
+    });
+</script>

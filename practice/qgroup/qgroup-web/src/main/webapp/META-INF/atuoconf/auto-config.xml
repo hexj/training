@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <property name="cuntao.work" defaultValue="/home/admin" description="应用程序的工作目录"/>
+        <property name="cuntao.output" defaultValue="${cuntao.work}/cuntaoadmin/output" description="应用程序的输出目录"/>
+        <property name="cuntao.loggingRoot" defaultValue="${cuntao.work}/cuntaoadmin/logs" description="日志文件目录"/>
+        <property name="cuntao.loggingLevel" defaultValue="debug" description="日志文件级别">
+            <validator name="choice" choice="trace, debug, info, warn, error"/>
+        </property>
+        <property name="cuntao.taobao.domain" defaultValue="daily.taobao.net" description="淘宝域名"/>
+        <property name="cuntao.domain.port" defaultValue="80" description="默认端口号"/>
+        <property name="cuntao.alimonitor.enableDebug" defaultValue="true" description="开启AliMonitor调试模式"/>
+        <property name="cuntao.webx.productionMode" defaultValue="false" description="是否开启WebX生产模式"/>
+        <property name="cuntao.web.eagleeye.EagleEyeFilter.useLocalIp" defaultValue="true" description="是否按浏览器的客户端IP实时查询到最近的调用链"/>
+        <property name="cuntao.web.requestSourceCheck.allowedDomains"
+                  defaultValue="taobao.net|tmall.net" description="请求白名单域名,多个域名之间用|隔开"/>
+
+        <property name="cuntao.assetsServer.host" defaultValue="assets.daily.taobao.net" description="淘宝assets域名"/>
+        <property name="cuntao.newAssetsServer.host" defaultValue="g.assets.daily.taobao.net"
+                  description="淘宝assets域名新版"/>
+        <property name="cuntao.assetsServer.port" defaultValue="80" description="默认assets端口号"/>
+        <property name="cuntao.vmcommon.path" defaultValue="${cuntao.work}/vmcommon" description="通用vm模板文件路径"/>
+        <property name="cuntao.tbsession.config.group" defaultValue="daily_new" description="tbsessionconfiggroup"/>
+
+        <property name="taobaocdn.img.common.domainName" defaultValue="gw1.alicdn.com" description="默认淘宝cdn地址"/>
+        <property name="cuntao.shop.taobao.domain" defaultValue="store.taobao.com" description="默认店铺域名"/>
+
+        <property name="cuntao.frontServer.url.prefix" defaultValue="http://g.assets.daily.taobao.net/tb/cuntao/" description="前端host地址前缀"/>
+        <property name="cuntao.frontServer.url.version" defaultValue="1.1.0" description="前端host地址版本号"/>
+        
+        <property name="cainiao.yz.service.domainName" defaultValue="cnyz.daily.taobao.net" description="菜鸟驿站域名"/>
+
+        <property name="cuntao.web.requestSourceCheck.checkHost" defaultValue="true" description="是否检查host"/>
+        <property name="cuntao.web.requestSourceCheck.checkReferer" defaultValue="true" description="是否检查referer"/>
+        <property name="cuntao.exam.url" defaultValue="http://exam.daily.taobao.net" description="考试系统地址"/>
+
+
+        <property name="icuntao.domain.name" defaultValue="icuntao.taobao.com" description="新版合伙人域名" />
+    </group>
+    <script>
+        <generate template="WEB-INF/web.xml"/>
+        <generate template="WEB-INF/webx.xml"/>
+        <generate template="WEB-INF/log4j.xml"/>
+        <generate template="WEB-INF/common/pipeline.xml"/>
+        <generate template="WEB-INF/common/resources.xml"/>
+        <generate template="WEB-INF/common/uris.xml"/>
+    </script>
+</config>

@@ -1,0 +1,174 @@
+<!-- 导航-- -->
+$!securityUtil.ignoretext($tmsTool.importRgn("/rgn/cun/cun-header.php",1,true))
+<link rel="stylesheet" href="$!frontServer/admin/pages/tp-apply/tp-apply.css">
+
+<div class="tp-wrap">
+	<div class="grid-1190 clearfix">
+		<div class="tp-main">
+			<div class="tp-header">
+				<div class="title">第三方合作申请</div>
+				<div class="step">
+				#if($!tpApply.status == "STATE_APPLY_ING")				
+					<div class="tp-step tp-step-2"></div>
+				#elseif($!tpApply.status == "STATE_APPLY_SUCC" || $!tpApply.status == "STATE_APPLY_REFUSE")
+				    <div class="tp-step tp-step-3"></div>
+				#end
+				</div>
+			</div>
+			<div class="tp-content">
+				
+                <div class="tp-content-body">
+                #if($!tpApply.status == "STATE_APPLY_SUCC")				
+                
+                    <div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-success">
+                            <h3 class="tp-feedback-header">您的报名信息已经收到并通过初步核实，我们会尽快处理进入下一个流程，感谢您关注农村淘宝。</h3>
+                        </div>
+                    </div>
+                #elseif($!tpApply.status == "STATE_APPLY_REFUSE")
+                    <div class="tp-feedback">
+                        <div class="tp-feedback-content tp-feedback-error">
+                            <h3 class="tp-feedback-header">对不起，经过综合评估，目前贵公司暂不符合农村淘宝第三方的要求，感谢您关注农村淘宝。</h3>
+                        </div>
+                    </div>
+                #end    
+<div class="addPage" id="tpApply">
+    <div class="detail">
+    <font style="color:red;font-size:15px;" id="error"></font>
+        <div>
+            <div class="cunInfo">
+                <table class="listInfo">
+                    <tr>
+                        <td class="tdleft">
+                            公司名称 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.orgName
+                        </td>
+                    </tr>
+                    <tr id="addressDetail">
+		                <td class="tdleft">
+		                    计划经营地址
+		                    <font color="red">*</font>
+		                </td>
+		                <td class="tdright">
+		                     $!tpApply.address
+		                </td>
+		            </tr>
+		            <tr>
+                        <td class="tdleft">
+                            法定代表人姓名 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.legalPersonName
+                        
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            支付宝帐号 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.alipayAccount
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            培训团人数 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.teamNum
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            自有师资人数 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.TeacherNum
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            服务区域 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.serveArea
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            业务范围 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.businessType
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td class="tdleft">
+                            申请人 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.applyerName
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td class="tdleft">
+                            申请人电话 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.tel
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdleft">
+                            申请人邮箱 <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            $!tpApply.email
+                        </td>
+                    </tr>
+                    <tr>
+				        <td class="tdleft" style="float: right;padding-top: 15px;vertical-align:top;">
+				            营业执照
+				            <font color="red">*</font>
+				        </td>
+				        <td class="tdright">
+				        #if($tpApply.businessLicenceList)
+				            #foreach($licence in $tpApply.businessLicenceList)
+				            <a href="$!licence.url" target="_blank"><img src="$!licence.url" width="150"></a>
+				            #end
+				        #end
+				        </td>
+				    </tr>
+				    <tr>
+                        <td class="tdleft">公司介绍:
+                            <font color="red">*</font>
+                        </td>
+                        <td class="tdright">
+                            <ul>
+                                #if($tpApply.attachmentList)
+                                    #foreach($attach in $tpApply.attachmentList)
+                                    <li><a href="$!attach.downloadUrl" target="_blank">$!attach.title</a></li>
+                                    #end
+                                #end
+                            </ul>
+                        </td>
+                    </tr>
+   
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

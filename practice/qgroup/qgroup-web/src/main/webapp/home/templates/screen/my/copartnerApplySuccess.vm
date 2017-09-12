@@ -1,0 +1,15 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/apply-success.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            ## left menu position
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","partner")
+        </div>
+        <div class="mc-main-wrap"> 
+           	<div class="success-tip">
+           		<h4 class="title">#if($!isEdit =='true') 修改成功 #else 恭喜您，报名成功 #end</h4>
+           		<p class="detail">建议参加合伙人考试, 分数越高对成为合伙人越有帮助 <a href="/my/exam.htm" target="_blank">参加考试</a></p>
+           	</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+$control.setTemplate("header").setParameter('headerdesc','村服务点合作协议')
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/tb/cuntao/1.0.10/admin/css/apply-confirm.css">
+<input type="hidden" id="applyStationId" value="$!applyStationId"/>
+<input type="hidden" id="version" value="$!version"/>
+
+
+<div id="confirm-info" class="clearfix">
+        <div class="l-fl l-left">
+			<div class="info-wrap">
+                <div class="info-title">基本信息</div>
+                <div class="info-content">
+                    <span class="info-label">村服务站名：</span><span class="info-control">$!name</span>
+                </div>
+                <div class="info-content">
+                    <span class="info-label">申请人淘宝帐号：</span><span class="info-control">$!loginId</span>
+                </div>
+                <div class="info-content">
+                    <span class="info-label">绑定支付宝帐号：</span><span class="info-control">$!alipayAccount</span>
+                </div>
+                <div class="info-content">
+                    <span class="info-label">手机号码：</span><span class="info-control">$!mobile</span>
+                </div>
+                <div class="info-content">
+                    <span class="info-label">申请人：</span><span class="info-control">$!applierName</span>
+                </div>
+                <div class="info-content">
+                    <span class="info-label">申请人证件号码：</span><span class="info-control">$!idenNum</span>
+                </div>
+    			<div class="info-content info-address">
+                    <span class="info-label">详细地址：</span><p class="info-control">$!{provinceDetail}$!{cityDetail}$!{countyDetail}$!{townDetail}$!{address}</p>
+                </div>
+			</div>
+			<div>
+                <div class="info-title">资料信息</div>
+                <div>
+                    <a href="$securityUtil.richtext($!idCardImageUrl)" target="_blank"><img class="info-img" src="$securityUtil.richtext($!idCardImageUrl)"/></a>
+                </div>
+            </div>
+        </div>
+        <div class="l-fl">
+            <div class="info-title info-title-r">服务条款和声明</div>
+            <div id="confirm-content"  class="protocol">
+				#if($!protocolVersion == "1")
+                $control.setTemplate("apply/agreements")
+				#else
+				$control.setTemplate("apply/agreements2")	
+				#end
+            </div>
+        </div>
+        
+    </div>
+	<div class="protocol-op">
+        <input id="cb-confirm" type="checkbox" class="op-confirm"/><label for="cb-confirm" class="op-confirm op-confirm-label">同意<span class="protocol-text">《村服务点合作协议》</span></label>
+    </div>
+    <div class="protocol-op" id="op-container">                
+        <input type="button" value="同意" id="btn-confirm-yes" class="btn btn-large " data-confirm="yes"/>
+    </div>  
+</div>
+
+<script type="text/javascript">
+
+KISSY.use('admin/js/apply-confirm');
+</script>

@@ -1,0 +1,24 @@
+$rundata.setLayout("defaultH5.vm")
+<link rel="stylesheet" href="$!frontServer/admin/css/mod/ct-message.css"/>
+<style>
+	.header {
+		margin: 20px auto;
+		width: 170px;
+		height: 50px;
+		background: url(//gtms03.alicdn.com/tps/i3/TB1uO0bHVXXXXXfXFXXGAn6NVXX-400-116.png) no-repeat;
+	}
+	.ct-ui-message {
+		border-top: 1px solid #ddd;
+	}
+</style>
+<div class="mc-main">
+	<div class="header"></div>
+	<div class="ct-ui-message">
+		<div class="ct-ui-message-content ct-ui-message-success">
+			<i class="ct-ui-message-ico"></i>
+			<h3 class="ct-ui-message-header">$!msg</h3>
+			<div class="ct-ui-message-body">
+			</div>
+		</div>
+	</div>
+</div>

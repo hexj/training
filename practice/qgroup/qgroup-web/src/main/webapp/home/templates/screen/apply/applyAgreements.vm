@@ -1,0 +1,6 @@
+$rundata.setLayoutEnabled(false)
+#if($!protocolVersion == "1")
+$control.setTemplate("apply/agreements")
+#else
+$control.setTemplate("apply/agreements2")	
+#end

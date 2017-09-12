@@ -1,0 +1,90 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/fullscreen-manage.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            ## left menu position
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","fullscreen")
+        </div>
+        <div class="mc-main-wrap">
+        	<div class="mc-fs-main">
+        		<div class="cun-fs-slides J_fs-slides">
+        			<div class="mc-fs-main-status J_fs-main-status" style="display:none;">
+	    				<p class="notice">您目前没有推荐大屏商品。</p>
+	    				<p class="guide">请在下方添加您推荐的商品<i class="ico-guide"></i></p>
+	    			</div>
+				</div>
+        	</div>
+        	<div class="mc-fs-action">
+        		<div class="mc-fs-action-add">
+        			<span class="title">商品链接：</span>
+        			<input type="text" class="input-add-item J_input-add-item">
+        			
+        		</div>
+				<div class="mc-fs-action-add">
+					<a href="javascript:void(0);" class="btn-add-item ml20 J_btn-add-item">添加商品</a>
+					<span class="red">* </span>您当前拥有 <span class="J_fs-total-num"></span>6个大屏位置，可再上传<span class="red J_fs-remain-num">0</span>个商品
+				</div>
+        	</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	KISSY.use('admin/js/fullscreen-manage',function (S, fs){
+		new fs('.mc-main-wrap','.mc-main-wrap');
+	});
+</script>
+<!-- slides模板 -->
+<script type="text/tmpl" class="J_TmplFsSlides">
+<div class="fs-slides-content">
+	{{#each full_screen_items}}
+		<div class="fs-slides-pannel J_cunItem" data-id="{{item_numiid}}">
+			<div class="fs-item clearfix">
+				<div class="fs-item-l">
+					<div class="item-pic">
+						<div class="fs-slides-item J_fs-slides-item" data-id="{{item_numiid}}">
+							<div class="fs-slides-item-content">
+								{{#each item_pic_list}}
+									<div class="fs-slides-item-pannel">
+										<img src="{{this}}_480x480q90.jpg" alt="">
+									</div>
+								{{/each}}
+							</div>
+							<div class="fs-slides-item-nav">
+								<ul class="fs-slides-item-nav-ul">
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="fs-item-r">
+					<div class="item-info">
+						<div class="title">
+							<h2><a href="//cun.taobao.com/itemlist/itemDetail.do?itemid={{item_numiid}}" target="_blank">{{item_title}}</a></h2>
+						</div>
+					</div>
+					<div class="item-price clearfix">
+						<div class="price-now">￥<em>{{item_current_price}}</em></div>
+						<div class="discount"><em>{{item_price_discount}}折</em></div>
+					</div>
+					<div class="item-meta">
+						原价：<span class="price-origin">￥<em>{{item_price}}</em></span>
+						<span class="sold">已售：<span class="J_soldData">{{item_trade_num}}</span>件</span>
+					</div>
+					<div class="item-action">
+						<a class="btn-buy-now" href="//cun.taobao.com/itemlist/itemDetail.do?itemid={{item_numiid}}" target="_blank">立即购买</a>
+					</div>
+				</div>
+			</div>
+			{{\#if item_auction_status!==0}}
+			<div class="mask-status">
+				此宝贝已下架
+			</div>
+			{{/if}}
+			<a href="javascript:void(0);" class="btn-del-item J_btn-del-item" data-id="{{item_numiid}}"></a>
+			
+		</div>
+	{{/each}}
+</div>
+<a href="javascript:void(0);" class="arrow arrow-l" id="J_pre"></a>
+<a href="javascript:void(0);" class="arrow arrow-r" id="J_next"></a>
+</script>

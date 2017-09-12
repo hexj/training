@@ -1,0 +1,76 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/detail-station.css">
+<div class="mc-main">
+    <input type="hidden" id="stationApplyId" value="$!applyStationId">
+    <input type="hidden" id="cunQuitProtocol" value="$!cunQuitProtocol"/>
+    <input type="hidden" id="cunQuitType" value="$!cunQuitType"/>
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","my")
+        </div>
+        <div class="mc-main-wrap">
+            <div class="cunPage">
+                <div class="detail">
+                    <div class="top">
+                        <span class="title">$!name服务点详情</span>
+                    </div>
+                    <div>
+                        <div div class="section-title">基础信息</div>
+                        <div class="cunInfo">
+                            <table class="listInfo">
+                                <tr>
+                                    <td class="tdleft">村服务点名:</td>
+                                    <td class="tdright">$!name</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">所属县城:</td>
+                                    <td class="tdright">$!orgName</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">详细地址:</td>
+                                    <td class="tdright">
+                                        $!{provinceDetail}$!{cityDetail}$!{countyDetail}$!{townDetail}$!{address}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">申请人姓名:</td>
+                                    <td class="tdright">$!applierName</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">身份证号:</td>
+                                    <td class="tdright">$!idenNum</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">申请人支付宝账号:</td>
+                                    <td class="tdright">$!alipayAccount</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">手机号码:</td>
+                                    <td class="tdright">$!mobile</td>
+                                </tr>
+                                <tr>
+                                    <td class="tdleft">常用联系邮箱:</td>
+                                    <td class="tdright">$!email</td>
+                                </tr>
+
+                            </table>
+                            <div class="status-operation">
+                                #if($!status == "SERVICING" && false == $!{tpa})
+                                    <button class="submitBtn">申请退出</button>
+                                #end
+                                #if($!status == "QUIT_APPLYING" && $!quitType != "worker-quit")
+                                    <span class="status-tip">提示：您已提交退出申请，待我们小二确认后，将停止您待村代购员身份。</span>
+                                #end
+                                #if($!status == "QUIT_APPLY_CONFIRMED" || $!status == "QUITAUDITING")
+                                    <span class="status-tip">提示：您的村代购员身份已经终止，请尽快完结确认的代购单，我们的小二将进一步跟进您后续的合伙人退出流程，请耐心等待通知。</span>
+                                #end
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    KISSY.use('admin/js/detail-station');
+</script>

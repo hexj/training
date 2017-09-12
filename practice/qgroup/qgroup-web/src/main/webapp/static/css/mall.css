@@ -1,0 +1,411 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	display:block;
+	background:#E5EEF5;
+	color:#333;
+	font-size:12px;
+}
+.HackBox{
+   border-top:1px solid transparent !important;
+   border-top:0;
+   clear:both;
+}
+#Content{
+	padding-top:5px;
+}
+/* 主框架 */
+div.InfoBox{
+	zoom:1;
+	margin-bottom:5px;
+	padding-right:5px;
+}
+.InfoBox div h3{
+	padding:0;
+	margin:0;
+	font-size:14px;
+	height:32px;
+	background:url(../images/content_gray_browse_02.gif) left top repeat-x;
+}
+.InfoBox div h3 div{
+	height:32px;
+	background:url(../images/content_gray_browse_01.gif) left top no-repeat;
+}
+.InfoBox div h3 div span{
+	display:block;
+	background:url(../images/content_gray_browse_03.gif) right top no-repeat;
+}
+.InfoBox div h3 div span div{
+	position:relative;
+	line-height:32px;
+}
+.InfoTitleButton{
+	display:block;
+	position:absolute;
+	top:3px;
+	right:10px;
+	background:url(../images/infotitlebutton_01.gif) left top no-repeat;
+	width:100px;
+	height:25px;
+	color:#666;
+	font-size:12px;
+	line-height:25px;
+	text-align:center;
+	text-decoration:none;
+}
+a.InfoTitleButton:hover{
+	color:#FFF;
+	background:url(../images/infotitlebutton_02.gif) left top no-repeat;
+}
+div.InfoBox div.InfoContent{
+	padding:0px 5px;
+	background:#F3F3F3;
+	border-left:1px #B4B4B4 solid;
+	border-right:1px #B4B4B4 solid;	
+}
+
+div.InfoBox div.InfoFoot{
+	display:inline;
+	height:8px;
+	background:#000 url(../images/content_gray_browse_05.gif) left top repeat-x;
+}
+div.InfoBox div.InfoFoot div{
+	height:8px;
+	background:url(../images/content_gray_browse_04.gif) left 0 no-repeat;
+}
+div.InfoBox div.InfoFoot div span{
+	display:block;
+	height:8px;
+	background:url(../images/content_gray_browse_06.gif) right 0 no-repeat;
+}
+/*表单内容*/
+.InfoContent div{
+	width:100%;
+	/*background-color: expression(this.sourceIndex%2==0?'#FFF':'#f6f6f6');*/
+	overflow:hidden;
+}
+.InfoContent div label{
+	display:block;
+	color:#4C5461;
+	font-weight:bold;
+	width:63px;
+	line-height:33px;
+	text-align:right;
+	float:left;
+	white-space:nowrap;
+}
+.Roomily .InfoContent div label{
+	width:120px;
+}
+.Vast .InfoContent div label{
+	width:150px;
+}
+
+.InfoContent div span{
+	overflow:hidden;
+	line-height:33px;
+}
+.InfoContent div div{
+	float:left;
+	padding-top:0;
+}
+.InfoContent div span input{
+	margin:0;
+	padding: 0 2px;
+	height:18px;
+	line-height:18px;
+	color:#333;
+	margin:4px 5px 0 4px;
+}
+.InfoContent div span textarea{
+	width:85%;
+	height:60px;
+	margin:0;
+	padding:0;
+	margin:4px 5px 0 4px;
+}
+.InfoContent div span select{
+	margin:4px 5px 0 0;
+}
+/*表单内容布局*/
+div.T100 div{
+	width:100%;
+}
+div.T50 div{
+	width:49.99%;
+}
+div.T25 div{
+	width:25%;
+}
+div.T20 div{
+	width:19.91%;
+}
+div.T33 div{
+	width:33.31%;
+	white-space:nowrap;
+	word-break:break-all;
+}
+div.Trade div{
+	width:auto;
+}
+div.T33 div span{
+	overflow:hidden;
+}
+div.Textarea{	
+	height:100%;
+}
+div.Textarea span{
+	display:block;
+	line-height:18px;
+	padding:8px 0 0 63px;
+}
+.Holistic{
+	background:#e6eff8;
+}
+.Primary{
+	background:#cfe0f1;
+}
+/*SubmitBox*/
+.SubmitBox{
+    clear:both;
+	text-align:center;
+	padding:10px 0;
+}
+.SubmitBox input{
+	padding:0 15px;
+	margin:0 5px;
+}
+
+/*SelectBox*/
+.SelectBox{
+	color:#666;
+	height:24px;
+	padding:0 5px;
+	background:#F3F3F3;
+	border-left:1px #B4B4B4 solid;
+	border-right:1px #B4B4B4 solid;	
+	line-height:22px;
+}
+.SelectBox a{
+	color:#0060bf;
+	margin-right:5px;
+}
+/*PageChange*/
+.PageChange{
+	position:absolute;
+	right:0;
+	margin:0px 10px 0 0;
+	text-align:right;
+}
+.PageChange span{
+	margin-right:14px;
+}
+.PageChange a{
+	display:block;
+	padding-top:2px;
+	width:14px;
+	line-height:14px;
+	color:#69C;
+	border:1px #69C solid;
+	float:right;
+	font-weight:bold;
+	text-align:center;
+	text-decoration:none;
+}
+.PageChange a:hover{
+	color:#2971b9;
+	border:1px #2971b9 solid;
+}
+/* 表格*/
+.InfoBox table{
+	width:100%;
+	font-size:12px;
+	background:#9C9C9E;
+	border-collapse:collapse;
+}
+.InfoBox table.Table50{
+	float:left;
+	width:49.9999%;
+}
+.InfoBox table th{
+	height:18px;
+	line-height:19px;
+	background:#ADADAD url(../images/content_gray_table_01.gif) 0 0 repeat-x;
+	white-space:nowrap;
+	overflow:hidden;
+}
+.InfoBox table tr{
+	background-color:expression('#FFF,#F8F8F0'.split(',')[rowIndex%2]);
+}
+.InfoBox table td{
+	padding:5px 4px;
+	line-height:120%; 
+}
+/* 主框架  移动*/
+.F100{
+	padding-left:5px;
+}
+.L50{
+	float:left;
+	clear:left;
+	width:50%;
+	padding-left:5px;
+}
+.R50{
+	float:right;
+	clear:right;
+}
+.L70{
+	float:left;
+	width:70%;
+	padding-left:5px;
+}
+.R30{
+	float:right;
+	clear:left;
+}
+.L34{
+	float:left;
+	width:34%;
+	padding-left:5px;
+}
+.L33{
+	float:left;
+	width:33%;
+}
+/*Query立体*/
+div.InfoBox .Query h3{
+	background:url(../images/content_gray_query_02.gif) left top repeat-x;
+}
+div.InfoBox .Query h3 div{
+	background:url(../images/content_gray_query_01.gif) left top no-repeat;
+}
+div.InfoBox .Query h3 div span{
+	background:url(../images/content_gray_query_03.gif) right top no-repeat;
+}
+div.InfoBox .Query div.InfoContent{
+	background:#FFF;	
+}
+div.InfoBox .Query div.InfoFoot{
+	background:url(../images/content_gray_query_05.gif) left top repeat-x;
+}
+div.InfoBox .Query div.InfoFoot div{
+	background:url(../images/content_gray_query_04.gif) left 0 no-repeat;
+}
+div.InfoBox .Query div.InfoFoot div span{
+	background:url(../images/content_gray_query_06.gif) right 0 no-repeat;
+}
+/*Verify黑色校验*/
+div.InfoBox .Verify h3{
+	background:url(../images/content_gray_verify_02.gif) left top repeat-x;
+}
+div.Verify h3 div{
+	background:url(../images/content_gray_verify_01.gif) left top no-repeat;
+}
+div.Verify h3 div span{
+	color:#FFF;
+	background:url(../images/content_gray_verify_03.gif) right top no-repeat;
+}
+div.Verify div.InfoContent{
+	background:#FFF;
+	border-left:1px #454B5F solid;
+	border-right:1px #454B5F solid;	
+}
+div.Verify div.InfoFoot{
+	background:url(../images/content_gray_verify_05.gif) left top repeat-x;
+}
+div.Verify div.InfoFoot div{
+	background:url(../images/content_gray_verify_04.gif) left 0 no-repeat;
+}
+div.Verify div.InfoFoot div span{
+	background:url(../images/content_gray_verify_06.gif) right 0 no-repeat;
+}
+.Verify table{
+	width:100%;
+	font-size:12px;
+	background:#454b5f;
+	border-collapse:collapse;
+}
+.Verify table th{
+	height:18px;
+	line-height:19px;
+	color:#fff;
+	background:#000 url(../images/content_gray_table_02.gif) 0 0 repeat-x;
+}
+/*Crystal水晶*/
+div.Crystal h3{
+	background:url(../images/content_gray_crystal_02.gif) left top repeat-x;
+}
+div.Crystal h3 em{
+	font-style:normal;
+	font-weight:normal;
+	font-size:12px;
+	margin-left:10px;
+}
+div.Crystal h3 div{
+	background:url(../images/content_gray_crystal_01.gif) left top no-repeat;
+}
+div.Crystal h3 div span{
+	color:#384B5F;
+	background:url(../images/content_gray_crystal_03.gif) right top no-repeat;
+}
+div.Crystal div.InfoContent{
+	background:#FFF;
+	border-left:1px #606D7D solid;
+	border-right:1px #606D7D solid;	
+}
+.Crystal div span input{
+	border:1px #606D7D solid;
+}
+.Crystal div span textarea{
+	border:1px #606D7D solid;
+}
+div.Crystal div.InfoFoot{
+	background:url(../images/content_gray_crystal_05.gif) left top repeat-x;
+}
+div.Crystal div.InfoFoot div{
+	background:url(../images/content_gray_crystal_04.gif) left 0 no-repeat;
+}
+div.Crystal div.InfoFoot div span{
+	background:url(../images/content_gray_crystal_06.gif) right 0 no-repeat;
+}
+.Crystal table{
+	background:#606d7d;
+}
+.Crystal div label{
+	color:#999;
+}
+.Crystal table th{
+	color:#384B5F;
+	background:#c8d2dd url(../images/content_gray_table_03.gif) 0 0 repeat-x;
+}
+.Crystal .InfoTitleButton{
+	color:#384B5F;
+	background:url(../images/infotitlebutton_03.gif) left top no-repeat;
+}
+.Crystal a.InfoTitleButton:hover{
+	color:#384B5F;
+	background:url(../images/infotitlebutton_04.gif) left top no-repeat;
+}
+.Crystal .SelectBox{
+	background:#FFF;
+	border-left:1px #606D7D solid;
+	border-right:1px #606D7D solid;	
+}
+/*FONT14*/
+.FONT14 div span{
+	font-size:14px;
+}
+/*Icon*/
+div.InfoBox div.QueryUserInfo{
+	padding-left:24px;
+	background:url(../images/queryuserinfo.gif) left top no-repeat;
+	background:url(../images/queryuserinfo.gif) 6px 7px no-repeat;
+}
+
+.loginTimesNot0{
+	border-top:1px solid #FFAB09;
+	background-color:#FFF2BF;
+}

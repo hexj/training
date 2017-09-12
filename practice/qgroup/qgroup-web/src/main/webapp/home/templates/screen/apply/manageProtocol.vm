@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/detail-station.css">
+
+<script type="text/css">
+    .content_wapper {
+        backgroundColor: white;
+    }
+
+    .content {
+        padding: 10px;
+    }
+</script>
+
+<div class="mc-main">
+    <input type="hidden" id="stationApplyId" value="$!applyStationId">
+    <input type="hidden" id="manageProtocolVersion" value="$!manageProtocolVersion"/>
+    
+    <div class="content_wapper">
+        <div class="l-fl content">
+            <div id="confirm-content"  class="protocol">
+				#if($!protocolVersion == "1")
+                $control.setTemplate("apply/agreements")
+				#else
+				$control.setTemplate("apply/agreements2")	
+				#end
+            </div>
+        </div> 
+    </div>
+</div>
+<script>
+    KISSY.use('admin/js/detail-station');
+</script>

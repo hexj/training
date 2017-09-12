@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:services="http://www.alibaba.com/schema/services"
+             xmlns:pull-factories="http://www.alibaba.com/schema/services/pull/factories" xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:p="http://www.springframework.org/schema/p"
+             xsi:schemaLocation="
+        http://www.alibaba.com/schema/services http://localhost:8080/schema/services.xsd
+        http://www.alibaba.com/schema/services/pull/factories http://localhost:8080/schema/services-pull-factories.xsd
+        http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <!-- 此文件仅被 webx-*.xml 引用。 -->
+    <!-- 注意：此文件需要property-placeholder变量：${component}。 -->
+<!-- ==================================================================================================== -->
+	<!-- WebX3 RPC 服务配置 （开始） -->
+	<!-- ==================================================================================================== -->
+	<!-- RPC 数据绑定服务 -->
+	<beans:bean id='rpcDatabindService'
+		class='com.alibaba.nonda.databind.impl.DatabindServiceImpl'>
+		<beans:property name="registry">
+			<beans:bean id='databinderRegistry'
+				class='com.alibaba.nonda.databind.impl.DatabinderRegistryImpl'>
+				<beans:property name="binderFactories">
+					<beans:list>
+						<beans:bean
+							class="com.alibaba.citrus.extension.rpc.databind.RPCDatabinderFactory" />
+					</beans:list>
+				</beans:property>
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<!-- RPC 数据验证服务 -->
+	<beans:bean id='rpcValidateService'
+		class="com.alibaba.nonda.integration.webx3.validation.ValidateService4WebX3" />
+
+	<!-- RPC URL与组件的映射服务 -->
+	<beans:bean id='rpcUrlComponentMapping'
+		class="com.alibaba.citrus.extension.rpc.impl.URLComponentMappingImpl">
+		<!-- 标识RPC服务的命名空间（通过不同的namespace来模板化不同的业务） -->
+		<beans:property name="namespace" value="${component}" />
+		<!-- 是否启用URL的驮峰转换，缺省为true -->
+		<beans:property name="useCamelCaseURL" value="false" />
+	</beans:bean>
+
+	<!-- RPC 处理请求的核心服务 -->
+	<beans:bean id='rpcServiceHandler'
+		class="com.alibaba.citrus.extension.rpc.impl.RPCServiceHandlerImpl">
+		<!-- 示例：覆盖缺省的 resultGenerator -->
+		<beans:property name="resultGenerator">
+			<beans:bean
+				class="com.alibaba.citrus.extension.rpc.impl.DefaultResultGenerator" />
+		</beans:property>
+		<!-- 示例：配置全局的属性过滤器 -->
+		<beans:property name="propertyFilters">
+			<beans:list>
+				<!-- Trim2Null过滤器 -->
+				<beans:bean
+					class="com.alibaba.citrus.extension.rpc.response.impl.Trim2NullPropertyFilter" />
+			</beans:list>
+		</beans:property>
+		<!-- xssType配置选择项有两种: 1.delete会直接删除xss标签 2.escape会将xss标签做转义输出 系统默认delete -->
+		<beans:property name="xssType" value="escape" />
+		<beans:property name="productionMode" value="true" />
+		<beans:property name="interceptors">
+	         <beans:list>
+	            <beans:bean class="com.taobao.cun.admin.web.webx.interceptor.CuntaoCSRFCheckInterceptor" />
+	         </beans:list>
+		</beans:property>
+	</beans:bean>
+    <!-- 综合设置。 -->
+    <services:webx-configuration />
+</beans:beans>

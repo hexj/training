@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="gbk">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>我的农村淘宝</title>
+	$control.setTemplate("vmcommon/s/3.2/css.vm")
+	$control.setTemplate("vmcommon/s/3.2/js.vm").setParameter("version", "1.4.7")
+	<link rel="stylesheet" href="//g.alicdn.com/??tbc/market/0.3.0/index-min.css?t=20140418.css">
+	<link href="//www.taobao.com/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+	<script src="//g.alicdn.com/tbc/market/1.3.6/index-min.js"></script>
+	<link rel="stylesheet" href="$!frontServer/??common/css/common.css,admin/css/mycun.css">
+</head>
+<body>
+	$control.setTemplate("vmcommon/s/3.2/header.vm")
+	<script>
+	TB.Global.blacklist = ['fn-cart'];
+	TB.Global.init();
+	</script>
+	$control.setTemplate("config")
+	$screen_placeholder
+	$!securityUtil.ignoretext($tmsTool.importRgn("/rgn/sites/footer.php",1,true))
+</body>
+</html>

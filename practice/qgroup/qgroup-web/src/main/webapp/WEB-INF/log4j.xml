@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="null">
+    <appender name="PROJECT" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="threshold" value="${cuntao.loggingLevel}"/>
+        <param name="file" value="${cuntao.loggingRoot}/cuntao.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="CUNTAO_APP" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="threshold" value="INFO"/>
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_app.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} %m%n"/>
+        </layout>
+    </appender>
+    <appender name="CUNTAO_INFO" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="threshold" value="info"/>
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_info.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} %m%n"/>
+        </layout>
+    </appender>
+    <appender name="CUNTAO_HSF" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_hsf.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <!-- 记录notify log -->
+    <appender name="CUNTAO_NOTIFY" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_notify.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] [%-5p] %d [%c{2}] - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="cuntao-tddl" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="threshold" value="${cuntao.loggingLevel}"/>
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_tddl.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%n%d [%X{loginUserNick}@%X{remoteAddr} - %X{method} %X{requestURIWithQueryString}] %nUserAgent: %X{userAgent}%nReferrer: %X{referrer}%n%-5p [%c{1}:%L] - %m"/>
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="WEBX" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_webx.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="FILTER" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_filter.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="CUNTAO_SEARCH" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_search.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="CUNTAO_ALIPAY" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_alipay.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%X{traceId}] [%X{rpcId}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="CUNTAO_SLS_APPEND" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/cuntao_sls_error.log" />
+        <param name="append" value="true" />
+        <param name="encoding" value="UTF-8" />
+        <param name="threshold" value="error"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}] [%X{traceId}] [%X{rpcId}] [%-5p] [%c{2}]  [%m] %n" />
+        </layout>
+    </appender>
+    <!-- jmonitor appender -->
+    <appender name="JmonitorAppender" class="com.taobao.cun.common.monitor.CuntaoJMonitorLog4jAppender"/>
+
+    <logger name="com.alibaba.citrus.webx" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="WEBX"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="com.alibaba.webx.filter" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="FILTER"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+
+    <logger name="com.taobao.tddl" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="cuntao-tddl"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="com.taobao.hsf" additivity="true">
+        <level value="WARN"/>
+        <appender-ref ref="CUNTAO_HSF"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="org.apache.commons.httpclient.HttpMethodBase" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="CUNTAO_INFO"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <!-- biz -->
+    <logger name="com.taobao.cun.core.sp" additivity="false">
+        <level value="${cuntao.loggingLevel}"/>
+        <appender-ref ref="CUNTAO_SEARCH"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="com.taobao.cun.search" additivity="false">
+        <level value="${cuntao.loggingLevel}"/>
+        <appender-ref ref="CUNTAO_SEARCH"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="com.taobao.cun.payment.notify" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="CUNTAO_NOTIFY"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="com.taobao.cun" additivity="false">
+        <level value="${cuntao.loggingLevel}"/>
+        <appender-ref ref="CUNTAO_APP"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+
+    <logger name="com.taobao.cun.admin.alipay" additivity="false">
+        <level value="${cuntao.loggingLevel}"/>
+        <appender-ref ref="CUNTAO_ALIPAY"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <logger name="com.taobao.cun.admin.web.home.module.rpc" additivity="false">
+        <level value="${cuntao.loggingLevel}"/>
+        <appender-ref ref="CUNTAO_ALIPAY"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </logger>
+    <root>
+        <level value="${cuntao.loggingLevel}"/>
+        <appender-ref ref="PROJECT"/>
+        <appender-ref ref="JmonitorAppender"/>
+        <appender-ref ref="CUNTAO_SLS_APPEND" />
+    </root>
+</log4j:configuration>

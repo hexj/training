@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/css/app-download.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu").setParameter("currentIndex","card")
+        </div>
+        <div class="mc-main-wrap">
+            <div class="J-agent-card agent-card-wrap">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+   (function(){
+        KISSY.use('admin/js/app-down', function (S, AppDown) {
+            new AppDown("card");
+        });
+   })();
+</script>

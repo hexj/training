@@ -1,0 +1,79 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/index/admin-top.css">
+<div class="top_all">
+		<div class="user_info">
+			<div class="user_l">
+				<div class="person-m">
+					<img src="//assets.alicdn.com/app/sns/img/default/avatar-120.png" id="p_img"></div>
+				<div class="cun_info">
+					<ul class="cun_p">
+						<li class="cun_weight">
+                            <em id="station_name" class="station_name"></em>
+                            <span class="level_info">
+                                <span class="cun_level_icon"></span>
+                                <span class="cun_show_detail"><a class="link" title="数据军师" target="_blank" href="http:$!{icuntaoDomain}datadviser">查看详情</a></span>
+                             </span>
+						</li>
+						<li class="cun_ww">
+						    旺旺ID： <em id="station_ww"></em>ss
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="user_r">
+				<div>
+					<div class="my_task">我的任务</div>
+					<div class="my_task_count"><a href="#" class="task-action">$!{unFinishTaskCount}</a></div>
+					#if($!{hasNewTask})
+					<div class="my_task_tips">
+						<i class="arrow"></i>
+						<div class="tip_close"></div>
+						<p class="tip-content">亲，您有一个新任务，请尽快完成！</p>
+						<a href="javascript:void(0);" class="task-go task-action">立即查看</a>
+					</div>
+					#end
+				</div>
+			</div>
+		</div>
+		<div class="trade_info">
+			<ul>
+				<li>
+					<a href="#" target="_blank" id="wait_payment">
+						<span>
+							待付款 <em id="wait_payment_c" class="state" title=""></em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" target="_blank" id="wait_deliver">
+						<span>
+							待发货 <em id="wait_deliver_c" class="state" title=""></em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" target="_blank" id="wait_gets">
+						<span>
+							待收货
+							<em id="wait_gets_c" class="state" title=""></em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#"  target="_blank" id="wait_evaluation">
+						<span>
+							待评价
+							<em id="wait_evaluation_c" class="state" title=""></em>
+						</span>
+					</a>
+				</li>
+				<li>
+					<a href="#" target="_blank" id="wait_back">
+						<span>
+							退款
+							<em id="wait_back_c" class="state" title=""></em>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>

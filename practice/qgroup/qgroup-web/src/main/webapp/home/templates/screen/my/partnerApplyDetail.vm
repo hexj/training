@@ -1,0 +1,202 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/??admin/css/copartner-apply-detail.css,admin/mods/feed-back-tips/feed-back-tips.css">
+#if($!repeatApply =='notApply')
+	<div style="width: 800px;height: 100px;margin: 0 auto;border: 1px solid #E5E5E5;margin-top: 20px;margin-bottom: 20px;font-family: Microsoft YaHei;">
+	    <div style=" margin: 50px auto;width:500px;height:70px"> <font style="font-size:15px">您好，对不起您未申请报名，无法查看进度，请先
+	            <a href="/my/copartnerApplyStation.htm">申请报名</a>。</font> 
+	    </div>
+	</div>
+#elseif($!repeatApply =='alreadyBePartner')
+	<div style="width: 800px;height: 100px;margin: 0 auto;border: 1px solid #E5E5E5;margin-top: 20px;margin-bottom: 20px;font-family: Microsoft YaHei;">
+	    <div style=" margin: 50px auto;width:500px;height:70px"> <font style="font-size:15px">您好，您已经是合伙人,无需再次报名。
+	    <a href="/my/index.htm">我的村淘</a></font> 
+	    </div>
+	</div>
+#else
+<div class="mc-main">
+		<div class="grid-1190 clearfix">
+			<div class="mc-main-aside">
+				$control.setTemplate("my/asideMenu").setParameter("currentIndex","partner")
+			</div>
+			<div class="mc-main-wrap">
+				<div class="top-apply">
+					<div style="margin-top: 16px;padding-left: 40px;">
+						<ul>
+							<li  style="color: black;font-weight: 600;">申请流程：</li>
+							<li style="width:120px">1、报名（实名认证)</li>
+							<li>
+								<img src="//img.alicdn.com/tps/i3/TB10iAXHpXXXXXMXVXXh7R9JVXX-94-16.png" style="width:50px"></li>
+							<li>2、信息审核</li>
+							<li>
+								<img src="//img.alicdn.com/tps/i3/TB10iAXHpXXXXXMXVXXh7R9JVXX-94-16.png" style="width:50px"></li>
+							<li>3、面试</li>
+							<li>
+								<img src="//img.alicdn.com/tps/i3/TB10iAXHpXXXXXMXVXXh7R9JVXX-94-16.png" style="width:50px"></li>
+							<li>4、通过</li>
+						</ul>
+					</div>
+				</div>
+				<div class="cunPage">
+					<div class="detail">
+						<div class="top">
+							<span class="title">$!statusInfo</span>
+						</div>
+						<div>
+						#if($!remark)
+						<div style="color:#999;border-bottom: 1px solid #E5E5E5;">审核意见</div>
+						<div style="padding:10px;">
+							#if($!status == 'STATE_APPLY_REFUSE')
+							<div class="ui-feedback ui-feedback-error">
+							#else
+							<div class="ui-feedback ui-feedback-success">
+							#end
+							    <i class="f-icon"></i>
+							    <div class="ui-content">
+							    	<div class="ui-main-tips">
+							        	$!remark
+							        </div>
+							    </div>
+							</div>
+						</div>
+						#end
+						<div style="color:#999;border-bottom: 1px solid #E5E5E5;">申请信息</div>
+							<div class="cunInfo">
+								<table class="listInfo">
+									<tr>
+										<td class="tdleft">姓名:</td>
+										<td class="tdright">$!applyName</td>
+									</tr>
+									<tr>
+										<td class="tdleft">性别:</td>
+										<td class="tdright">$!gender</td>
+									</tr>
+									<tr>
+										<td class="tdleft">身份证号:</td>
+										<td class="tdright">$!idCardNum</td>
+									</tr>
+									<tr>
+										<td class="tdleft">支付宝账号:</td>
+										<td class="tdright">$!alipayAccount</td>
+									</tr>
+									<tr>
+										<td class="tdleft">民族:</td>
+										<td class="tdright">$!nation</td>
+									</tr>
+									<tr>
+										<td class="tdleft">学历:</td>
+										<td class="tdright">$!education</td>
+									</tr>
+									<tr>
+										<td class="tdleft">政治面貌:</td>
+										<td class="tdright">$!politics</td>
+									</tr>
+									<tr>
+										<td class="tdleft">现居住地:</td>
+										<td class="tdright">$!manageAddress</td>
+									</tr>
+									<tr>
+										<td class="tdleft">营业场所:</td>
+										<td class="tdright">#if($!isExitPlace == 'y') 有  #else 无  #end</td>
+									</tr>
+									<tr>
+										<td class="tdleft">计划经营地址:</td>
+										<td class="tdright">$!addressDetail</td>
+									</tr>
+									#if($!isExitPlace == 'y')
+										<tr>
+											<td class="tdleft">营业面积:</td>
+											<td class="tdright">$!manageArea</td>
+										</tr>
+									
+									<tr>
+										<td class="tdleft">经营地照片:</td>
+										<td class="tdright location-pic">
+										   #if($!locationImgs)
+											  #foreach($!atta in $!locationImgs)
+			                                      <a href="$!atta.url" target="_blank"><img src="$!atta.url" width="100" height="100" /></a>
+			                                  #end
+										   #end
+										</td>
+									</tr>
+									#end
+									<tr>
+										<td class="tdleft">联系电话:</td>
+										<td class="tdright">$!mobile</td>
+									</tr>
+									<tr>
+										<td class="tdleft">常用邮箱:</td>
+										<td class="tdright">$!email</td>
+									</tr>
+									<tr>
+										<td class="tdleft">创业(经营)计划书:</td>
+										<td class="tdright">
+										   #if($!busProposal)
+											  #foreach($!atta in $!busProposal)
+			                                      <a class="guide-book" href="$!atta.downloadUrl">$!atta.title</a><br>
+			                                  #end
+										   #end
+										</td>
+									</tr>
+									<tr>
+										<td class="tdleft">您是从哪个渠道知道我们的:</td>
+										<td class="tdright">
+											#set($count1=0)
+                                        	#foreach($!channel in $!fromChannels)
+                                        	    #if ($count1 == 0)
+                                        	    	$!channel
+                                        	    #else
+                                        	    	,&nbsp;$!channel
+                                        	    #end
+                                        	    #set($count1 = $count1 + 1)
+							                #end
+										</td>
+									</tr>
+									<tr>
+                                        <td class="tdleft">工作经历:</td>
+										<td class="tdright">$!workExp</td>
+                                    </tr>
+                                	<tr>
+										<td class="tdleft">村面积:</td>
+										<td class="tdright">$!areaRange</td>
+                                    </tr>
+                                	<tr>
+										<td class="tdleft">村人口:</td>
+										<td class="tdright">$!population</td>
+                                    </tr>
+                                	<tr>
+										<td class="tdleft">村人均收入:</td>
+										<td class="tdright">$!perIncomeRange</td>
+                                    </tr>
+                                	<tr>
+										<td class="tdleft">村民主要年龄:</td>
+										<td class="tdright">$!ageRange</td>
+                                    </tr>
+                                	<tr>
+                                        <td class="tdleft">是否有其他电子商务平台经验:</td>
+                                        <td class="tdright"  colspan="2">
+                                            #set($count2=0)
+                                        	#foreach($!codeName in $!netPlatformExp)
+                                        	    #if ($count2 == 0)
+                                        	    	$!codeName
+                                        	    #else
+                                        	    	,&nbsp;$!codeName
+                                        	    #end
+                                        	    #set($count2 = $count2 + 1)
+							                #end
+                                        </td>
+                                    </tr>
+								</table>
+							</div>
+							#if($!canEdit)
+								<div style="padding: 25px 0 0 240px;">
+									<div style="margin-left:100px">
+										<a href="/my/copartnerApplyEdit.htm" class="submitBtn detail-edit">补充资料</a>
+									</div>
+								</div>
+							#end
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+#end	

@@ -1,0 +1,47 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/index/my-performence.css">
+<div class="section">
+	<div class="title">我的业绩
+		<a class="js-refresh-performence refresh">
+			<i class="iconrefresh">&#xe600;</i>
+            <span>刷新</span>
+		</a>
+	</div>
+	<div class="clearfix">
+		<div class="item day fl">
+			<div class="time">
+				<span>今日(不含淘帮手数据)</span>
+				<span class="detail" id="order-day"></span>
+			</div>
+			<div class="profile day clearfix">
+				<div class="count fl">
+					<span class="key">订单数</span>
+					<span class="value num" id="order-count-day">--</span>
+				</div>
+				<div class="money fl">
+					<span class="key">订单金额</span>
+					<span class="value num" id="order-money-day">--</span>
+				</div>
+			</div>
+		</div>
+		<div class="item month fl">
+			<div class="time">
+				<span>本月</span>
+				<span class="detail"  id="order-month"></span>
+			</div>
+			<div class="profile month clearfix">
+				<div class="count fl">
+					<span class="key">订单数</span>
+					<span class="value num" id="order-count-month">--</span>
+				</div>
+				<div class="money fl">
+					<span class="key">订单金额</span>
+					<span class="value num" id="order-money-month">--</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tip" id="tip-desc">
+
+		
+	</div>
+</div>

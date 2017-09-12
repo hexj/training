@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "http://toolkit.alibaba-inc.com/dtd/log4j/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- ===================================================================== -->
+    <!--  以下是appender的定义                                                 -->
+    <!-- ===================================================================== -->
+    <appender name="PROJECT"
+        class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/food.log" />
+        <param name="append" value="true" />
+        <param name="encoding" value="GBK" />
+        <param name="threshold" value="info" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d %-5p %c{2} %m%n" />
+        </layout>
+    </appender>
+    <appender name="FOOD_INFO"
+        class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/food_info.log" />
+        <param name="append" value="true" />
+        <param name="encoding" value="GBK" />
+        <param name="threshold" value="info" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d %-5p %c{2} %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="HSF"
+        class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/hsf-common.log" />
+        <param name="append" value="true" />
+        <param name="encoding" value="GBK" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%d %-5p %c{2} - %m%n" />
+        </layout>
+    </appender>
+
+    <!-- 记录notify log -->
+    <appender name="foodNotifyAppender" class="com.alibaba.common.logging.spi.log4j.DailyRollingFileAppender">
+        <param name="file" value="${cuntao.loggingRoot}/food-notify.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-5p] %d [%c{2}] - %m%n"/>
+        </layout>
+    </appender>
+
+   <appender name="specInfoAppender" class="org.apache.log4j.DailyRollingFileAppender">
+      <param name="file" value="${cuntao.loggingRoot}/spec-info.log" />
+      <param name="append" value="true" />
+      <param name="encoding" value="GBK" />
+      <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{2} - %m%n"/>
+      </layout>
+   </appender>
+
+	<appender name="vsearchAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${cuntao.loggingRoot}/food-vsearch.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="GBK" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %m%n"/>
+		</layout>
+	</appender>
+	
+	<appender name="cycleAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="${cuntao.loggingRoot}/food-cycle.log" />
+		<param name="append" value="true" />
+		<param name="encoding" value="GBK" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %m%n"/>
+		</layout>
+	</appender>
+
+    <!-- ===================================================================== -->
+    <!--  以下是logger的定义                                                   -->
+    <!-- ===================================================================== -->
+
+  <logger name="food-cycle" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="cycleAppender"/>
+    </logger>
+
+    <logger name="com.taobao.vsearch" additivity="false">
+        <level value="WARN"/>
+        <appender-ref ref="vsearchAppender"/>
+    </logger>
+
+    <logger name="hsf.common" additivity="true">
+        <level value="INFO"/>
+        <appender-ref ref="HSF"/>
+    </logger>
+    
+    <logger name="SEARCH" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="searchAppender"/>
+    </logger>
+  
+    <logger name="food-notify" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="foodNotifyAppender"/>
+    </logger>
+
+   <logger name="spec-info" additivity="false">
+      <level value="INFO" />
+      <appender-ref ref="specInfoAppender" />
+   </logger>
+
+   <logger name="org.apache.commons.httpclient.HttpMethodBase" additivity="false">
+      <level value="${cuntao.loggingLevel}" />
+      <appender-ref ref="FOOD_INFO" />
+   </logger>
+
+    <!-- ===================================================================== -->
+    <!--  Root logger的定义                                                    -->
+    <!-- ===================================================================== -->
+    <root>
+        <level value="${cuntao.loggingLevel}" />
+        <appender-ref ref="PROJECT" />
+    </root>
+</log4j:configuration>

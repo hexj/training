@@ -1,0 +1,281 @@
+$securityUtil.ignoretext($!{menu})
+
+##<link rel="stylesheet" type="text/css" href="$!frontServer/admin/mods/aside-menu/aside.css">
+##<style >
+##    @font-face {
+##        font-family: 'iconfontaside';
+##        src: url('//at.alicdn.com/t/font_1431649983_4539852.eot'); /* IE9*/
+##        src: url('//at.alicdn.com/t/font_1431649983_4539852.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+##        url('//at.alicdn.com/t/font_1431649983_4539852.woff') format('woff'), /* chrome??firefox */
+##        url('//at.alicdn.com/t/font_1431649983_4539852.ttf') format('truetype'), /* chrome??firefox??opera??Safari, Android, iOS 4.2+*/
+##        url('//at.alicdn.com/t/font_1431649983_4539852.svg#iconfont') format('svg'); /* iOS 4.1- */
+##    }
+##    .iconfontlist{
+##        font-family: "iconfontaside";
+##        font-size: 16px;
+##        font-style: normal;
+##        line-height: 16px;
+##    }
+##    .iconfontarrow{
+##        font-family: "iconfontaside";
+##        font-size: 12px;
+##        font-style: normal;
+##        line-height: 6px;
+##    }
+##    .aside{
+##        width: 180px;
+##        background-color: #fff;
+##        min-height: 530px;
+##    }
+##    .aside .title{
+##        padding-left: 65px;
+##        border-bottom: 1px solid #e9e9e9;
+##        position: relative;
+##        font-size: 16px;
+##        line-height: 59px;
+##    }
+##    .aside .title i {
+##        position: absolute;
+##        top: 22px;
+##        left: 40px;
+##    }
+##    .aside .menu{
+##        padding: 5px 0;
+##    }
+##    .aside .item{
+##        font-size: 14px;
+##        line-height: 30px;
+##        padding-left:40px;
+##    }
+##    .aside .item a{
+##        color: #2b2b2b;
+##        text-decoration: none;
+##    }
+##    .aside .item.current,.aside .item.current:hover{
+##        color:#fff;
+##        background-color: #1e8c00;
+##    }
+##    .aside .item.current a,.aside .item.current:hover a{
+##        color:#fff;
+##        background-color: #1e8c00;
+##    }
+##    .aside .item:hover{
+##        background-color: #f2f8f1;
+##    }
+##    .aside .item-wrap{
+##        margin-top: 15px;
+##    }
+##    .aside .item-title{
+##        padding-left:42px;
+##        margin-bottom: 13px;
+##        font-weight: bold;
+##        font-size: 14px;
+##        line-height: 14px;
+##        position: relative;
+##    }
+##    .aside .item-title:hover{
+##        cursor: pointer;
+##        color: #FF4200;
+##    }
+##    .aside .item-title i{
+##        position: absolute;
+##        top: 4px;
+##        left: 24px;
+##    }
+##    .aside .item.sub{
+##        padding-left: 60px;
+##    }
+##    .aside .item-wrap.close-menu .sub{
+##        display: none;
+##    }
+##    .aside .item-wrap .arrow-up{
+##        display: none;
+##    }
+##    .aside .item-wrap .arrow-down{
+##        display: block;
+##    }
+##    .aside .item-wrap.close-menu .arrow-up{
+##        display: block;
+##    }
+##    .aside .item-wrap.close-menu .arrow-down{
+##        display: none;
+##    }
+##
+##    .aside .new-icon{
+##        display: inline-block;
+##        width: 20px;
+##        height: 20px;
+##        position: relative;
+##        vertical-align: top;
+##        top: 7px;
+##        margin-left: 8px;
+##        background: url('https://img.alicdn.com/tps/TB1f4vKJXXXXXawXFXXXXXXXXXX-1000-1000.png') no-repeat -217px -544px;
+##
+##    }
+##
+##</style>
+##<div class="aside">
+##    <div class="title">
+##    	<i class="iconfontlist">&#xe601;</i>
+##    	全部功能
+##    </div>
+##    <div class="menu">
+##
+##		#if($hasStationApply == true)
+##
+##            #if($scorderOn == 'y')
+##            <div class="item-wrap #if($!{currentIndex}=='order' || $!{currentIndex}=='receiptHistory' || $!{currentIndex}=='receipt' || $!{currentIndex}=='serviceorder')  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    我的服务单
+##                </div>
+##                <div class="item sub #if($!{currentIndex}=='serviceorder') current #end"> <a href="$!{icuntaoDomain}/serviceorder">我的交易</a></div>
+##				#if($viewAgentOrderMenu  && $hasStationApply == true && $!{tpa}!=true)
+##                    <div class="item sub  #if($!{currentIndex}=='order') current #end"><a href="$!{cuntaoAdminDomain}/my/agentOrderList.htm">代购单</a></div>
+##                #end
+##				 #if($!alipayFeature && $hasStationApply == true && $!{tpa}!=true)
+##                    <div class="item sub #if($!{currentIndex}=='receipt') current #end"><a href="$!{cuntaoAdminDomain}/my/receiptDetail.htm">我要收款</a></div>
+##                    <div class="item sub #if($!{currentIndex}=='receiptHistory') current #end"><a  href="$!{cuntaoAdminDomain}/my/receiptHistory.htm">收款记录</a></div>
+##				 #end
+##            </div>
+##			#end
+##			 #if($!{tpa}!=true)
+##            <div class="item-wrap #if($!{currentIndex}=='task')  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    我的任务
+##                </div>
+##                <div class="item sub #if($!{currentIndex}=='task') current #end"> <a href="$!{icuntaoDomain}/task ">任务列表</a> <span class="new-icon"></span></div>
+##            </div>
+##            #end
+##
+##			 #if($scorderOn == 'y')
+##            <div class="item-wrap  #if($!{currentIndex}=='villager') #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    客户管理
+##                </div>
+##                <div class="item sub  #if($!{currentIndex}=='villager') current #end"><a href="$!{icuntaoDomain}/villager">村民管理</a></div>
+##            </div>
+##			 #end
+##
+##            <div class="item-wrap #if($!{currentIndex}=='fullscreen' || $!{currentIndex}=='postergoods' || $!{currentIndex}=='receiveactivity' || $!{currentIndex}=='coupon')  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    营销工具
+##                </div>
+##                #if($!{tpa}!=true)
+##                    <div class="item sub #if($!{currentIndex}=='fullscreen') current #end"><a    href="$!{cuntaoAdminDomain}/my/fullscreenManage.htm">大屏轮播</a></div>
+##                #end
+##                <div class="item sub  #if($!{currentIndex}=='postergoods') current #end"><a href="$!{icuntaoDomain}/postergoods">海报商品</a> </div>
+##
+##				#if($!{tpa}!=true)
+##    				 <div class="item sub  #if($!{currentIndex}=='receiveactivity') current #end"><a href="$!{icuntaoDomain}/receiveactivity">红包管理</a> </div>
+##                     <div class="item sub #if($!{currentIndex}=='coupon') current #end"><a    href="$!{cuntaoAdminDomain}/my/couponList.htm">广场舞代金券</a></div>
+##				#end
+##            </div>
+##
+##			 #if($!{tpa}!=true && $!{grayTpa})
+##                    <div class="item-wrap #if($!{currentIndex}=='tpaList' || $!{currentIndex}=='tpa')  #else close-menu #end" ">
+##                        <div class="item-title">
+##                            <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                            <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                            淘帮手
+##                        </div>
+##                        <div class="item sub  #if($!{currentIndex}=='tpaList') current #end"><a href="$!{icuntaoDomain}/tpa/tpaList">淘帮手列表</a> <span class="new-icon"></span></div>
+##                        <div class="item sub  #if($!{currentIndex}=='tpa') current #end"><a href="$!{icuntaoDomain}/tpa">新增淘帮手</a> <span class="new-icon"></span></div>
+##                    </div>
+##            #end
+##
+##
+##            <div class="item-wrap #if($!{currentIndex}=='income' || $!{currentIndex}=='my' ||$!{currentIndex}=='assets'  ||$!{currentIndex}=='card' || $!{currentIndex}=='commissionbill')  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    个人中心
+##                </div>
+##
+##				<div class="item sub #if($!{currentIndex}=='my') current #end"><a   href="$!{cuntaoAdminDomain}/my/applyDetail.htm">签约信息</a></div>
+##
+##				  #if($!{tpa}!=true && $showAssets == true)
+##                        <div class="item sub #if($!{currentIndex}=='assets') current #end"><a    href="$!{cuntaoAdminDomain}/my/assetsList.htm">资产信息</a></div>
+##				  #end
+##
+##				 #if($!{tpa}!=true)
+##				 <div class="item sub #if($!{currentIndex}=='card') current #end"><a   href="$!{cuntaoAdminDomain}/my/agentCard.htm">站点二维码</a></div>
+##				 #end
+##
+##				 #if($!{tpa}!=true)
+##					<div class="item sub #if($!{currentIndex}=='income') current #end"><a    href="$!{cuntaoAdminDomain}/my/stationBillDetail.htm">我的收入</a></div>
+##                    <div class="item sub #if($!{currentIndex}=='commissionbill') current #end"> <a href="$!{icuntaoDomain}/commissionbill">我的收入预估</a></div>
+##                #end
+##            </div>
+##
+##			  #if($!{tpa}!=true)
+##			  <div class="item-wrap #if($!{currentIndex}=='datadviser') #else close-menu #end">
+##                    <div class="item-title">
+##                        <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                        <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                        数据管家
+##                    </div>
+##                    <div class="item sub  #if($!{currentIndex}=='datadviser') current #end"><a href="$!{icuntaoDomain}/datadviser">数据军师</a></div>
+##                </div>
+##			  #end
+##            <div class="item-wrap #if( $!{currentIndex}=='exam' )  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    我的考试
+##                </div>
+##                <div class="item sub #if($!{currentIndex}=='exam') current #end"><a href="$!{cuntaoAdminDomain}/my/exam.htm">考试信息</a></div>
+##
+##            </div>
+##        #end
+##        <!-- 合伙人或者淘帮手审核中 -->
+##        #if($hasPartnerApply == true)
+##            <div class="item-wrap #if( $!{currentIndex}=='my' || $!{currentIndex}=='partner' )  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    个人中心
+##                </div>
+##                <div class="item sub #if($!{currentIndex}=='partner') current #end"><a    href="$!{cuntaoAdminDomain}/my/copartnerApplyDetail.htm">申请信息</a></div>
+##            </div>
+##
+##			 <div class="item-wrap #if( $!{currentIndex}=='exam' )  #else close-menu #end">
+##                <div class="item-title">
+##                    <i class="iconfontarrow arrow-down">&#xe603;</i>
+##                    <i class="iconfontarrow arrow-up">&#xe602;</i>
+##                    我的考试
+##                </div>
+##                <div class="item sub #if($!{currentIndex}=='exam') current #end"><a    href="$!{cuntaoAdminDomain}/my/exam.htm">考试信息</a></div>
+##
+##            </div>
+##        #end
+##
+##</div>
+##</div>
+##
+##
+##<script>
+##//KISSY.use('admin/mods/aside-menu/aside-menu');
+##/**
+## @des
+## 菜单相关处理
+## @author zhangsen.z
+##
+## */
+##KISSY.use(['node','dom'], function(Node){
+##    var $ = Node.all;
+##    $(".item-wrap").delegate('click', '.item-title' , function(e){
+##        var t = $(e.currentTarget);
+##        var p = t.parent();
+##        p.toggleClass("close-menu");
+##    });
+##});
+##
+##</script>

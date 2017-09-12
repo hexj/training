@@ -1,0 +1,597 @@
+<link rel="stylesheet" href="//g.alicdn.com/kissy/k/5.0.0/overlay/assets/dpl.css"/>
+<link rel="stylesheet" href="$!frontServer/admin/css/mod/??ct-step.css,ct-dropdown.css,ct-textfield.css,ct-button.css,ct-form.css,ct-message.css"/>
+<link rel="stylesheet" href="$!frontServer/admin/pages/recruit-partner/index.css"/>
+<div class="mc-main">
+    <div class="grid-1190 recruit-sign clearfix">
+        <div id="recruitLoading">
+            <div class="loading">
+                <span class="cun-ui-loading"></span>
+            </div>
+        </div>
+        <div id="recruitError" style="display: none;"></div>
+        <div id="recruitSuccess" style="display: none;">
+            <input id="objectId" name="objectId" type="hidden" value="$!objectId" />
+            <input id="currentStep" name="currentStep" type="hidden" value="$!currentStep" /><!-- 当前步骤 -->
+            <input id="isEdit" name="isEdit" type="hidden" value="$!isEdit" /><!-- 是否编辑 -->
+            <input id="infoLevel" type="hidden" value="$!infoLevel" /><!-- 信息完整度 -->
+            <input id="canEditAddress" type="hidden" value="$!canEditAddress" /><!-- 地址是否可编辑 -->
+            <div id="step1" class="step" style="display: none;">
+                <div class="step-title">
+                    填写报名信息
+                    <span class="sub-title">完成的步骤越多、通过的概率越大！</span>
+                </div>
+                <div class="step-progress">
+                    <div class="ui-step ui-step-normal">
+                        <ol class="col3">
+                            <li class="current first">
+                                <span class="state">
+                                    <b class="ico-1">填写基础信息</b>
+                                </span>
+                            </li>
+                            <li class="">
+                                <span class="state">
+                                    <b class="ico-2">填写详细信息</b>
+                                </span>
+                            </li>
+                            <li class="last">
+                                <span class="state">
+                                    <b class="ico-3">考试</b>
+                                </span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="step-main">
+                    <div class="step-main-form">
+                        <form id="formStep1" class="ui-form ui-form-horizontal">
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    姓名 :
+                                </label>
+                                <input id="applyName" name="applyName" value="$!applyName" class="ui-textfield ui-textfield-system ui-control-m" type="text" readonly>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    性别 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input type="radio" name="gender" class="ui-radio ui-radio-system" value="M" #if($!gender!='F')checked#end>
+                                        男
+                                    </label>
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input type="radio" name="gender" class="ui-radio ui-radio-system" value="F" #if($!gender=='F')checked#end>
+                                        女
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    身份证号 :
+                                </label>
+                                <input id="idCardNum" name="idCardNum" value="$!idCardNum" class="ui-textfield ui-textfield-system ui-control-m" type="text" readonly>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    支付宝帐号 :
+                                </label>
+                                <input id="alipayAccount" name="alipayAccount" value="$!alipayAccount"  class="ui-textfield ui-textfield-system" type="text" readonly>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    联系电话 :
+                                </label>
+                                <input id="mobile" name="mobile" value="$!mobile"  class="ui-textfield ui-textfield-system ui-control-s" type="text">
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    学历 :
+                                </label>
+                                <select name="education" id="education" class="ui-dropdown ui-dropdown-system ui-control-s">
+                                    <option value="">请选择</option>
+                                    #foreach($!edu in $!educationList)
+                                    <option value="$edu.code" #if($!education==$edu.code)selected#end>$!edu.name</option>
+                                    #end
+                                </select>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    计划经营地址 :
+                                </label>
+                                <div class="ui-form-control">
+                                    #if ($!canEditAddress == 'true')
+                                    <div id="J_CitySelect" class="ks-clear">
+                                        <input class="J_iProv" id="J_iProv" type="hidden" name="province" value="$!province"/>
+                                        <input class="J_iCity" id="J_iCity" type="hidden" name="city" value="$!city"/>
+                                        <input class="J_iArea" id="J_iArea" type="hidden" name="county" value="$!county"/>
+                                        <input class="J_iTown" id="J_iTown" type="hidden" name="town" value="$!town"/>
+                                        <input class="J_iProvDetail" type="hidden" name="provinceDetail" value="$!provinceDetail"/>
+                                        <input class="J_iCityDetail" type="hidden" name="cityDetail" value="$!cityDetail"/>
+                                        <input class="J_iAreaDetail" type="hidden" name="countyDetail" value="$!countyDetail"/>
+                                        <input class="J_iTownDetail" type="hidden" name="townDetail" value="$!townDetail"/>
+                                        <div class="bf-select bf-cn-select lSelect select-node J_Modify J_CnCity">
+                                            <div id="city-title" class="city-title has-city-title">
+                                                #if($!provinceDetail)
+                                                    $!provinceDetail
+                                                    #if($!cityDetail)
+                                                    / $!cityDetail
+                                                    #end
+                                                    #if($!countyDetail)
+                                                    / $!countyDetail
+                                                    #end
+                                                    #if($!townDetail)
+                                                    / $!townDetail
+                                                    #end
+                                                #else
+                                                请选择省市区
+                                                #end
+                                            </div>
+                                            <div class="bf-menu-button-dropdown"></div>
+                                        </div>
+                                    </div>
+                                    #else
+                                    <div>
+                                    	<span>
+                                            $!provinceDetail
+                                            #if($!cityDetail)
+                                                / $!cityDetail
+                                            #end
+                                            #if($!countyDetail)
+                                                / $!countyDetail
+                                            #end
+                                            #if($!townDetail)
+                                                / $!townDetail
+                                            #end
+                                        </span>
+                                    </div>
+                                    #end
+                                </div>
+                            </div>
+                            <input type="hidden" id="showStationVilliage"  value="$!showStationVilliage"/>
+                            <div id="planAddressVillage" class="ui-form-item"   #if($!showStationVilliage == 'false') style="display: none;" #end>
+                                <label class="ui-form-label" for="">
+                                    村名称 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <input type="hidden" id="planVillageDetail" name="stationVillageDetail" value="$!stationVillageDetail"/>
+                                    <input type="hidden" id="planVillageCodeWriteBack"  value="$!stationVillageCode"/>
+                                    <select name="stationVillageCode" id="planVillageCode" class="ui-dropdown ui-dropdown-system ui-control-s">
+                                        <option value="">请选择</option>
+	                                    #foreach($!village in $!stationVillageList)
+	                                        <option value="$village.id" #if($!village.id == $!stationVillageCode)selected#end>$!village.name</option>
+	                                    #end
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    详细地址 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <textarea id="address" name="address" class="ui-textfield ui-textfield-system multiple ui-control-xl" placeholder="请输入详细地址（如门牌号等）">$!stationAddressDetailExt</textarea>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    身份证正面照片 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <input id="idCardImgsFace" name="idCardImgsFace" type="hidden" value="$!idCardImgs" /><!-- 身份证正面照片 -->
+                                    <div class="grid">
+                                        <input type="hidden" id="J_UrlsIdFace" name="imageUrlsIdFace" value="" style="width: 100px;">
+                                        <input class="g-u" id="J_UploaderBtnIdFace" name="Filedata" accept="image/*" type="file" value="正面照片" >
+                                    </div>
+                                    <ul id="J_UploaderQueueIdFace" class="grid">
+                                        <!--默认文件数据，组件会将数据插入到file的result对象内，通过监听success事件可以获取到-->
+                                        <script type="text/uploader-files">
+											#noescape() $!idCardImgsFace #end
+                                        </script>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    身份证反面照片 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <input id="idCardImgsBack" name="idCardImgsBack" type="hidden" value="$!idCardImgs" /><!-- 身份证反面照片 -->
+                                    <div class="grid">
+                                        <input type="hidden" id="J_UrlsIdBack" name="imageUrlsIdBack" value="" style="width: 100px;">
+                                        <input class="g-u" id="J_UploaderBtnIdBack" name="Filedata" accept="image/*" type="file" value="反面照片" >
+                                    </div>
+                                    <ul id="J_UploaderQueueIdBack" class="grid">
+                                        <!--默认文件数据，组件会将数据插入到file的result对象内，通过监听success事件可以获取到-->
+                                        <script type="text/uploader-files">
+											#noescape()$!idCardImgsBack#end
+                                        </script>
+                                    </ul>
+                                    <p class="ui-form-help">请将身份证正、反面照片分别上传；图片格式支持jpg、png、gif、jpeg；图片大小5M以内。</p>
+                                </div>
+                            </div>
+                            <div class="ui-form-action">
+                                <a id="J_BtnStep1Next" href="javascript:void(0);" class="ui-button ui-button-primary ui-button-large" data-kg-tooltip2="继续完成后面步骤，可增加通过概率！" data-kg-tooltip2-placement="t">下一步</a>
+                                <a id="J_BtnStep1Save" href="javascript:void(0);" class="ui-button ui-button-normal ui-button-large" data-kg-tooltip2="提交后可完成报名，但是建议完成下面步骤，增加通过概率！" data-kg-tooltip2-placement="t">提 交</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="step-main-success" style="display: none;">
+                        <div class="ct-ui-message">
+                            <div class="ct-ui-message-content ct-ui-message-success">
+                                <i class="ct-ui-message-ico"></i>
+                                <h3 class="ct-ui-message-header">报名成功，基本信息已提交！</h3>
+                                <div class="ct-ui-message-body">
+                                    <p>信息正在审核中。。。</p>
+                                    <div style="margin-top: 30px;">
+                                        <a id="J_BtnStep1NextSuccess" href="javascript:void(0);" class="ui-button ui-button-primary ui-button-large" data-kg-tooltip2="继续完成后面步骤，可增加通过概率！" data-kg-tooltip2-placement="t">完成后面步骤</a>
+                                        <a href="/my/copartnerApplyDetail.htm" class="ui-button ui-button-normal ui-button-large">查看进度</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end step1 -->
+            <div id="step2" class="step" style="display: none;">
+                <div class="step-title">
+                    填写报名信息
+                    <span class="sub-title">完成的步骤越多、通过的概率越大！</span>
+                </div>
+                <div class="step-progress">
+                    <div class="ui-step ui-step-normal">
+                        <ol class="col3">
+                            <li class="first current-prev done">
+                                <span class="state">
+                                    <b class="ico-1 ico-done">填写基础信息</b>
+                                </span>
+                            </li>
+                            <li class="current">
+                                <span class="state">
+                                    <b class="ico-2">填写详细信息</b>
+                                </span>
+                            </li>
+                            <li class="last">
+                                <span class="state">
+                                    <b class="ico-3">考试</b>
+                                </span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="step-main">
+                    <div class="step-main-form">
+                        <form id="formStep2" class="ui-form ui-form-horizontal">
+                            <input id="busProposal" name="busProposal" type="hidden" value="$!busProposal" /><!-- 经营计划书 -->
+                            <input id="LocationImgs" name="LocationImgs" type="hidden" value="$!locationImgs" /><!-- 营业地照片 -->
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    政治面貌 :
+                                </label>
+                                <select name="politics" id="politics" class="ui-dropdown ui-dropdown-system ui-control-s">
+                                    <option value="">请选择</option>
+                                    #foreach($!pol in $!politicsList)
+                                    <option value="$pol.code" #if($!politics==$pol.code)selected#end>$!pol.name</option>
+                                	#end
+                                </select>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    现居住地 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <div id="J_CitySelectNow" class="ks-clear">
+                                        <input class="J_iProv" id="J_iProvNow" type="hidden" name="manageProvince" value="$!manageProvince"/>
+                                        <input class="J_iCity" id="J_iCityNow" type="hidden" name="manageCity" value="$!manageCity"/>
+                                        <input class="J_iArea" id="J_iAreaNow" type="hidden" name="manageCounty" value="$!manageCounty"/>
+                                        <input class="J_iTown" id="J_iTownNow" type="hidden" name="manageTown" value="$!manageTown"/>
+                                        <input class="J_iProvDetail" type="hidden" name="manageProvinceDetail" value="$!manageProvinceDetail"/>
+                                        <input class="J_iCityDetail" type="hidden" name="manageCityDetail" value="$!manageCityDetail"/>
+                                        <input class="J_iAreaDetail" type="hidden" name="manageCountyDetail" value="$!manageCountyDetail"/>
+                                        <input class="J_iTownDetail" type="hidden" name="manageTownDetail" value="$!manageTownDetail"/>
+                                        <div class="bf-select bf-cn-select lSelect select-node J_Modify J_CnCity">
+                                            <div id="city-title" class="city-title has-city-title">
+                                                #if($!manageProvinceDetail)
+                                                $!manageProvinceDetail #if($!manageCityDetail) / $!manageCityDetail #end #if($!manageCountyDetail) / $!manageCountyDetail #end #if($!manageTownDetail) / $!manageTownDetail #end 
+                                                #else
+                                                请选择省市区
+                                                #end
+                                            </div>
+                                            <div class="bf-menu-button-dropdown"></div>
+                                        </div>
+                                        <!--<input id="J_iProvNow" type="hidden" name="prov" value="" class="J_iProv"/>
+                                        <input type="hidden" name="country" value="" class="J_iCountry"/>
+                                        <input type="hidden" name="provExt" value="" class="J_iProvExt"/>
+                                        <input id="J_iCityNow" type="hidden" name="city" value="" class="J_iCity"/>
+                                        <input type="hidden" name="area" value="" class="J_iArea"/>
+                                        <input type="hidden" name="town" value="" class="J_iTown"/>
+                                        <input type="hidden" name="provinceDetail" value="" />
+                                        <input type="hidden" name="cityDetail" value=""/>
+                                        <input type="hidden" name="countyDetail" value=""/>
+                                        <input type="hidden" name="townDetail" value=""/>
+                                        <div class="bf-select bf-cn-select lSelect select-node J_Modify J_CnCity">
+                                            <div id="city-title-now" class="city-title has-city-title">请选择省市区</div>
+                                            <div class="bf-menu-button-dropdown"></div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <input type="hidden" id="showManageVilliage"  value="$!showManageVilliage"/>
+                            <div id="nowAddressVillage" class="ui-form-item" #if($!showManageVilliage == 'false') style="display: none;" #end>
+                                <label class="ui-form-label" for="">
+                                    村名称 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <input type="hidden" id="nowVillageDetail" name="manageVillageDetail" value="$!manageVillageDetail"/>
+                                    <input type="hidden" id="nowVillageCodeWriteBack"  value="$!manageVillageCode"/>
+                                    <select name="manageVillageCode" id="nowVillageCode" class="ui-dropdown ui-dropdown-system ui-control-s">
+	                                    <option value="">请选择</option>
+	                                    #foreach($!village in $!manageVillageList)
+	                                        <option value="$village.id" #if($!village.id == $!manageVillageCode)selected#end>$!village.name</option>
+	                                    #end
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    详细地址 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <textarea id="manageAddress" name="manageAddress" class="ui-textfield ui-textfield-system multiple ui-control-xl" placeholder="请输入详细经营地址（如门牌号等）">$!manageAddress</textarea>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    村人口 :
+                                </label>
+                                <select name="population" id="population" class="ui-dropdown ui-dropdown-system ui-control-s">
+                                    <option value="">请选择</option>
+                                    #foreach($!pop in $!populationList)
+                                        <option value="$pop.code" #if($!pop.code == $!population)selected#end>$!pop.name</option>
+                                    #end
+                                </select>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    <span class="ui-form-required">*</span>
+                                    计划村淘营业场所 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <label class="verify-force-place ui-label ui-label-wrapper ui-label-inline">
+                                        <input id="isExitPlace" type="radio" name="isExitPlace" class="ui-radio ui-radio-system" value="y" #if($!isExitPlace=='y')checked#end >
+                                        有
+                                    </label>
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input type="radio" name="isExitPlace" class="ui-radio ui-radio-system" value="n" #if($!isExitPlace!='y')checked#end>
+                                        无
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="J_ExistPlaceExtra"  #if($!isExitPlace!='y') style="display:  none;" #end>
+                                <div class="ui-form-item">
+                                    <label class="ui-form-label" for="">
+                                        <span class="ui-form-required">*</span>
+                                        营业面积 :
+                                    </label>
+                                    <input id="manageArea" name="manageArea" value="$!manageArea"  class="ui-textfield ui-textfield-system" type="text" placeholder="如：1000平方米">
+                                </div>
+                                <div class="ui-form-item">
+                                    <label class="ui-form-label" for="">
+                                        营业地照片 :
+                                    </label>
+                                    <div class="ui-form-control">
+                                        <div class="grid">
+                                            <input type="hidden" id="J_UrlsLocation" name="imageUrls" value="" style="width: 240px; margin-top: -20px;">
+                                            <input class="g-u" id="J_UploaderBtnLocation" name="Filedata" accept="image/*" type="file" value="上传图片" >
+                                        </div>
+                                        <ul id="J_UploaderQueueLocation" class="grid">
+                                            <script type="text/uploader-files">
+                                                #if($!locationImgs == 'null')
+                                                    []
+                                                #else
+                                                    #noescape()$!locationImgs#end
+                                                #end
+											</script>
+
+                                        </ul>
+                                        <p class="ui-form-help">最多5张照片上传；图片格式支持jpg、png、gif、jpeg；图片大小5M以内。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    常用邮箱 :
+                                </label>
+                                <input id="email" name="email" value="$!email" class="ui-textfield ui-textfield-system" type="text">
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    民族 :
+                                </label>
+                                <input id="nation" name="nation" value="$!nation" class="ui-textfield ui-textfield-system ui-control-s" type="text">
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    村面积 :
+                                </label>
+                                <select id="areaRange" name="areaRange" class="ui-dropdown ui-dropdown-system ui-control-m">
+                                    <option>请选择</option>
+                                    #foreach($!ar in $!areaRangeList)
+                                        <option value="$ar.code" #if($!ar.code == $!areaRange)selected#end>$!ar.name</option>
+                                    #end
+                                </select>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    村人均收入 :
+                                </label>
+                                <select id="perIncomeRange" name="perIncomeRange" class="ui-dropdown ui-dropdown-system ui-control-s">
+                                    <option>请选择</option>
+                                    #foreach($!per in $!perIncomeRangeList)
+                                        <option value="$per.code" #if($!per.code == $!perIncomeRange)selected#end>$!per.name</option>
+                                    #end
+                                </select>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    村民主要年龄 :
+                                </label>
+                                <select id="ageRange" name="ageRange" class="ui-dropdown ui-dropdown-system ui-control-m">
+                                    <option>请选择</option>
+                                    #foreach($!ar in $!ageRangeList)
+                                    <option value="$ar.code" #if($!ar.code == $!ageRange)selected#end>$!ar.name</option>
+                                    #end
+                                </select>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    网络是否覆盖 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input type="radio" name="isExistNetwork" value="y" #if($!isExistNetwork=='y')checked#end class="ui-radio ui-radio-system">
+                                        有
+                                    </label>
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input type="radio" name="isExistNetwork" value="n" #if($!isExistNetwork=='n')checked#end  class="ui-radio ui-radio-system">
+                                        无
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    工作经历 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <textarea id="workExp" name="workExp" class="ui-textfield ui-textfield-system multiple ui-control-xl">$!workExp</textarea>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    经营计划书 :
+                                </label>
+                                <div class="ui-form-control">
+                                    <div class="grid">
+                                        <input type="hidden" id="J_UrlsFiles" name="image-urls" value="">
+                                        <input class="g-u" id="J_UploaderBtnFiles" name="Filedata" type="file" value="上传文件" >
+                                    </div>
+                                    <ul id="J_UploaderQueueFiles" class="grid">
+                                        <!--默认文件数据，组件会将数据插入到file的result对象内，通过监听success事件可以获取到-->
+										<script type="text/uploader-files">
+                                            #if($!busProposal == 'null')
+                                                []
+                                            #else
+                                                #noescape()$!busProposal#end
+                                            #end
+                                        </script>
+                                    </ul>
+                                    <p class="ui-form-help">最多上传5份资料，附件格式支持jepg、png、jpg、doc、docx、ppt、pptx、pdf、zip，大小在 20M 以内。</p>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    您是从哪几个渠道知道我们的 :
+                                </label>
+                                <div class="ui-form-control">
+                                    #foreach($!fromChannel in $!fromChannelList)
+		            				<label class="ui-label ui-label-wrapper ui-label-inline">
+		                				<input style="width:25px" name="fromChannels" #if($!fromChannel.checked)checked#end type="checkbox" value="$!fromChannel.code" />$fromChannel.name
+		                			</label>
+		                			#end
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input id="other-way" type="checkbox" class="ui-checkbox ui-checkbox-system" #if($!otherChannel)checked#end name="fromChannels" value="$!otherChannel"> 其他
+                                    </label>
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input class="other-way ui-textfield ui-textfield-system ui-control-m" type="text"  #if($!otherChannel)style="display: block;" #else style="display: none;" #end value="$!otherChannel">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-item">
+                                <label class="ui-form-label" for="">
+                                    是否有其他电子商务平台经验 :
+                                </label>
+                                <div class="ui-form-control">
+                                    #foreach($!netPlat in $!netPlatList)
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input type="checkbox" name="netPlatformExp"  #if($!netPlat.checked)checked#end class="ui-checkbox ui-checkbox-system" value="$!netPlat.code"> $netPlat.name
+                                    </label>
+                                    #end
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input id="other-experience" type="checkbox" class="ui-checkbox ui-checkbox-system" #if($!otherPlat)checked#end name="netPlatformExp" value ="$!otherPlat"> 其他
+                                    </label>
+                                    <label class="ui-label ui-label-wrapper ui-label-inline">
+                                        <input class="other-experience ui-textfield ui-textfield-system ui-control-m" type="text" #if($!otherPlat)style="display: block;" #else style="display: none;" #end value ="$!otherPlat">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="ui-form-action">
+                                <a id="J_BtnStep2Save" href="javascript:void(0);" class="ui-button ui-button-primary ui-button-large">提 交</a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="step-main-success" style="display: none;">
+                        ok
+                    </div>
+                </div>
+            </div><!-- end step2 -->
+            <div id="step3" class="step" style="">
+                <div class="step-title">
+                    填写报名信息
+                    <span class="sub-title">完成的步骤越多、通过的概率越大！</span>
+                </div>
+                <div class="step-progress">
+                    <div class="ui-step ui-step-normal">
+                        <ol class="col3">
+                            <li class="first done">
+                                <span class="state">
+                                    <b class="ico-1 ico-done">填写基础信息</b>
+                                </span>
+                            </li>
+                            <li class="current-prev done">
+                                <span class="state">
+                                    <b class="ico-2 ico-done">填写详细信息</b>
+                                </span>
+                            </li>
+                            <li class="current last">
+                                <span class="state">
+                                    <b class="ico-3">考试</b>
+                                </span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="step-main">
+                    <div class="ct-ui-message">
+                        <div class="ct-ui-message-content ct-ui-message-success">
+                            <i class="ct-ui-message-ico"></i>
+                            <h3 class="ct-ui-message-header">报名成功！</h3>
+                            <div class="ct-ui-message-body">
+                                <p>信息正在审核中。。。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-action">
+                    <a href="/my/exam.htm" class="J_btn-step2-next ui-button ui-button-primary ui-button-large">开始考试</a>
+                    <a href="/my/copartnerApplyDetail.htm" class="J_btn-step2-next ui-button ui-button-normal ui-button-large">查看进度</a>
+                </div>
+            </div><!-- end step3 -->
+        </div>
+    </div>
+</div>
+<script>
+    KISSY.use('admin/pages/recruit-partner/index', function(S, App){
+        new App();
+    });
+</script>

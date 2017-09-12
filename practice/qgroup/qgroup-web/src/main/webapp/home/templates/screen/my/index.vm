@@ -1,0 +1,22 @@
+<link rel="stylesheet" type="text/css" href="$!frontServer/admin/pages/index/index.css">
+<div class="mc-main">
+    <div class="grid-1190 clearfix">
+        <div class="mc-main-aside">
+            $control.setTemplate("my/asideMenu")
+        </div>
+        <div class="mc-main-wrap">
+            <div class="main-content">
+                $control.setTemplate("my/myCun").setParameter("hasNewTask",$!hasNewTask).setParameter("unFinishTaskCount",$!unFinishTaskCount)
+                $control.setTemplate("my/myActivity.vm")
+				$control.setTemplate("my/myPerformence")
+				$control.setTemplate("my/myRanking")
+			</div>
+            <div class="bbs-board">
+                $control.setTemplate("my/bbsBoard")
+            </div>
+		</div>
+</div>
+
+<script type="text/javascript">
+KISSY.use('admin/pages/index/index');
+</script>

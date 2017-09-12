@@ -1,0 +1,264 @@
+#** -------------------------------------------
+ * 显示所有headers
+ * -------------------------------------------- *#
+#macro (showHead $defaultTitle)
+
+    #showTitle ($defaultTitle)
+    #showMetaTags ()
+    #showHttpEquiv ()
+    #showStylesheets ()
+    #showJavascripts ()
+
+#end
+
+#** -------------------------------------------
+ * 显示标题，如果未提供标题，则使用默认值
+ * -------------------------------------------- *#
+#macro (showTitle $defaultTitle)
+
+    #if( $page.title != "" )
+    <title>$page.title</title>
+    #else
+    <title>$!defaultTitle</title>
+    #end
+
+#end
+
+#** -------------------------------------------
+ * 显示meta tags
+ * -------------------------------------------- *#
+#macro (showMetaTags)
+
+    #foreach($metaTag in $page.metaTags.keySet())
+    <meta name="$metaTag" content="$page.metaTags.get($metaTag)">
+    #end
+
+#end
+
+#** -------------------------------------------
+ * 显示meta http-equiv
+ * -------------------------------------------- *#
+#macro (showHttpEquiv)
+
+    #foreach($httpEquiv in $page.httpEquivs.keySet())
+    <meta http-equiv="$httpEquiv" content="$page.httpEquivs.get($httpEquiv)">
+    #end
+
+#end
+
+#** -------------------------------------------
+ * 显示stylesheets
+ * -------------------------------------------- *#
+#macro (showStylesheets)
+
+    #foreach( $styleSheet in $page.styleSheets )
+    <link rel="stylesheet" href="$styleSheet.Url"
+        #if($styleSheet.Type != "" ) type="$styleSheet.Type" #end
+        #if($styleSheet.Media != "") media="$styleSheet.Media" #end
+        #if($styleSheet.Title != "") title="$styleSheet.Title" #end>
+    #end
+
+#end
+
+#** -------------------------------------------
+ * 显示javascripts
+ * -------------------------------------------- *#
+#macro (showJavascripts)
+
+    #foreach( $script in $page.scripts )
+    <script type="text/javascript" src="$script" language="JavaScript"></script>
+    #end
+
+#end
+
+
+#** -------------------------------------------
+ * 显示body attributes
+ * -------------------------------------------- *#
+#macro (bodyAttributes)
+
+    #foreach( $attributeName in $page.bodyAttributes.keySet() )
+        $attributeName="$page.bodyAttributes.get($attributeName)"
+    #end
+
+#end
+
+#** -------------------------------------------
+ * 显示select box
+ * -------------------------------------------- *#
+#macro (select $name $map $selected $hint)
+
+    #set ($_map = $map)
+    #set ($_selected = $selected)
+<select name="$name">
+    <option value="">$hint</option>
+
+    #foreach ($_key in $_map.keySet())
+        <option value="$_key" #if ($_key == $_selected) selected #end>$_map.get($_key)</option>
+    #end
+
+</select>
+
+#end
+
+#macro( enumIteratorByValue $enum_list $compare_value )
+<option value="-1"#if($compare_value && "$compare_value"=="-1") selected#end>全部</option>
+    #foreach($item in $enum_list)
+    <option value="${item.value}"#if($compare_value && "$compare_value"=="$item.value")
+            selected#end>${item.desc}</option>
+    #end
+#end
+
+#macro( enumIteratorByValueOnly $enum_list $compare_value )
+    #foreach($item in $enum_list)
+    <option value="${item.value}"#if($compare_value && "$compare_value"=="$item.value")
+            selected#end>${item.desc}</option>
+    #end
+#end
+#macro( mapIteratorByValue $map $compare_value )
+<option value="-1"#if($compare_value && "$compare_value"=="-1") selected#end>全部</option>
+    #foreach($item in $map.entrySet())
+    <option value="${item.key}"#if($compare_value && "$compare_value"=="$item.key") selected#end>${item.value}</option>
+    #end
+#end
+#macro( displayRefundMessage $refundTicket $isCz)
+    #set($isAccept=false)
+    #set($isWait4Process=false)
+    #set($isRefunded=false)
+    #set($isRejected=false)
+    #if ( $refundTicket.isRefunded() )
+        #set($isRefunded=true)
+    #elseif ( $refundTicket.isAccept() )
+        #set($isAccept=true)
+    #elseif($refundTicket.isRefused())
+        #set($isRejected=true)
+    #else
+        #set($isWait4Process=true)
+    #end
+
+    #if ( $isCz )
+        #set ($gmtCreate = $orderUtil.getCzReturnCreateTime($refundTicket) )
+        #set ($gmtModified = $orderUtil.getCzReturnModifiedTime($refundTicket) )
+    #else
+        #set ($gmtCreate = $refundTicket.gmtCreate)
+        #set ($gmtModified = $refundTicket.firstAuditTime)
+    #end
+<li title="退票理由：$securityUtil.unescapeHtml($!{refundTicket.reason})&#13代理商说明：$securityUtil.unescapeHtml($!{refundTicket.answer})">$calendarUtil.toString($!{gmtCreate},"yyyy-MM-dd HH:mm")
+    &nbsp;&nbsp;登机人：$!{refundTicket.passengerName}
+    &nbsp;申请退票，退票理由：$securityUtil.unescapeHtml($!{refundTicket.reason})
+    <font color="#ff0000">
+        #if($refundTicket.isPayFail() || $isAccept)
+            退票申请已经通过代理商业务审核，请等待代理商财务审核。
+        #elseif($isWait4Process)
+            等待商家处理中...
+        #end
+    </font>
+</li>
+    #if($refundTicket.isPaySucc() && $isRefunded)
+    <li>
+        #if($gmtModified) $calendarUtil.toString($!{gmtModified},"yyyy-MM-dd HH:mm")#end&nbsp;&nbsp;代理商接受退票，退款金额：
+        #if($!{refundTicket.realRefundMoney} && "" != "$!{refundTicket.refundAppkey}" && "PC" != "$!{refundTicket.refundAppkey}")
+            $atfUtil.moneyToStringWithCent($!{refundTicket.realRefundMoney}) 元 &nbsp; 答复信息：
+        #elseif($!{refundTicket.refundMoney})
+            $atfUtil.moneyToStringWithCent($!{refundTicket.refundMoney}) 元 &nbsp; 答复信息：
+        #else
+            - 元 &nbsp; 答复信息：
+        #end
+        说明：$tbStringUtil.getFormattedTitle($!{refundTicket.answer},20)
+    </li>
+    #end
+    #if($isRefunded)
+    <li>
+        #if ( $refundTicket.isPaySucc() )
+            #if ( $isCz )
+                $calendarUtil.toString($!{gmtModified},"yyyy-MM-dd HH:mm")
+            #else
+                #if ($calendarUtil.toString($!{refundTicket.paySuccTime},"yyyy-MM-dd HH:mm"))
+                    $calendarUtil.toString($!{refundTicket.paySuccTime},"yyyy-MM-dd HH:mm")
+                #end
+            #end
+            &nbsp;&nbsp;退款成功。
+            <font color="#ff0000">已经成功退款，请查看您的支付宝或者相关银行卡。</font>
+        #end
+    </li>
+    #end
+    #if($isRejected)
+    <li>
+        #if($gmtModified) $calendarUtil.toString($!{gmtModified},"yyyy-MM-dd HH:mm")#end
+        &nbsp;&nbsp;代理商拒绝退票，说明：$!{refundTicket.answer}
+    </li>
+    #end
+<li>&nbsp;</li>
+#end
+#macro( showRemainHandleTime $time_plus )
+    #if($calendarUtil.compareDate($time_plus,$calendarUtil.getCurrentDate())==1)
+        #set($currentTime=$calendarUtil.getCurrentDate().getTime())
+        #set($time=$time_plus.getTime())
+    <br>
+    <span class="listtime" time="$time" currentTime="$currentTime">(处理时间仅剩： <br/>
+		<em class="havetime"></em> )</span>
+    #end
+#end
+
+#macro( divError $msg )
+    #if($msg)
+    <div class="err_msg_box">&nbsp;${msg}</div>
+    #end
+#end
+
+#macro( bgc $count )
+    #if( $count % 2 == 0 ) bgcolor="#EFF4F5" #else bgcolor="#D6E4F1" #end
+#end
+
+#macro( simpleDivWarn $msg )
+    #if($msg)
+    <div class="warning_msg_box">&nbsp;${msg}</div>
+    #end
+#end
+
+
+#**
+ * 显示用户信用级别。
+ * $rate	信用值
+ * $type	'b':买家 ， 's': 卖家
+ * $url		'none':使用默认帮助链接， '':表示不使用链接
+ * $target	'_self' - 表示本页打开，'' - 表达新窗口打开
+ *#
+#macro (G_ShowRankBase $rate $type $url $target)
+    #set($defaultSellerUrl = 'http://service.taobao.com/support/153-156-164/help-842.htm')
+    #set($defaultBuyerUrl = 'http://service.taobao.com/support/153-156-164/help-1179.htm')
+    #set($img = '')
+    #set($range = '')
+    #set($turl = '')
+    #if($url == 'none')#if($type == 's')#set($turl = $defaultSellerUrl)#else#set($turl = $defaultBuyerUrl)#end#else#set($turl=$url)#end
+
+    #set($linkTarget = '_blank')
+    #if($target != '')
+        #set($linkTarget = $!target)
+    #end
+
+    #if("$!rate" == "-") #set($rate=0)#end
+    #if($rate < 4)#set($img='')#set($range='小于3')
+    #elseif($rate >= 4 && $rate <= 10) #set($img="red_1.gif")#set($range='4－10')
+    #elseif($rate >= 11 && $rate <= 40) #set($img="red_2.gif")#set($range='11－40')
+    #elseif($rate >= 41 && $rate <= 90) #set($img="red_3.gif")#set($range='41－90')
+    #elseif($rate >= 91 && $rate <= 150) #set($img="red_4.gif")#set($range='91－150')
+    #elseif($rate >= 151 && $rate <= 250) #set($img="red_5.gif")#set($range='151－250')
+    #elseif($rate >= 251 && $rate <= 500) #set($img="blue_1.gif")#set($range='251－500')
+    #elseif($rate >= 501 && $rate <= 1000) #set($img="blue_2.gif")#set($range='501－1000')
+    #elseif($rate >= 1001 && $rate <= 2000) #set($img="blue_3.gif")#set($range='1001－2000')
+    #elseif($rate >= 2001 && $rate <= 5000) #set($img="blue_4.gif")#set($range='2001－5000')
+    #elseif($rate >= 5001 && $rate <= 10000) #set($img="blue_5.gif")#set($range='5001－10000')
+    #elseif($rate >= 10001 && $rate <= 20000) #set($img="cap_1.gif")#set($range='10001－20000')
+    #elseif($rate >= 20001 && $rate <= 50000) #set($img="cap_2.gif")#set($range='20001－50000')
+    #elseif($rate >= 50001 && $rate <= 100000) #set($img="cap_3.gif")#set($range='50001－100000')
+    #elseif($rate >= 100001 && $rate <= 200000) #set($img="cap_4.gif")#set($range='100001－200000')
+    #elseif($rate >= 200001 && $rate <= 500000) #set($img="cap_5.gif")#set($range='200001－500000')
+    #elseif($rate >= 500001 && $rate <= 1000000) #set($img="crown_1.gif")#set($range='500001－1000000')
+    #elseif($rate >= 1000001 && $rate <= 2000000) #set($img="crown_2.gif")#set($range='1000001－2000000')
+    #elseif($rate >= 2000001 && $rate <= 5000000) #set($img="crown_3.gif")#set($range='2000001－5000000')
+    #elseif($rate >= 5000001 && $rate <= 10000000) #set($img="crown_4.gif")#set($range='5000001－10000000')
+    #elseif($rate >= 10000001) #set($img="crown_5.gif")#set($range='大于10000001')
+    #end
+    #if($!img != '')#if($!turl != '')<a href="$turl" target="$linkTarget">#end<img src="http://pics.taobaocdn.com/newrank/${type}_${img}" #if($type == 'b')title="$range个买家信用积分#if($!turl != '')，请点击查看详情#end"#end border="0" align="absmiddle" class="rank" />#if($!url != '')</a>#end#end
+#end
